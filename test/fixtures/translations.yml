@@ -1,0 +1,13 @@
+one:
+  source_language_id: 1
+  target_language_id: 1
+  category_id: 1
+  company_id: 1
+  notes: MyString
+
+two:
+  source_language_id: 1
+  target_language_id: 1
+  category_id: 1
+  company_id: 1
+  notes: MyString

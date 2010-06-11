@@ -1,0 +1,34 @@
+<% title "Translations" %>
+
+<table id="hor-minimalist-b">
+  <tr>
+    <th>From</th>
+    <th>To</th>
+    <th>Category</th>
+    <th>Company</th>
+    <th>Notes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% for translation in @translations %>
+    <tr>
+      <td>
+        <%=h translation.source_content %> <br />
+        <%=h translation.source_language.title %>
+      </td>
+      <td>
+        <%=h translation.target_content %> <br />
+        <%=h translation.target_language.title %>
+      </td>
+      <td><%=h translation.category_name %></td>
+      <td><%=h translation.company_name %></td>
+      <td><%=h translation.notes %></td>
+      <td><%= link_to "Show", translation %></td>
+      <td><%= link_to "Edit", edit_translation_path(translation) %></td>
+      <td><%= link_to "Destroy", translation, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Translation", new_translation_path %></p>

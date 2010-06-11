@@ -1,0 +1,12 @@
+<% title "Company" %>
+
+<p>
+  <strong>Title:</strong>
+  <%=h @company.title %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_company_path(@company) %> |
+  <%= link_to "Destroy", @company, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", companies_path %>
+</p>

@@ -1,0 +1,7 @@
+one:
+  body: MyString
+  language_id: 1
+
+two:
+  body: MyString
+  language_id: 1

@@ -1,0 +1,11 @@
+one:
+  title: MyString
+  permalink: MyString
+  body: MyText
+  language_id: 1
+
+two:
+  title: MyString
+  permalink: MyString
+  body: MyText
+  language_id: 1

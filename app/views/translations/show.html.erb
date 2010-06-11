@@ -1,0 +1,28 @@
+<% title "Translation" %>
+
+<p>
+  <strong>Source Language:</strong>
+  <%=h @translation.source_content_id %>
+</p>
+<p>
+  <strong>Target Language:</strong>
+  <%=h @translation.target_content_id %>
+</p>
+<p>
+  <strong>Category:</strong>
+  <%=h @translation.category_id %>
+</p>
+<p>
+  <strong>Company:</strong>
+  <%=h @translation.company_id %>
+</p>
+<p>
+  <strong>Notes:</strong>
+  <%=h @translation.notes %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_translation_path(@translation) %> |
+  <%= link_to "Destroy", @translation, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", translations_path %>
+</p>
