@@ -201,3 +201,26 @@ border-bottom: 1px solid white;
 {
 	color: #009;
 }
+
+/* Success, notice and error boxes
+-------------------------------------------------------------- */
+
+.errorerror,
+.flash_notice, 
+.flash_success { 
+  padding: 12px 16px; 
+  margin-bottom: 1em; 
+  border: 2px solid #ddd; 
+  font-size:1.2em;
+}
+
+.flash_error      { background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; }
+.flash_notice     { background: #FFF6BF; color: #514721; border-color: #FFD324; }
+.flash_success    { background: #E6EFC2; color: #264409; border-color: #C6D880; }
+.flash_error a    { color: #8a1f11; }
+.flash_notice a   { color: #514721; }
+.flash_success a  { color: #264409; }
+
+.flash_error p,
+.flash_notice p, 
+.flash_success p  { font-size: 1.2em; padding: 0; margin: 0;}

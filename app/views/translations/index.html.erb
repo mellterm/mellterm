@@ -43,22 +43,33 @@
   &nbsp; - &nbsp; <%= link_to "Delete all", {:action => "destroy", :all => true}, :confirm => 'Are you sure?', :method => :delete %>
 </p>
 
- <% form_for :csv_file, :url=>{:controller=>"translations", :action=>"import"}, :html => { :multipart => true } do |f| %>
- <table>
-   <tr>
-     <td>
-      <label for="csv_file">
-        Select a CSV File :
-      </label>
-     </td>
-     <td >
-       <%= f.file_field :file %>
-     </td>
-   </tr>
-   <tr>
-     <td colspan='2'>
-       <%= submit_tag 'Submit' %>
-     </td>
-   </tr>
- </table>
+
+<br />
+
+<% form_for :csv_file, :url=>{:controller=>"translations", :action=>"import"}, :html => { :multipart => true } do |f| %>
+  <p>
+    Select a CSV File to import
+    <br />
+    <%= f.file_field :file %>
+    <%= submit_tag 'Upload' %>
+  </p>    
 <% end %>
+
+<br />
+
+<h4>Format of CSV file for import</h4>
+<p>CSV must have header a definining the language</p>
+<pre>
+  source_language,destination_language
+  source_content,destination_content
+  source_content,destination_content
+</pre>
+<h4>Example:</h4>
+<pre>
+  de_de,en_gb
+  Ablage,Personal Clipboard
+  Allgemein,General
+  Allg. Hinweise,general hints
+  Aufgaben,Tasks
+  Auftrag,Appointment
+</pre>
