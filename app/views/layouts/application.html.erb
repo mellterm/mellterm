@@ -4,6 +4,7 @@
   <head>
     <title><%= h(yield(:title) || "Untitled") %></title>
     <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag :defaults %>
     <%= yield(:head) %>
   </head>
   <body>
@@ -28,4 +29,11 @@
       <%= yield %>
     </div>
   </body>
+  
+  <% if params[:search] %>
+  <script language=JavaScript>
+    highlightSearchTerms("<%= params[:search][:source_content_or_target_content_like_any] %>", false);
+  </script>
+  <% end %>
+  
 </html>

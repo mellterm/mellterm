@@ -1,9 +1,16 @@
 <% title "Translations" %>
 
+<% form_for @search do |f| %>
+  <%= f.text_field :source_content_or_target_content_like_any %>
+  <%= f.submit "Search" %>
+<% end %>
+
 <table id="hor-minimalist-b">
   <tr>
     <th>From</th>
     <th>To</th>
+    <th></th>
+    <th></th>
     <th>Category</th>
     <th>Company</th>
     <th>Notes</th>
@@ -14,13 +21,13 @@
   <% for translation in @translations %>
     <tr>
       <td>
-        <%=h translation.source_content %> <br />
-        <%=h translation.source_language.title %>
+        <%=h translation.source_content %>
       </td>
       <td>
-        <%=h translation.target_content %> <br />
-        <%=h translation.target_language.title %>
+        <%=h translation.target_content %>
       </td>
+      <td><%=h translation.source_language.title %></td>
+      <td><%=h translation.target_language.title %></td>
       <td><%=h translation.category_name %></td>
       <td><%=h translation.company_name %></td>
       <td><%=h translation.notes %></td>
@@ -31,4 +38,27 @@
   <% end %>
 </table>
 
-<p><%= link_to "New Translation", new_translation_path %></p>
+<p>
+  <%= link_to "New Translation", new_translation_path %>
+  &nbsp; - &nbsp; <%= link_to "Delete all", {:action => "destroy", :all => true}, :confirm => 'Are you sure?', :method => :delete %>
+</p>
+
+ <% form_for :csv_file, :url=>{:controller=>"translations", :action=>"import"}, :html => { :multipart => true } do |f| %>
+ <table>
+   <tr>
+     <td>
+      <label for="csv_file">
+        Select a CSV File :
+      </label>
+     </td>
+     <td >
+       <%= f.file_field :file %>
+     </td>
+   </tr>
+   <tr>
+     <td colspan='2'>
+       <%= submit_tag 'Submit' %>
+     </td>
+   </tr>
+ </table>
+<% end %>
