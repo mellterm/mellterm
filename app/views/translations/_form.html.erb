@@ -12,7 +12,7 @@
   </p>
   
   <p>
-    <%= f.label :category_id %><br />
+    <%= f.label :category_id, "Domain" %><br />
     <%= f.select(:category_id, Category.all.collect {|p| [p.title,p.id] }, { :include_blank => true }) %>
   </p>
   <p>

@@ -11,7 +11,7 @@
     <th>To</th>
     <th></th>
     <th></th>
-    <th>Category</th>
+    <th>Domain</th>
     <th>Company</th>
     <th>Notes</th>
     <th></th>
@@ -60,16 +60,17 @@
 <h4>Format of CSV file for import</h4>
 <p>CSV must have header a definining the language</p>
 <pre>
-  source_language,destination_language
-  source_content,destination_content
-  source_content,destination_content
+  header --> source_language,destination_language,domain(category),company,notes
+  data ->    source_content,destination_content
+  data ->    source_content,destination_content
 </pre>
 <h4>Example:</h4>
 <pre>
-  de_de,en_gb
-  Ablage,Personal Clipboard
-  Allgemein,General
-  Allg. Hinweise,general hints
-  Aufgaben,Tasks
+  de_de,en_gb,category,company,notes
+  Ablage,Personal Clipboard,tech,abc,"this, that and those"
+  Allgemein,General,tech,abc,"this, that and those"
+  Allg. Hinweise,general hints,Office,"xyz Company, ltd.",
+  Aufgaben,Tasks,tech,abc,,
   Auftrag,Appointment
 </pre>
+Notes: If comma is in part of field, it must be embraced by Double Quotes ("") as in the example above. 

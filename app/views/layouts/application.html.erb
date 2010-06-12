@@ -11,7 +11,7 @@
     <div id="navigation">
       <ul>
         <li> <%= link_to "Translations", translations_path %> </li>
-        <li> <%= link_to "Categories", categories_path %> </li>
+        <li> <%= link_to "Domains", categories_path %> </li>
         <li> <%= link_to "Companies", companies_path %> </li>
         <li> <%= link_to "Languages", languages_path %> </li>
         <li> <%= link_to "Pages", pages_path %> </li>
@@ -31,9 +31,9 @@
   </body>
   
   <% if params[:search] %>
-  <script language=JavaScript>
-    highlightSearchTerms("<%= params[:search][:source_content_or_target_content_like_any] %>", false);
-  </script>
+    <script language=JavaScript>
+      highlightSearchTerms("<%= params[:search][:source_content_or_target_content_like_any] %>", false);
+    </script>
   <% end %>
   
 </html>
