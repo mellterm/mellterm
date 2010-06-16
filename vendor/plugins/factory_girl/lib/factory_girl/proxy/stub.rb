@@ -1,4 +1,4 @@
-class Factory 
+class Factory
   class Proxy
     class Stub < Proxy #:nodoc:
       @@next_id = 1000
@@ -9,6 +9,14 @@ class Factory
         @instance.instance_eval do
           def new_record?
             id.nil?
+          end
+
+          def save(*args)
+            raise "stubbed models are not allowed to access the database"
+          end
+
+          def destroy(*args)
+            raise "stubbed models are not allowed to access the database"
           end
 
           def connection

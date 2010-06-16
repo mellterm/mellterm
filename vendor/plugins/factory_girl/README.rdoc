@@ -2,17 +2,16 @@
 
 factory_girl is a fixtures replacement with a straightforward definition syntax, support for multiple build strategies (saved instances, unsaved instances, attribute hashes, and stubbed objects), and support for multiple factories for the same class (user, admin_user, and so on), including factory inheritance.
 
+If you want to use factory_girl with Rails 3, use the factory_girl_rails gem, not this one.
+
+If you want to use factory_girl with Rails versions prior to Rails 3, use version 1.2.4.
+
 == Download
 
 Github: http://github.com/thoughtbot/factory_girl/tree/master
 
 Gem:
-  gem install factory_girl --source http://gemcutter.org
-
-Note: if you install factory_girl using the gem from Gemcutter, you'll need this
-in your environment.rb if you want to use Rails 2.1+'s dependency manager:
-
-  config.gem "factory_girl", :source => "http://gemcutter.org"
+  gem install factory_girl
 
 == Defining factories
 
@@ -43,7 +42,8 @@ It is highly recommended that you have one factory for each class that provides 
 
 Attempting to define multiple factories with the same name will raise an error.
 
-Factories can either be defined anywhere, but will automatically be loaded if they are defined in files at the following locations:
+Factories can be defined anywhere, but will be automatically loaded if they
+are defined in files at the following locations:
 
   test/factories.rb
   spec/factories.rb
@@ -201,7 +201,7 @@ Factory_girl makes available three callbacks for injecting some code:
 
 Examples:
 
-  # Define a factory that calls the generate_hashed_password method after it is built 
+  # Define a factory that calls the generate_hashed_password method after it is built
   Factory.define :user do |u|
     u.after_build { |user| do_something_to(user) }
   end

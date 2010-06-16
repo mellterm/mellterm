@@ -1,6 +1,15 @@
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec_helper'))
+require 'spec_helper'
 
 describe Factory do
+  include DefinesConstants
+
+  before do
+    define_constant('User')
+    define_constant('Admin', User)
+    define_constant('Business')
+    define_constant('Admin::Settings')
+  end
+
   describe "defining a factory" do
     before do
       @name    = :user
@@ -36,7 +45,7 @@ describe Factory do
     end
 
     it "should not allow a duplicate factory definition" do
-      lambda { 
+      lambda {
         2.times { Factory.define(@name) {|f| } }
       }.should raise_error(Factory::DuplicateDefinitionError)
     end
@@ -60,6 +69,36 @@ describe Factory do
 
     it "should have a default strategy" do
       @factory.default_strategy.should == :create
+    end
+
+    it "should return static attribute  when asked for a type" do
+      result = @factory.type
+      result.should be_kind_of(Array)
+      result.first.should be_kind_of(Factory::Attribute::Static)
+      result.first.name.should == :type
+    end
+
+    it "should define type as an attribute" do
+      @factory.type { "it's a type" }
+      attributes = @factory.attributes
+      attributes.should be_kind_of(Array)
+      attributes.size.should == 1
+      attributes.first.name.should == :type
+    end
+
+    it "should return static attribute when asked for the id" do
+      result = @factory.id
+      result.should be_kind_of(Array)
+      result.first.should be_kind_of(Factory::Attribute::Static)
+      result.first.name.should == :id
+    end
+
+    it "should define id as an attribute" do
+      @factory.id { "it's an id" }
+      attributes = @factory.attributes
+      attributes.should be_kind_of(Array)
+      attributes.size.should == 1
+      attributes.first.name.should == :id
     end
 
     it "should not allow the same attribute to be added twice" do
@@ -368,6 +407,24 @@ describe Factory do
     end
   end
 
+  describe "a factory for namespaced class" do
+    before do
+      Factory.factories = {}
+      @name  = :settings
+      @class = Admin::Settings
+    end
+
+    it "should build namespaced class passed by string" do
+      factory = Factory.define(@name.to_s, :class => @class.name) {}
+      factory.build_class.should == @class
+    end
+
+    it "should build Admin::Settings class from Admin::Settings string" do
+      factory = Factory.define(@name.to_s, :class => 'admin/settings') {}
+      factory.build_class.should == @class
+    end
+  end
+
   describe "after defining a factory" do
     before do
       @name    = :user
@@ -497,6 +554,26 @@ describe Factory do
       factory = Factory.define(:object, :default_strategy => :stub) {}
       factory.default_strategy.should == :stub
     end
+
+    describe 'defining a child factory without setting default strategy' do
+      before do
+        @child = Factory.define(:child_object, :parent => :object) {}
+      end
+
+      it "should inherit default strategy from its parent" do
+        @child.default_strategy.should == :stub
+      end
+    end
+
+    describe 'defining a child factory with a default strategy' do
+      before do
+        @child2 = Factory.define(:child_object2, :parent => :object, :default_strategy => :build) {}
+      end
+
+      it "should not inherit default strategy from parent" do
+        @child2.default_strategy.should == :build
+      end
+    end
   end
 
   def self.in_directory_with_files(*files)
@@ -521,7 +598,7 @@ describe Factory do
 
   def require_definitions_from(file)
     simple_matcher do |given, matcher|
-      has_received = have_received.require(file)
+      has_received = have_received.method_missing(:require, file)
       result = has_received.matches?(given)
       matcher.description = "require definitions from #{file}"
       matcher.failure_message = has_received.failure_message

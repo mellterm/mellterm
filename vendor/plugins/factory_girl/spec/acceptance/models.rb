@@ -14,12 +14,12 @@ class CreateSchema < ActiveRecord::Migration
     end
 
     create_table :posts, :force => true do |t|
-      t.string  :name  
+      t.string  :name
       t.integer :author_id
     end
-    
+
     create_table :business, :force => true do |t|
-      t.string  :name  
+      t.string  :name
       t.integer :owner_id
     end
   end
@@ -40,4 +40,9 @@ end
 class Post < ActiveRecord::Base
   validates_presence_of :name, :author_id
   belongs_to :author, :class_name => 'User'
+end
+
+module Admin
+  class Settings
+  end
 end

@@ -1,7 +1,3 @@
-PROJECT_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
-
-$: << File.join(PROJECT_ROOT, 'lib')
-
 case ENV['RAILS_VERSION']
 when '2.1' then
   gem 'activerecord',  '~>2.1.0'
@@ -12,4 +8,9 @@ else
 end
 
 require 'active_record'
-require 'factory_girl'
+require 'active_record/version'
+
+puts "Running specs using Rails #{ActiveRecord::VERSION::STRING}"
+
+require 'acceptance/models'
+

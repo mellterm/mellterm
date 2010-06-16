@@ -1,4 +1,3 @@
-require 'active_support'
 require 'factory_girl/proxy'
 require 'factory_girl/proxy/build'
 require 'factory_girl/proxy/create'
@@ -21,15 +20,6 @@ def Factory (name, attrs = {})
   Factory.default_strategy(name, attrs)
 end
 
-if defined? Rails.configuration
-  Rails.configuration.after_initialize do
-    Factory.definition_file_paths = [
-      File.join(RAILS_ROOT, 'test', 'factories'),
-      File.join(RAILS_ROOT, 'spec', 'factories')
-    ]
-    Factory.find_definitions
-  end
-else
-  Factory.find_definitions
+class Factory
+  VERSION = "1.3.0"
 end
-
