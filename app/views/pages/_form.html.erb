@@ -1,20 +1,38 @@
+<script type="text/javascript" src="/javascripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+tinyMCE.init({
+	mode : "exact",
+	elements : "page_body",
+	theme : "advanced",
+	skin : "o2k7",
+	plugins : "safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+	theme_advanced_buttons1 :  "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleprops,spellchecker,|,forecolor,backcolor",
+	theme_advanced_buttons2 :  "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,help,removeformat,cleanup,code,|,preview,fullscreen",
+	theme_advanced_buttons3 :  "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl",
+	theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	theme_advanced_statusbar_location : "bottom",
+	theme_advanced_resizing : true,
+});
+</script>
+
 <% form_for @page do |f| %>
   <%= f.error_messages %>
   <p>
     <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :size => 60 %>
   </p>
   <p>
     <%= f.label :permalink %><br />
-    <%= f.text_field :permalink %>
+    <%= f.text_field :permalink, :size => 60 %>
   </p>
   <p>
     <%= f.label :body %><br />
-    <%= f.text_area :body %>
+    <%= f.text_area :body, :rows => 25 %>
   </p>
   <p>
     <%= f.label :language_id %><br />
-    <%= f.select(:language_id, Language.all.collect {|p| p.title }, { :include_blank => false }) %>
+    <%= f.select(:language_id, Language.all.collect {|p| [p.title,p.id] }, { :include_blank => false }) %>
   </p>
   <p><%= f.submit %></p>
 <% end %>

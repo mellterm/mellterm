@@ -3,6 +3,13 @@
 <% form_for @search do |f| %>
   <%= f.text_field :source_content_or_target_content_like_any %>
   <%= f.submit "Search" %>
+  <br />
+  <% Category.all.each do |t|%>
+    <%= #check_box :categories, t.id, {}, t.id, nil 
+    %> 
+    <%= check_box_tag "categories[]", t.id %>
+    <%= t.title %>
+  <% end %>
 <% end %>
 
 <table id="hor-minimalist-b">

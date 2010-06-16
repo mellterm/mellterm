@@ -1,4 +1,7 @@
 class LanguagesController < ApplicationController
+  
+  before_filter :require_admin
+  
   def index
     @languages = Language.all
   end

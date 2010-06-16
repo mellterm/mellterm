@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+  
+  before_filter :require_admin
+  
   def index
     @pages = Page.all
   end

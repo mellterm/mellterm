@@ -1,18 +1,27 @@
 ActionController::Routing::Routes.draw do |map|
   
   map.root :controller => :translations
-  
   map.resources :pages
-
   map.resources :contents, :belongs_to => :language
-
   map.resources :translations, :belongs_to => [:company, :category]
-
   map.resources :companies, :has_many => :translations
-
   map.resources :categories, :has_many => :translations
-
   map.resources :languages, :has_many => :contents
+  
+  map.resources :users
+  map.resource :account, :controller => "users"
+  map.resource :user_session
+  
+  map.permalink '/page/:permalink/:language', 
+    :controller => 'pages', :action => 'show', 
+    :language => :language, :permalink => :permalink
+    
+  map.login    "login",     :controller => "user_sessions", :action => "new"
+  map.signin   "signin",    :controller => "user_sessions", :action => "new"
+  map.logout   "logout",    :controller => "user_sessions", :action => "destroy"
+  map.signup   "signup",    :controller => "users",     :action => "new"
+  map.register "register",  :controller => "users",     :action => "new"
+  map.user  "/user/:login", :controller => "users",     :action => "user", :user => :user
 
   # The priority is based upon order of creation: first created -> highest priority.
 

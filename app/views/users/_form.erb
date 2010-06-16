@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <td><%= form.label :login %></td>
+    <td><%= form.text_field :login, :size => 24 %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :password, form.object.new_record? ? nil : "Change password" %></td>
+    <td><%= form.password_field :password, :size => 24 %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :password_confirmation %></td>
+    <td><%= form.password_field :password_confirmation, :size => 24 %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :email %></td>
+    <td><%= form.text_field :email, :size => 24, :type => "email" %></td>
+  </tr>
+<table>

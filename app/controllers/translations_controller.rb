@@ -1,7 +1,18 @@
 class TranslationsController < ApplicationController
+  
+  before_filter :require_admin
+  
   def index
     @search = Translation.search(params[:search])
-    @translations = @search.all
+    conditions = nil
+    if params[:categories] && !params[:categories].empty?
+      cat_ids = params[:categories].join(" OR category_id = ")
+      conditions = ["category_id = #{cat_ids}"]
+    end
+    @translations = @search.all(
+      :conditions => conditions, 
+      :include => [:source_language, :target_language, :company, :category]
+    )
   end
   
   def show

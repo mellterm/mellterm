@@ -5,3 +5,14 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+
+User.create(:login => "admin",
+  :email => "admin@localhost.com",
+  :password => "welcome", 
+  :password_confirmation => "welcome" 
+)
+user = User.find(:first, :conditions => ["login = ?", "admin"])
+if user
+  user.admin = true
+  user.save
+end

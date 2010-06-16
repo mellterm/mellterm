@@ -1,4 +1,7 @@
 class CompaniesController < ApplicationController
+  
+  before_filter :require_admin
+  
   def index
     @companies = Company.all
   end

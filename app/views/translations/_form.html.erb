@@ -3,12 +3,12 @@
   <p>
     <%= f.label :source_content, "From" %><br />
     <%= f.select(:source_language_id, Language.all.collect {|p| [p.title,p.id] }, { :include_blank => false }) %>
-    <%= f.text_field :source_content, :size => 100 %> 
+    <%= f.text_field :source_content, :size => 80 %> 
   </p>
   <p>
     <%= f.label :target_content, "To" %><br />
     <%= f.select(:target_language_id, Language.all.collect {|p| [p.title,p.id] }, { :include_blank => false }) %>
-    <%= f.text_field :target_content, :size => 100 %>
+    <%= f.text_field :target_content, :size => 80 %>
   </p>
   
   <p>

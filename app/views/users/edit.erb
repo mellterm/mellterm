@@ -1,0 +1,12 @@
+<% form_for @user, :url => account_path do |f| %>
+  <div id="columnarForm">
+    <fieldset>
+      <legend><%= @title %></legend>
+      <%= render :partial => "form", :object => f %>
+    </fieldset>
+  </div>
+  <br clear="both"/>
+  <%= f.submit "Update" %>
+  
+  <%= f.error_messages %>
+<% end %>

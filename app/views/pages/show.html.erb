@@ -1,20 +1,16 @@
-<% title "Page" %>
+<% title @page.title %> 
+
+<%= @page.body %>
+
 
 <p>
-  <strong>Title:</strong>
-  <%=h @page.title %>
-</p>
-<p>
   <strong>Permalink:</strong>
-  <%=h @page.permalink %>
+  <%= h @page.permalink %>
 </p>
-<p>
-  <strong>Body:</strong>
-  <%=h @page.body %>
-</p>
+
 <p>
   <strong>Language:</strong>
-  <%=h @page.language_id %>
+  <%=h @page.language_title %>
 </p>
 
 <p>

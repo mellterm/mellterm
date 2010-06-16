@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+  
+  before_filter :require_admin
+  
   def index
     @categories = Category.all
   end
