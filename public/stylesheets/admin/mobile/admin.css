@@ -1,0 +1,304 @@
+@charset "utf-8";
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+margin: 0;
+padding: 0;
+border: 0;
+outline: 0;
+font-weight: inherit;
+font-style: inherit;
+font-size: inherit;
+font-family: inherit;
+vertical-align: baseline;
+}
+body{overflow-x:hidden;}
+img{vertical-align:middle;}
+
+body {
+	background-color: #fff;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 1em;
+	-webkit-text-size-adjust:none;
+}
+
+p {
+	margin: 2px 0px;
+}
+
+#site {
+	float: left;
+  margin: 0;
+	background: #fff;
+	padding: 0px;
+}
+.content {
+  width: auto;
+	float: left;
+	margin: 0px 0px 20px 10px;
+}
+
+.content img {
+	border: none;
+	margin: none;
+	outline: none;
+	text-decoration: none;
+}
+.content p {
+	font-size: 1.2em;
+	padding: 2px 1px;
+}
+
+#header {
+	margin: 0;
+	padding: 0;
+}
+h2.header_title {
+	margin: 0.2em 0.4em 0.2em 0.4em;
+	color: #4B7399;
+}
+.version {
+	margin: 0.1em;
+	color: green;
+	font-style: italic;
+	display: inline;
+	font-size:0.5em;
+}
+
+#main {
+  width: auto;
+	margin: 0;
+	float: left;
+}
+.flash_notice {
+	background-color: pink;
+	font-size: 1.4em;
+	font-style: italic;
+	padding: 0 4px;
+}
+.article {
+	border: 1px solid #ddd;
+}
+
+#sidebar {
+	width:180px;
+	float: right;
+	margin: 0;
+}
+
+#sidebar .sidebar_block {
+	width: 98%;
+	float: right;
+	margin: 0 0 10px 0;
+}
+
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+
+.comment {
+	width: 70%;
+	margin:10px 15px; 
+	padding: 8px;
+	border: 1px solid #ccc;
+	background-color: #FAFAFA; 
+}
+
+
+.bold * {
+	font-weight:bold;
+	color: black;
+	background:pink;
+}
+
+
+.jobs_box {
+	float: left;
+	background-color: #E6FCCB;
+	border: 1px solid #9ECB64;
+	width: 180px;
+	padding: 2px 0 2px 0;
+	margin: 2px 8px;
+	text-align: center;
+	height: 222px;
+}
+.jobs_box a {
+	text-decoration: none;
+	color: #555;
+}
+.jobs_box .user_avatar_small img {
+	margin: 2px;
+	text-align: center;
+	border: 1px solid #9ECB64;
+} 
+.jobs_box .user_avatar_small img a {
+	text-align: center;
+	outline: none;
+}
+
+.jobs_box .user_name {
+	font-size: 1.2em;
+	color: #555;
+}
+.jobs_box .user_login {
+	font-size: 1.4em;
+	color: #555;
+}
+
+
+.divider_box {
+	float: left;
+	width: 99%;
+	padding: 0;
+	margin: 2px;
+}
+.user_box {
+	float: left;
+	background-color: #E3F4FF;
+	border: 1px solid #7EC6F6;
+	width: 120px;
+	height: 140px;
+	padding: 2px 0 2px 0;
+	margin: 2px 8px;
+	text-align: center;
+}
+.user_box a {
+	text-decoration: none;
+	color: #555;
+}
+.user_box .user_avatar_small img {
+	margin: 2px;
+	text-align: center;
+	border: 1px solid #7EC6F6;
+} 
+.user_box .user_avatar_small img a {
+	text-align: center;
+	outline: none;
+}
+
+.user_box .user_name {
+	font-size: 1.2em;
+	color: #555;
+}
+.user_box .user_login {
+	font-size: 1.4em;
+	color: #555;
+}
+
+
+/* Footer */
+#footer {
+	width: 100%;
+	float: left;
+	margin: 0;
+	padding: 5px 0 0 0;
+	border: none;
+	text-align: center;
+	background-color: #eee;
+}
+#footer h1, 
+#footer h2,
+#footer h3,
+#footer h4,
+#footer h5,
+#footer h6 {
+	font-weight: normal;
+	color: #333333;
+	margin: 2px;
+}
+#footer p {
+	padding: 0;
+	margin: 0 0 5px 0;
+}
+#footer p a {
+  text-decoration: none;
+}
+
+img.avatar_left {
+	border: 1px solid #999;
+	position: absolute;
+	top: 240px;
+	right: 80px;
+}
+
+img.spinner {
+	vertical-align: middle;
+	display:inline;
+	border: none;
+	outline: none;
+	padding: 0;
+	margin: 0;
+	height: 15px;
+}
+
+
+.mini_contract {
+	padding: 4px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	background-color: #F8F3CC;
+	font-size: 1.1em;
+}
+.mini_label {
+}
+.mini_value {
+	font-weight: bold;
+}
+
+img.home_icon {
+	margin-top:4px;
+	display:inline;
+	width:26px;
+	clear:none;
+	float:left;
+	outline:none;
+	border:none;
+}
+
+.button {
+	outline:none;
+	border:none;
+	display:inline;
+	clear: none;
+	margin: 0;
+}
+
+.cascaded_list p {
+  font-size:0.95em;
+  padding: 0;
+  margin: 0;
+}
+
+.cascaded_list {
+  width: auto;
+  height: auto;
+  float: left;
+  border: 1px solid #aaa;
+  padding: 0 6px 0 0;
+  margin: 0 8px 10px 0;
+}
+
+.check_item {
+  padding: 4px;
+  margin: 4px;
+  font-style: italic;
+  font-size: 1.1em;
+}
+
+.license {
+  width: 100%;
+  float: left;
+  text-align: center;
+  margin: 0;
+  background-color: #EEE;
+  padding: 10px 0;
+}

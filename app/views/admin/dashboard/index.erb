@@ -1,0 +1,8 @@
+<h1><%= @title = "Welcome Back #{current_user.login}"%></h1>
+
+<h3> Logged users in last 24 hrs:</h3>
+<% @logged_users.each do |user| %>
+  <p>
+    <strong><%= user.login %></strong> : <%= user.last_request_at.to_s %>
+  </p>
+<% end %>

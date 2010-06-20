@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title><%= (@title || "Admin") %></title>
+    <%= stylesheet_link_tag 'admin/base' %>
+    <%= stylesheet_link_tag 'admin/admin' %>
+    <%= stylesheet_link_tag 'admin/menu' %>
+    <%= stylesheet_link_tag 'admin/scaffold' %>
+    <%= stylesheet_link_tag 'admin/side_menu' %>
+    <%= stylesheet_link_tag 'admin/forms' %>
+    <%= stylesheet_link_tag 'admin/typography' %>
+    <%= stylesheet_link_tag 'admin/table' %>
+    <%= stylesheet_link_tag 'admin/pagination' %>
+    <%= javascript_include_tag 'browser_detect' %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    
+    <div id="top-menu">
+      <div class="top-menu-left">
+        <%= link_to "Home", admin_path %>
+        &nbsp; <%= link_to "Website", root_path %>
+      </div>
+      <div class="top-menu-right">
+        <span class="loggedas"><%= "Logged in as: #{current_user.name}" %> </span>        
+        <% if !current_user %>
+          &nbsp; <%= link_to "Login", new_user_session_path %> |
+        <% else %>
+          &nbsp; <%= link_to "My account", edit_admin_user_path(current_user) %> |
+          &nbsp; <%= link_to "LOGOUT", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div id="site">
+    
+      <h2 class="header_title">
+        Administration Interface <span class="version"> version 0.5 </span>
+      </h2>
+      
+      <!-- HEADER START -->
+      <div  id="header"> 
+        <div  id="dolphincontainer">
+          <div  id="dolphinnav">
+            <ul><%= link_to(image_tag("admin/home_icon.png", :class => "home_icon"), admin_path ) %>
+              <li><%= link_to "Home", admin_path, :class => is_current_menu("dashboard") %></li>
+              <li><%= link_to "Translations", admin_translations_path, :class => is_current_menu("translations") %></li>
+              <li><%= link_to "Domains", admin_categories_path, :class => is_current_menu("categories") %></li>
+              <li><%= link_to "Companies", admin_companies_path, :class => is_current_menu("companies") %></li>
+              <li><%= link_to "Languages", admin_languages_path, :class => is_current_menu("languages") %></li>
+              <li><%= link_to "Pages", admin_pages_path, :class => is_current_menu("pages") %></li>
+              <li><%= link_to "Users", admin_users_path, :class => is_current_menu("users") %></li>
+              <li><%= link_to "Settings", admin_settings_path, :class => is_current_menu("settings") %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- HEADER END -->
+        
+      <br class="clear"/>
+      
+      <!-- Main Content Starts Here -->
+      <div id="main">
+        
+        <div class="content">
+            
+            <% if flash[:error] %>
+              <div class="error">
+                <%= flash[:error] %>
+              </div>
+            <% end %>
+          
+            <% if flash[:notice] %>
+              <div class="notice">
+                <%= flash[:notice] %>
+              </div>
+            <% end %>
+          
+            <% if flash[:success] %>
+              <div class="success">
+                <%= flash[:success] %>
+              </div>
+            <% end %>
+            
+            <%= yield %>
+                      
+        </div>
+        
+      </div>
+      
+      <%= render :partial => "/shared/admin/footer" %>
+    </div>
+  </body>
+</html>

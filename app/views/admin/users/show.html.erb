@@ -1,0 +1,32 @@
+<h3> <% @title ||= "User: #{@user.login}" %> </h3>
+
+<div id="columnarForm">
+
+    <fieldset>
+  		<legend>User Info</legend>
+  		<%= show_field("Login", @user.login) %>
+  		<%= show_field("Name", @user.name) %>
+      <%= show_field("Email",@user.email) %>
+      <%= show_field("Phone", @user.phone) %>
+      <%= show_field("Address", @user.address) %>
+      <%= show_field("Created_at", @user.created_at.to_s(:long)) %>
+      <%= show_field("Updated_at", @user.updated_at.to_s(:long)) %>
+    </fieldset>
+
+    <fieldset>
+  		<legend>History</legend>
+  		<%= show_field("Logins", @user.login_count) %>
+      <%= show_field("Failed Logins",@user.failed_login_count) %>
+      <%= show_field("Last Request", @user.last_request_at.to_s(:long)) %>
+      <%= show_field("Last Login", @user.last_login_at) %>
+      <%= show_field("Last IP", @user.last_login_ip) %>
+      <%= show_field("Current Login", @user.current_login_at.to_s(:long)) %>
+      <%= show_field("Current IP", @user.current_login_ip) %>
+    </fieldset>
+    
+  <br clear="both"/>
+  <%= link_to image_tag("admin/edit_button.png"), edit_admin_user_path(@user) %>
+  <%= link_to image_tag("admin/back_button.png"), admin_users_path %>
+
+</div>
+<br clear="both"/>

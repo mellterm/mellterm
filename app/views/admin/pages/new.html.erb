@@ -1,0 +1,12 @@
+<h3> <%= @title ||= "Editing #{@page.title}" %> </h3>
+
+<% form_for(@page, :url => admin_pages_path, :html => { :multipart => true }) do |f| %>
+
+  <%= f.error_messages %>
+  
+  <%= render :partial => 'form', :locals => { :f => f, :page => @page } %>
+
+  <%= image_submit_tag "admin/save_button.png", :class => "button" %>
+  
+<% end %>
+

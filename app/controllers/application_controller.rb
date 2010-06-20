@@ -5,9 +5,40 @@ class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user_session, :current_user
   protect_from_forgery
-  filter_parameter_logging :password
+  filter_parameter_logging :password, :password_confirmation
+  before_filter :store_location, :setup_search
+  layout 'indicator'
+  
+  rescue_from ActionController::RoutingError, :with => :not_found
+  rescue_from ActionController::UnknownAction, :with => :not_found
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  def not_found
+    flash[:error] = "Page not found." 
+    redirect_to root_path
+  end
+  
+  def setup_search
+    @search = Translation.search(params[:search])
+  end
+  
+  def is_iphone_request?
+    request.user_agent.downcase =~ /(mobile\/.+safari)|(iphone)|(ipod)|(blackberry)|(symbian)|(series60)|(android)|(smartphone)|(wap)|(mobile)/
+  end
 
-  before_filter :store_location
+  def set_iphone_format
+    if params[:desktop]
+      session[:mobile] = nil
+    end
+    if is_iphone_request? or params[:mobile] or session[:mobile]
+      session[:desktop] = nil
+      session[:mobile] = true
+      request.format = :iphone
+    end
+  end
+    
+  def initialize
+    @start_time = Time.now.usec
+  end
   
   def logged_in?
     !current_user.nil?

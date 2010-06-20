@@ -1,0 +1,14 @@
+<!-- Footer -->
+<div id="footer">
+  <p>
+  <%= link_to "Home", admin_path %> | 
+  <%= link_to "Website", root_path %> | 
+  <%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %> | 
+  <%= link_to "Desktop", {:desktop => true} %> 
+  </p>
+	<p>
+	  <%= render :partial => "/shared/render_time" %>
+	</p>
+	
+</div>
+<!-- Footer end -->

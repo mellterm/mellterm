@@ -1,0 +1,72 @@
+<h2><%= @title ||= "Global Website Settings" %></h2>
+
+<% form_for :settings, :url => { :action => 'update_all'} do |f| -%>
+
+<div class="span-12">
+  <fieldset class="red_fieldset">
+		<legend>Meta Information</legend>
+      <p class="alert"> These settings will only be shown in the META tag of the page, it will not be displayed to the user. This is for Search Engine Optimization. </p>
+      <p>
+        <%= label :site_meta_title, "Meta Title" %> <br />
+        <%= text_field :settings, :site_meta_title, :size => 80, :value => Settings.site_meta_title %>
+      </p>
+      <p>
+        <%= label :site_meta_keywords, "Meta Keywords for search engine" %> <br />
+        <%= text_field :settings, :site_meta_keywords, :size => 80, :value => Settings.site_meta_keywords %> <br />
+        <p class="info"> Keep between 6 to 12 unique keyword, precise and relative to website contents. <%= link_to "info", "http://www.seologic.com/faq/meta-keywords.php" %> </p>
+      </p>
+      <p>
+        <%= label :site_meta_description, "Meta Description" %> <br />
+        <%= text_field :settings, :site_meta_description, :size => 80, :value => Settings.site_meta_description %>
+      </p>
+      <p class="info">Limit this between 120 to 200 characters. </p>
+	</fieldset>
+</div>
+
+
+<div class="span-12">
+  <fieldset class="orange_fieldset">
+		<legend>Emails</legend>
+		  <p class="info"> Email Settings. These are the emails that will receive alerts from this website </p>
+      <p> 
+        <%= label :site_email, "Email For Contact" %> <br />
+        <%= text_field :settings, :site_email, :size => 80, :value => Settings.site_email %>
+      </p>
+      <p>
+        <%= label :site_email_alert, "Email for Notifications and Alterts" %> <br />
+        <%= text_field :settings, :site_email_alert, :size => 80, :value => Settings.site_email_alert %>
+      </p>
+      <p> 
+        <%= label :site_email_alert_subject, "Subject for Email alerts" %> <br />
+        <%= text_field :settings, :site_email_alert_subject, :size => 80, :value => Settings.site_email_alert_subject %>
+      </p>
+	</fieldset>
+</div>
+
+<div class="span-12">
+  <fieldset class="blue_fieldset">
+		<legend>Main Page</legend>
+		  <p class="alert"> These settings do show on the page. </p>
+      <p>
+        <%= label :site_title, "Main Page Title" %> <br />
+        <%= text_field :settings, :site_title, :size => 80, :value => Settings.site_title %>
+      </p>
+      <p>
+        <%= label :site_sub_title, "Main Page Subtitle" %> <br />
+        <%= text_field :settings, :site_sub_title, :size => 80, :value => Settings.site_sub_title %>
+      </p>
+      <p>
+        <%= label :footer, "Text in the Footer" %> <br />
+        <%= text_area :settings, :footer, :rows => 8, :cols => 82, :value => h(Settings.footer) %>
+      </p>
+      <p>
+        <%= label :ga_key, "Google Analytics Key" %> <br />
+        <%= text_field :settings, :ga_key, :size => 12, :value => Settings.ga_key %>
+      </p>
+	</fieldset>
+</div>
+
+
+<%= submit_tag "Save" %>
+
+<% end %>

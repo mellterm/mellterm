@@ -1,6 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
   
-  map.root :controller => :translations
+  map.permalink '/page/:permalink/:language', 
+    :controller => 'pages', :action => 'show', 
+    :language => :language, :permalink => :permalink
+  
+  map.root :controller => :pages, :action => "show", :permalink => "home"
   map.resources :pages
   map.resources :contents, :belongs_to => :language
   map.resources :translations, :belongs_to => [:company, :category]
@@ -11,10 +15,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :account, :controller => "users"
   map.resource :user_session
-  
-  map.permalink '/page/:permalink/:language', 
-    :controller => 'pages', :action => 'show', 
-    :language => :language, :permalink => :permalink
     
   map.login    "login",     :controller => "user_sessions", :action => "new"
   map.signin   "signin",    :controller => "user_sessions", :action => "new"
@@ -22,6 +22,22 @@ ActionController::Routing::Routes.draw do |map|
   map.signup   "signup",    :controller => "users",     :action => "new"
   map.register "register",  :controller => "users",     :action => "new"
   map.user  "/user/:login", :controller => "users",     :action => "user", :user => :user
+  
+  # Admin home page
+  map.admin "/admin", :controller => "admin/dashboard"
+  # Admin dashboard
+  map.connect '/dashboard/:action', :controller => "admin/dashboard"
+  # Admin routes
+  map.namespace :admin do |admin|
+    admin.resources :settings
+    admin.resources :users
+    admin.resources :pages
+    admin.resources :languages
+    admin.resources :comments
+    admin.resources :companies
+    admin.resources :translations
+    admin.resources :categories
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
 

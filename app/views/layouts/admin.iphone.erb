@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title> <%= @title %> </title>
+    <%= stylesheet_link_tag 'admin/mobile/base' %>
+    <%= stylesheet_link_tag 'admin/mobile/admin' %>
+    <%= stylesheet_link_tag 'admin/mobile/menu' %>
+    <%= stylesheet_link_tag 'admin/mobile/scaffold' %>
+    <%= stylesheet_link_tag 'admin/mobile/forms' %>
+    <%= stylesheet_link_tag 'admin/typography' %>
+    <%= stylesheet_link_tag 'admin/mobile/table' %>
+    <%= stylesheet_link_tag 'admin/mobile/pagination' %>
+    <%= javascript_include_tag 'browser_detect' %>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    <meta name="HandheldFriendly" content="True" />
+    <%= yield(:head) %>
+  </head>
+  <body>
+    
+    <div id="site">
+      <div  id="header"> 
+        <div  id="dolphincontainer">
+          <div  id="dolphinnav">
+            <ul>
+              <li><%= link_to "Home", admin_path, :class => is_current_menu("dashboard") %></li>
+              <li><%= link_to "users", admin_users_path, :class => is_current_menu("users") %></li>
+              <li><%= link_to "settings", admin_settings_path, :class => is_current_menu("settings") %></li>
+              <li><%= link_to "Website", root_path %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Header Ends here -->
+        
+      <br class="clear"/>
+      
+      <!-- Main Content Starts Here -->
+      
+      <div id="main">
+        
+        <div class="content">
+          
+            <% if flash[:error] %>
+              <div class="error">
+                <%= flash[:error] %>
+              </div>
+            <% end %>
+          
+            <% if flash[:notice] %>
+              <div class="notice">
+                <%= flash[:notice] %>
+              </div>
+            <% end %>
+          
+            <% if flash[:success] %>
+              <div class="success">
+                <%= flash[:success] %>
+              </div>
+            <% end %>
+            
+            <%= yield %>
+            
+        </div>
+        
+      </div>
+      
+      <%= render :partial => "/shared/admin/footer" %>
+    </div>
+  </body>
+</html>

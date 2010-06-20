@@ -1,0 +1,18 @@
+<% title @page.title %> 
+
+<%= @page.body %>
+
+<p>
+  <strong>Permalink:</strong>
+  <%= h @page.permalink %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%=h @page.language_title %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_admin_page_path(@page) %> |
+  <%= link_to "Destroy", admin_page_path(@page), :confirm => 'Are you sure?', :method => :delete %>
+</p>

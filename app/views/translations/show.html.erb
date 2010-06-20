@@ -1,13 +1,10 @@
-<% title "Translation" %>
+<% title "#{@translation.source_content} (#{@translation.source_language.title})" %>
+<br />
+<h3>
+  <%=h @translation.target_content %> (<%= @translation.target_language.title %>)
+</h3>
 
-<p>
-  <strong>Source Language:</strong>
-  <%=h @translation.source_content %>
-</p>
-<p>
-  <strong>Target Language:</strong>
-  <%=h @translation.target_content %>
-</p>
+<br />
 <p>
   <strong>Domain:</strong>
   <%=h @translation.category_name %>
@@ -16,13 +13,8 @@
   <strong>Company:</strong>
   <%=h @translation.company_name %>
 </p>
+
 <p>
   <strong>Notes:</strong>
   <%=h @translation.notes %>
-</p>
-
-<p>
-  <%= link_to "Edit", edit_translation_path(@translation) %> |
-  <%= link_to "Destroy", @translation, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", translations_path %>
 </p>

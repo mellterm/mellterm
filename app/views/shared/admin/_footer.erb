@@ -1,0 +1,40 @@
+<!-- Footer -->
+<div id="footer">
+  <p>
+    <%= link_to "English", {:language => "en"}, :class => "bold" %> - 
+    <%= link_to "Desktop", {:desktop => "true"}, :class => "bold" %> - 
+    <%= link_to "Mobile", {:mobile => "true"}, :class => "bold" %>
+  </p>
+	<p>
+	  <%= render :partial => "/shared/render_time" %>
+	</p>
+	
+	<p>
+	  <script type="text/javascript">
+    <!--
+      document.write('You\'re using ' + BrowserDetect.browser + ' ' + BrowserDetect.version + ' on ' + BrowserDetect.OS);
+    // -->
+    </script>
+  </p>
+  <% 
+    @opera_link = link_to("Opera", "http://www.opera.com/browser")
+    @chrome_link = link_to("Chrome", "http://www.google.com/chrome")
+    @firefox_link = link_to("Firefox", "http://www.mozilla.com/en-US/products/download.html?product=firefox")
+    @safari_link = link_to("Safari", "http://www.apple.com/safari/download/")
+  %>
+  <% if request.user_agent.match(/MSIE 5|MSIE 6/) %>
+    <p>Internet Explorer 5/6 are outdated and not fully supported. Please use Firefox 3, Safari 4 or <%=@chrome_link%> </p>
+  <% end %>
+  
+  <% if request.user_agent.match(/MSIE 7|MSIE 8/) %>
+    <p><strong>It is recommended to use <%=@opera_link%>, <%=@firefox_link%>, <%=@safari_link%> or <%=@chrome_link%> for a better usability.</strong></p>
+  <% end %>
+
+  <% if !request.user_agent.match(/MSIE 7|MSIE 8|Firefox\/2|Firefox\/3|Firefox\/4|Shiretoko|AppleWebKit|Safari\/4|Safari\/5|Opera\/9|Opera\/10|Gecko\/2009|Gecko\/2010/) %>
+    <p class="warning">
+      WARNING: Your browser is old, please upgrade to <%=@opera_link%>, <%=@firefox_link%>, <%=@safari_link%> or <%=@chrome_link%>
+    </p>
+    <%= request.user_agent %>
+  <% end %>
+</div>
+<!-- Footer end -->

@@ -1,0 +1,49 @@
+<div id="columnarForm">
+
+  <fieldset>
+		<legend>Login</legend>
+		<p>
+    	<%= f.label :login %> <br />
+    	<%= f.text_field :login %>
+    </p>
+    <p>
+    	<%= f.label :email %> <br />
+    	<%= f.text_field :email, :type => "email" %>
+    </p>
+    <p>
+    	<%= f.label :password %> <br />
+    	<%= f.password_field :password %>
+    </p>
+    <p>
+    	<%= f.label :password_confirmation %> <br />
+    	<%= f.password_field :password_confirmation %>
+    	<span class="small_tip">Leave Password blank to keep current password.</span>
+    </p>
+	</fieldset>
+	
+	<fieldset>
+		<legend>User</legend>
+  	<p>
+    	<%= f.label :name %> <br />
+    	<%= f.text_field :name %>
+    </p>
+    <p>
+    	<%= f.label :phone %> <br />
+    	<%= f.text_field :phone, :type => :number %>
+    </p>
+    <p>
+    	<%= f.label :address %> <br />
+    	<%= f.text_field :address %>
+    </p>
+    <% if show_admin_content? %>
+      <p>
+        <%= f.check_box :admin %>
+        <%= f.label :admin %>
+      </p>
+    <% end %>
+  </fieldset>
+
+    
+</div>
+
+<br clear="both"/>

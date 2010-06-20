@@ -1,0 +1,11 @@
+<% @title = @company.title %>
+
+<p>
+  <strong>Title:</strong>
+  <%=h @company.title %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_admin_company_path(@company) %> |
+  <%= link_to "Destroy", admin_company_path(@company), :confirm => 'Are you sure?', :method => :delete %>
+</p>

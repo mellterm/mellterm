@@ -1,20 +1,8 @@
-<% title @page.title %> 
-
+<% title @page.title %>
+<br />
 <%= @page.body %>
-
-
-<p>
-  <strong>Permalink:</strong>
-  <%= h @page.permalink %>
-</p>
-
-<p>
-  <strong>Language:</strong>
-  <%=h @page.language_title %>
-</p>
-
-<p>
-  <%= link_to "Edit", edit_page_path(@page) %> |
-  <%= link_to "Destroy", @page, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", pages_path %>
+<br />
+<p class="meta">
+  <span class="date"><%= @page.updated_at.strftime("%B %d, %Y") %></span>
+  <!-- <span class="posted">Posted by admin </span> -->
 </p>

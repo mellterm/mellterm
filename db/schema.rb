@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100615090553) do
+ActiveRecord::Schema.define(:version => 20100619102617) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(:version => 20100615090553) do
     t.integer  "menu_order",  :default => 1
     t.string   "link_title"
   end
+
+  create_table "settings", :force => true do |t|
+    t.string   "var"
+    t.text     "value"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["var"], :name => "index_settings_on_var", :unique => true
 
   create_table "translations", :force => true do |t|
     t.string   "source_content"
@@ -70,6 +80,11 @@ ActiveRecord::Schema.define(:version => 20100615090553) do
     t.boolean  "admin",               :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "time_zone"
+    t.text     "notes"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

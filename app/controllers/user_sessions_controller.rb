@@ -4,8 +4,7 @@ class UserSessionsController < ApplicationController
   
   def show
     if current_user && current_user.admin
-      # redirect_to admin_path
-      redirect_to root_path
+      redirect_to admin_path
     else
       redirect_to root_path
     end

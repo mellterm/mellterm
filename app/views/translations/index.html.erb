@@ -1,17 +1,5 @@
 <% title "Translations" %>
 
-<% form_for @search do |f| %>
-  <%= f.text_field :source_content_or_target_content_like_any %>
-  <%= f.submit "Search" %>
-  <br />
-  <% Category.all.each do |t|%>
-    <%= #check_box :categories, t.id, {}, t.id, nil 
-    %> 
-    <%= check_box_tag "categories[]", t.id %>
-    <%= t.title %>
-  <% end %>
-<% end %>
-
 <table id="hor-minimalist-b">
   <tr>
     <th>From</th>
@@ -19,65 +7,26 @@
     <th></th>
     <th></th>
     <th>Domain</th>
-    <th>Company</th>
-    <th>Notes</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
   <% for translation in @translations %>
     <tr>
       <td>
-        <%=h translation.source_content %>
+        <%= link_to translation.source_content,translation %>
       </td>
       <td>
-        <%=h translation.target_content %>
+        <%= link_to translation.target_content,translation %>
       </td>
       <td><%=h translation.source_language.title %></td>
       <td><%=h translation.target_language.title %></td>
       <td><%=h translation.category_name %></td>
-      <td><%=h translation.company_name %></td>
-      <td><%=h translation.notes %></td>
-      <td><%= link_to "Show", translation %></td>
-      <td><%= link_to "Edit", edit_translation_path(translation) %></td>
-      <td><%= link_to "Destroy", translation, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
 
-<p>
-  <%= link_to "New Translation", new_translation_path %>
-  &nbsp; - &nbsp; <%= link_to "Delete all", {:action => "destroy", :all => true}, :confirm => 'Are you sure?', :method => :delete %>
-</p>
-
-
-<br />
-
-<% form_for :csv_file, :url=>{:controller=>"translations", :action=>"import"}, :html => { :multipart => true } do |f| %>
-  <p>
-    Select a CSV File to import
-    <br />
-    <%= f.file_field :file %>
-    <%= submit_tag 'Upload' %>
-  </p>    
-<% end %>
-
-<br />
-
-<h4>Format of CSV file for import</h4>
-<p>CSV must have header a definining the language</p>
-<pre>
-  header --> source_language,destination_language,domain(category),company,notes
-  data ->    source_content,destination_content
-  data ->    source_content,destination_content
-</pre>
-<h4>Example:</h4>
-<pre>
-  de_de,en_gb,category,company,notes
-  Ablage,Personal Clipboard,tech,abc,"this, that and those"
-  Allgemein,General,tech,abc,"this, that and those"
-  Allg. Hinweise,general hints,Office,"xyz Company, ltd.",
-  Aufgaben,Tasks,tech,abc,,
-  Auftrag,Appointment
-</pre>
-Notes: If comma is in part of field, it must be embraced by Double Quotes ("") as in the example above. 
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%= page_entries_info @translations %>
+  </div>
+  <br />
+  <%= will_paginate @translations, :container => false %>
+</div>

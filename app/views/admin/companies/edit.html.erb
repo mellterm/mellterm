@@ -1,0 +1,11 @@
+<h3> <%= @title ||= "Editing #{@company.title}" %> </h3>
+
+<% form_for @company, :url => { :action => "update" } do |f| %>
+
+  <%= f.error_messages %>
+  
+  <%= render :partial => 'form', :locals => { :f => f, :company => @company } %>
+
+  <%= image_submit_tag "admin/save_button.png", :class => "button" %>
+  
+<% end %>

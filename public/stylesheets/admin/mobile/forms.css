@@ -1,0 +1,227 @@
+/* -------------------------------------------------------------- 
+   
+   forms.css
+   * Sets up some default styling for forms
+   * Gives you classes to enhance your forms
+   
+   Usage:
+   * For text fields, use class .title or .text
+   
+-------------------------------------------------------------- */
+
+/* Admin Forms */
+
+.small_tip {
+	font-size: 1.0em;
+	font-style: italic;
+	color: #666;
+	display: block;
+}
+.label_field {
+	padding: 2px;
+	margin: 4px 0 0 0;
+	clear: both;
+	float: left;
+	width: 99%;
+	font-size: 1.2em;
+	color: #444;
+}
+.label {
+	float: left;
+	padding: 0 4px 0 0;
+	font-weight: bold;
+}
+.value {
+  font-style: italic;
+	float: left;
+	padding: 0 0 0 4px;
+}
+label.value {
+	margin: 20px;
+	padding: 0 2px;
+	color: #666;
+	background-color: #eee;
+	border: 1px solid #ddd;
+	font-size: 1.4em;
+	width: 40%;
+}
+label.value_text {
+	margin: 20px;
+	padding: 0 2px;
+	color: #666;
+	font-size: 1.4em;
+}
+
+fieldset {
+	padding: 18px 12px;
+	margin: 0 0 22px 0;
+	border: 1px solid #aaa;
+}
+
+fieldset label {
+	font-size: 1.0em;
+}
+
+
+legend { 
+	font-size:1.5em; color: #333;
+}
+
+
+/* Form fields
+-------------------------------------------------------------- */
+
+li {
+	font-size: 1.15em;
+	list-style: none;
+}
+
+input, select {
+	color: #333;
+	padding: 3px;
+	font-size: 1.0em;
+}
+input, input.text, input.title, select {
+  margin: 0 0 0.2em 0;
+  border:1px solid #999;
+}
+
+input.text:focus, input.title:focus,
+textarea:focus, select:focus {
+  border:1px solid #666;
+}
+
+input.text, 
+input.title   { width: 300px; padding: 5px; }
+input.title   { font-size:1.5em; }
+textarea  { 
+  width: 240px;
+  margin: 0.2em 0 0.2em 0;
+	padding:3px;
+	border: 1px solid #999;
+}
+
+input.inline	{display: inline; clear:none;}
+
+.button-to, .button-to div		{display: inline;}
+
+/* Success, notice and error boxes
+-------------------------------------------------------------- */
+
+
+.error,
+.notice, 
+.success    { padding: .8em; margin-bottom: 1em; border: 2px solid #ddd; font-size: 1.2em;}
+
+.error      { background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; }
+.notice     { background: #FFF6BF; color: #514721; border-color: #FFD324; }
+.success    { background: #E6EFC2; color: #264409; border-color: #C6D880; }
+.error a    { color: #8a1f11; }
+.notice a   { color: #514721; }
+.success a  { color: #264409; }
+
+
+
+
+#columnarForm fieldset
+{
+	float: left;
+	display: block;
+	width: auto;
+	margin: 0 0.8em 0.8em 0;
+	padding: 0.8em;
+	min-height: 160px;
+}
+
+#columnarForm fieldset.50-wider {
+	width: 20em;
+}
+#columnarForm ul,
+#columnarForm ol {
+	margin: 0.5em 0 0 0.2em;
+	padding: 0;
+}
+
+#columnarForm fieldset.radio
+{
+	width: 15em;
+	margin: 1em 0 2em 0;
+}
+
+#columnarForm fieldset.radio input
+{
+	clear: both;
+	float: left;
+	width: auto;
+}
+
+#columnarForm fieldset.radio label
+{
+	font-weight: normal;
+}
+
+#columnarForm label.first
+{
+	padding-top: 1em;
+}
+
+#columnarForm select
+{
+	display: block;
+}
+
+#columnarForm input.hidden {
+	display: none;
+	border: none;
+}
+
+input.small {
+	padding: 2px;
+}
+
+#columnarForm input.smaller_input {
+	padding:2px;
+	font-size: 1.0em;
+	width: 186px;
+}
+
+.wide input {
+	margin: 0;
+	width: 220px;
+}
+
+.checkbox_list {
+  width: 48%;
+  padding: 0px;
+  margin: 0px;
+  float: left;
+}
+.checkbox_list h4 {
+  font-weight: bold;
+  margin: 4px 0px 0px 0px;
+}
+
+.blue_fieldset legend {
+  color: blue;
+}
+.blue_fieldset {
+  border-color: blue;
+}
+.red_fieldset legend {
+  color: red;
+}
+.red_fieldset {
+  border-color: red;
+}
+.orange_fieldset legend {
+  color: orange;
+}
+.orange_fieldset {
+  border-color: orange;
+}
+.green_fieldset legend {
+  color: green;
+}
+.green_fieldset {
+  border-color: green;
+}

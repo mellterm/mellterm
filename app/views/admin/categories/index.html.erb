@@ -1,0 +1,20 @@
+<% title "Domains" %>
+
+<table id="hor-minimalist-b">
+  <tr>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% for category in @categories %>
+    <tr>
+      <td><%=h category.title %></td>
+      <td><%= link_to "Show", admin_category_path(category) %></td>
+      <td><%= link_to "Edit", edit_admin_category_path(category) %></td>
+      <td><%= link_to "Destroy", admin_category_path(category), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Domain", new_admin_category_path %></p>
