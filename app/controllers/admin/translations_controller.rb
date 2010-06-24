@@ -63,7 +63,25 @@ class Admin::TranslationsController < Admin::BaseController
   
   def import
     require "fastercsv"
+    require 'tempfile'
     file = params[:csv_file][:file]
+    file_type = `file -b --mime-encoding #{file.path}`.chomp.upcase
+    # Only allow UTF-8 
+    unless file_type.match("UTF-8")
+      tmp_file = Tempfile.new("/tmp")
+      flash[:notice] = "File was converted from #{file_type} to UTF-8"
+      logger.debug "*** Found File encoding not UTF-8: #{file_type}"
+      logger.debug "*** Converting from #{file_type} to UTF-8"
+      logger.debug "    Command: iconv -f #{file_type} -t UTF-8 #{file.path} >> #{tmp_file.path}"
+      # Create a new temp file to store the new converted file
+      conversion = system("iconv -f #{file_type} -t UTF-8 #{file.path} >> #{tmp_file.path}")
+      if conversion 
+        logger.debug "*** Successfully converted"
+        file.close!
+        file = tmp_file
+      end
+    end
+    
     arr_of_arrs = FasterCSV.read(file.path)
     # de_de, en_gb,category,company, notes
     @source_language = Language.find_or_create_by_title(arr_of_arrs[0][0].to_s)
@@ -94,7 +112,8 @@ class Admin::TranslationsController < Admin::BaseController
         @total+=1
       end
     end
-    flash[:success] = "#{@total} entries were imported."
+    flash[:success] = "#{@total} entries were successfully imported."
+    file.close!
     redirect_to :action => "index"
   end
   
