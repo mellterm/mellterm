@@ -3,16 +3,16 @@
 <table id="hor-minimalist-b">
   <tr>
     <th>Title</th>
-    <th></th>
+    <th>Description</th>
     <th></th>
     <th></th>
   </tr>
   <% for category in @categories %>
     <tr>
-      <td><%=h category.title %></td>
-      <td><%= link_to "Show", admin_category_path(category) %></td>
+      <td><%= link_to category.title, admin_category_path(category) %></td>
+      <td><%= category.description %></td>
       <td><%= link_to "Edit", edit_admin_category_path(category) %></td>
-      <td><%= link_to "Destroy", admin_category_path(category), :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to "Del", admin_category_path(category), :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>

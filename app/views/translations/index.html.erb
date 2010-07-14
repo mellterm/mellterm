@@ -1,6 +1,6 @@
 <% title "Translations" %>
 
-<table id="hor-minimalist-b">
+<table id="hor-minimalist-b" class="pretty">
   <tr>
     <th>From</th>
     <th>To</th>
@@ -11,14 +11,22 @@
   <% for translation in @translations %>
     <tr>
       <td>
-        <%= link_to translation.source_content,translation %>
+        <%= link_to translation.source_content,
+          translation,
+          :title => "#{translation.source_language.title}"
+        %>
       </td>
       <td>
-        <%= link_to translation.target_content,translation %>
+        <%= link_to translation.target_content, 
+            translation,
+            :title => "#{translation.target_language.title.to_s}"
+        %>
       </td>
       <td><%=h translation.source_language.title %></td>
       <td><%=h translation.target_language.title %></td>
-      <td><%=h translation.category_name %></td>
+      <td><%= link_to translation.category_name.to_s, translation, 
+          :title => translation.category_description.to_s %>
+      </td>
     </tr>
   <% end %>
 </table>

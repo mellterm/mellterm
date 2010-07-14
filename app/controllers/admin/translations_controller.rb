@@ -23,10 +23,12 @@ class Admin::TranslationsController < Admin::BaseController
   
   def new
     @translation = Translation.new
+    @translation.user_id = current_user.id
   end
   
   def create
     @translation = Translation.new(params[:translation])
+    @translation.user_id = current_user.id
     if @translation.save
       flash[:success] = "Successfully created translation."
       redirect_to admin_translations_url

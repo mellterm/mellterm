@@ -1,6 +1,8 @@
-<% title @page.title %> 
 
-<%= @page.body %>
+<p>
+  <strong>Title:</strong>
+  <%= h @page.title %>
+</p>
 
 <p>
   <strong>Permalink:</strong>
@@ -11,6 +13,12 @@
   <strong>Language:</strong>
   <%=h @page.language_title %>
 </p>
+
+<br />
+
+<%= @page.body %>
+
+<br />
 
 <p>
   <%= link_to "Edit", edit_admin_page_path(@page) %> |

@@ -6,7 +6,13 @@
 </p>
 
 <p>
-  <%= link_to "Edit", edit_category_path(@category) %> |
-  <%= link_to "Destroy", @category, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", categories_path %>
+  <strong>Description:</strong>
+  <%=h @category.description %>
+</p>
+
+<br />
+
+<p>
+  <%= link_to "Edit", edit_admin_category_path(@category) %> |
+  <%= link_to "Delete", admin_category_path(@category), :confirm => 'Are you sure?', :method => :delete %>
 </p>

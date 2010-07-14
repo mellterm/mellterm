@@ -17,10 +17,13 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
   
+  # this search will be for global
+  # DO NOT REMOVE From here.
   def setup_search
     @search = Translation.search(params[:search])
   end
   
+  # Check for iphone/ipod devices, Nokia, Android
   def is_iphone_request?
     request.user_agent.downcase =~ /(mobile\/.+safari)|(iphone)|(ipod)|(blackberry)|(symbian)|(series60)|(android)|(smartphone)|(wap)|(mobile)/
   end

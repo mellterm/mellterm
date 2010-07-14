@@ -25,15 +25,15 @@
 		<legend>User</legend>
   	<p>
     	<%= f.label :name %> <br />
-    	<%= f.text_field :name %>
+    	<%= f.text_field :name, :class=>"nice_input" %>
     </p>
     <p>
     	<%= f.label :phone %> <br />
-    	<%= f.text_field :phone, :type => :number %>
+    	<%= f.text_field :phone, :type => :number, :class=>"nice_input" %>
     </p>
     <p>
     	<%= f.label :address %> <br />
-    	<%= f.text_field :address %>
+    	<%= f.text_field :address, :class=>"nice_input" %>
     </p>
     <% if show_admin_content? %>
       <p>

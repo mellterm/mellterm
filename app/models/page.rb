@@ -5,4 +5,9 @@ class Page < ActiveRecord::Base
   def language_title
     self.language.title if self.language
   end
+  
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
+  
 end

@@ -18,23 +18,23 @@
     <th></th>
     <th>Domain</th>
     <th>Company</th>
+    <th>User</th>
     <th>Notes</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
   <% for translation in @translations %>
     <tr>
-      <td><%=h translation.source_content %></td>
-      <td><%=h translation.target_content %></td>
+      <td><%= link_to translation.source_content.to_s, translation %></td>
+      <td><%= link_to translation.target_content.to_s, translation %></td>
       <td><%=h translation.source_language.title %></td>
       <td><%=h translation.target_language.title %></td>
-      <td><%=h translation.category_name %></td>
-      <td><%=h translation.company_name %></td>
+      <td><%= link_to(translation.category_name, admin_category_path(translation.category)) if translation.category %></td>
+      <td><%= link_to(translation.company_name, admin_company_path(translation.company)) if translation.company %></td>
+      <td><%= link_to(translation.user.login, admin_user_path(translation.user)) if translation.user %></td>
       <td><%=h translation.notes %></td>
-      <td><%= link_to "Show", admin_translation_path(translation) %></td>
       <td><%= link_to "Edit", edit_admin_translation_path(translation) %></td>
-      <td><%= link_to "Destroy", admin_translation_path(translation), :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to "Del", admin_translation_path(translation), :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
