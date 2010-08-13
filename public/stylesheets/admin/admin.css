@@ -79,6 +79,11 @@ p {
 .content p {
 	font-size: 1.2em;
 	padding: 2px 1px;
+	margin: 5px 0;
+}
+.content label {
+  margin: 6px 0;
+  font-size: 1.1em;
 }
 
 #header {
@@ -326,10 +331,15 @@ img.home_icon {
 }
 
 .check_item {
-  padding: 4px;
-  margin: 4px;
+  padding: 2px;
+  margin: 2px;
   font-style: italic;
   font-size: 1.1em;
+}
+.check_item a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
 }
 
 .license {
@@ -339,4 +349,11 @@ img.home_icon {
   margin: 0;
   background-color: #EEE;
   padding: 10px 0;
+}
+
+input.search {
+  padding: 4px;
+  font-size:1.3em;
+  margin-bottom: 5px;
+  
 }

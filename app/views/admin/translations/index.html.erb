@@ -1,16 +1,21 @@
 <% title "Translations" %>
 
 <% form_for @search do |f| %>
-  <%= f.text_field :source_content_or_target_content_like_any %>
-  <%= f.submit "Search" %>
+  <%= f.text_field :source_content_or_target_content_like_any, :class=>"search" %>
+  <%= f.submit "Search", :class=>"search" %>
   <br />
   <% Category.all.each do |t|%>
-    <%= check_box_tag "categories[]", t.id %>
-    <%= t.title %>
+    <%= check_box_tag "categories[]", 
+        t.id, 
+        params[:categories] && params[:categories].include?(t.id.to_s) 
+    %>
+    <%= t.title %> &nbsp;
   <% end %>
 <% end %>
 
-<table id="hor-minimalist-b">
+<br />
+
+<table id="one-column-emphasis-b">
   <tr>
     <th>From</th>
     <th>To</th>
@@ -25,11 +30,15 @@
   </tr>
   <% for translation in @translations %>
     <tr>
-      <td><%= link_to translation.source_content.to_s, translation %></td>
-      <td><%= link_to translation.target_content.to_s, translation %></td>
+      <td><%= link_to translation.source_content.to_s, admin_translation_path(translation) %></td>
+      <td><%= link_to translation.target_content.to_s, admin_translation_path(translation) %></td>
       <td><%=h translation.source_language.title %></td>
       <td><%=h translation.target_language.title %></td>
-      <td><%= link_to(translation.category_name, admin_category_path(translation.category)) if translation.category %></td>
+      <td>
+        <% translation.categories.each do |category| %>
+          <%= link_to(category.title, admin_category_path(category)) %>
+        <% end %>
+      </td>
       <td><%= link_to(translation.company_name, admin_company_path(translation.company)) if translation.company %></td>
       <td><%= link_to(translation.user.login, admin_user_path(translation.user)) if translation.user %></td>
       <td><%=h translation.notes %></td>
@@ -57,26 +66,39 @@
 <h2>CSV Import</h2>
 <% form_for :csv_file, :url => {:action=>"import"}, :html => { :multipart => true } do |f| %>
   <p>
+    <label>Select Categories for uploaded entries: </label> <br />
+    <%= select_tag "csv_file[category_ids][]", 
+        options_from_collection_for_select(Category.all, :id, :title), 
+        :multiple => true
+    %>
+  </p>
+  <p>
+    <label>Select Company for uploaded entries: </label> <br />
+    <%= f.select(:company_id, Company.all.collect {|p| [p.title,p.id] }, { :include_blank => true }) %>
+  </p>
+  <p>
     Select a CSV File to import
     <br />
     <%= f.file_field :file %>
     <%= submit_tag 'Upload' %>
-  </p>    
+  </p>
 <% end %>
 
 <br />
+<br />
+<br />
 
-<h4>Format of CSV file for import</h4>
+<h2>Format of CSV file for import</h2>
 <p>CSV must have header a definining the language</p>
 <pre>
-  header --> source_language,destination_language,domain(category),company,notes
-  data ->    source_content,destination_content
+  header --> source_language,destination_language,domains(categories),company,notes
+  data ->    source_content,destination_content,"domain1, domain2",company ABC, "some notes"
   data ->    source_content,destination_content
 </pre>
 <h4>Example:</h4>
 <pre>
   de_de,en_gb,category,company,notes
-  Ablage,Personal Clipboard,tech,abc,"this, that and those"
+  Ablage,Personal Clipboard,"tech,office",abc,"this, that and those"
   Allgemein,General,tech,abc,"this, that and those"
   Allg. Hinweise,general hints,Office,"xyz Company, ltd.",
   Aufgaben,Tasks,tech,abc,,

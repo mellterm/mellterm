@@ -6,12 +6,23 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
-  before_filter :store_location, :setup_search
+  before_filter :store_location, :setup_search, :order_by
   layout 'indicator'
   
-  rescue_from ActionController::RoutingError, :with => :not_found
-  rescue_from ActionController::UnknownAction, :with => :not_found
-  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  rescue_from(ActionController::RoutingError, :with => :not_found) if Rails.env == "production"
+  rescue_from(ActionController::UnknownAction, :with => :not_found) if Rails.env == "production"
+  rescue_from(ActiveRecord::RecordNotFound, :with => :not_found) if Rails.env == "production"
+  
+  
+  def order_by
+    if session[:order_by]
+      @order_by=session[:order_by]
+    else
+      @order_by="updated_at DESC"
+    end
+    @order_by
+  end
+  
   def not_found
     flash[:error] = "Page not found." 
     redirect_to root_path

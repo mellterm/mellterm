@@ -202,6 +202,33 @@ body table {
 }
 
 
+#one-column-emphasis-b {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 0px;
+	margin-top: 8px;
+	width: 99%;
+	text-align: left;
+	border-collapse: collapse;
+}
+#one-column-emphasis-b th {
+	font-size: 15px;
+	font-weight: normal;
+	padding: 10px 8px;
+	color: #039;
+	border-bottom: 2px solid #6678b1;
+}
+#one-column-emphasis-b td {
+	padding: 4px 8px;
+	color: #669;
+	border-top: 2px solid #e8edff;
+}
+#one-column-emphasis-b tr:hover td {
+	color: #339;
+	background: #eff2ff;
+}
+
+
 #one-column-emphasis {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 12px;

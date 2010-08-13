@@ -1,11 +1,9 @@
 class Translation < ActiveRecord::Base
   
+  has_and_belongs_to_many :categories
   belongs_to :source_language, :class_name => "Language"
   belongs_to :target_language, :class_name => "Language"
-  
   belongs_to :company
-  belongs_to :category
-  
   belongs_to :user
   
   validates_presence_of :source_content, :target_content

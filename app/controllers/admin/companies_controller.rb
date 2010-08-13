@@ -1,5 +1,4 @@
 class Admin::CompaniesController < Admin::BaseController
-  
   before_filter :require_admin
   
   def index

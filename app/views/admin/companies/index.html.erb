@@ -1,8 +1,9 @@
 <% @title = "Companies" %>
 
-<table id="hor-minimalist-b">
+<table id="one-column-emphasis-b">
   <tr>
     <th>Title</th>
+    <th>Transl</th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,6 +11,7 @@
   <% for company in @companies %>
     <tr>
       <td><%=h company.title %></td>
+      <td><%= company.translations.count %></td>
       <td><%= link_to "Show", admin_company_path(company) %></td>
       <td><%= link_to "Edit", edit_admin_company_path(company) %></td>
       <td><%= link_to "Destroy", admin_company_path(company), :confirm => 'Are you sure?', :method => :delete %></td>

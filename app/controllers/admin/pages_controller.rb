@@ -4,7 +4,7 @@ class Admin::PagesController < Admin::BaseController
   
   def index
     @title = "Pages"
-    @pages = Page.all
+    @pages = Page.all(:order => order_by)
   end
   
   def show

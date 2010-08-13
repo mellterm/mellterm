@@ -6,8 +6,11 @@
 
 <br />
 <p>
-  <strong>Domain:</strong>
-  <%=h @translation.category_name %>
+  <strong>Domains:</strong>
+  &nbsp;
+  <% @translation.categories.each do |category| %>
+      <%= category.title %> &nbsp;
+  <% end %>
 </p>
 <p>
   <strong>Company:</strong>

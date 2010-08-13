@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :feed_sites
   has_many :own_categories, :class_name => "Category", :foreign_key => "owner_id"
+  has_many :translations 
   
   acts_as_authentic
   

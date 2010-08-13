@@ -34,9 +34,9 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :pages
     admin.resources :languages
     admin.resources :comments
-    admin.resources :companies
+    admin.resources :companies, :has_many => :translations
     admin.resources :translations
-    admin.resources :categories
+    admin.resources :categories, :has_many => :translations
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

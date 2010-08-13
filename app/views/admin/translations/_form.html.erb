@@ -9,10 +9,39 @@
   <%= f.text_field :target_content, :size => 80 %>
 </p>
 
+
 <p>
-  <%= f.label :category_id, "Domain" %><br />
-  <%= f.select(:category_id, Category.all.collect {|p| [p.title,p.id] }, { :include_blank => true }) %>
+  <label>Domains</label>
+<% #for category in Category.all 
+%>
+
+    <div class="check_item">
+      <%= #check_box_tag "translation[category_ids][]", 
+          #category.id, 
+          #@translation.categories.include?(category),
+          #:id => "checkbox_#{category.id}"
+      %>
+      <%= #category.title.to_s
+          #link_to category.title, "#", :title => category.title.to_s, 
+          #:onclick => "toggleCheckbox('checkbox_#{category.id}');" 
+      %>
+    </div>
+<% #end 
+%>
+<%= # select_tag "translation[category_ids][]", 
+#     options_from_collection_for_select(Category.all, :id, :title), 
+#     :multiple => true 
+%>
+
+<%= multi_select("translation",
+    "translation[category_ids][]", 
+    Category.all, 
+    @translation.categories, 
+    :id,
+    {:text => [:title], :bracket => [:description]})
+%>
 </p>
+
 <p>
   <%= f.label :company_id %><br />
   <%= f.select(:company_id, Company.all.collect {|p| [p.title,p.id] }, { :include_blank => true }) %>
@@ -20,10 +49,10 @@
 <p>
   <%= f.label :notes, "Extra Notes" %><br />
   <%= f.text_field :notes, :size => 36 %>
+  <p class="info">This will be tooltip on translations</p>
 </p>
-
 <p>
   <%= f.label :user_id, "Uploaded by User" %><br />
   <%= f.select(:user_id, User.all.collect {|p| [p.login,p.id] }, { :include_blank => false }) %>
 </p>
-
+<br />

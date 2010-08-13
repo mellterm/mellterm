@@ -13,19 +13,21 @@
       <td>
         <%= link_to translation.source_content,
           translation,
-          :title => "#{translation.source_language.title}"
+          :title => translation.notes.to_s
         %>
       </td>
       <td>
         <%= link_to translation.target_content, 
             translation,
-            :title => "#{translation.target_language.title.to_s}"
+            :title => translation.notes.to_s
         %>
       </td>
       <td><%=h translation.source_language.title %></td>
       <td><%=h translation.target_language.title %></td>
-      <td><%= link_to translation.category_name.to_s, translation, 
-          :title => translation.category_description.to_s %>
+      <td>
+        <% translation.categories.each do |category| %>
+          <%= category.title %>
+        <% end %>
       </td>
     </tr>
   <% end %>

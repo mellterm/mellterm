@@ -337,14 +337,6 @@ input.small {
 	padding: 2px;
 }
 
-select#user_time_zone,
-input#user_avatar,
-select#job_contract_id,
-select#user_customer_id {
-	padding:0px;
-	font-size: 0.9em;
-}
-
 
 #columnarForm input.smaller_input {
 	padding:2px;

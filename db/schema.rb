@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100713085615) do
+ActiveRecord::Schema.define(:version => 20100802140230) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -17,6 +17,15 @@ ActiveRecord::Schema.define(:version => 20100713085615) do
     t.datetime "updated_at"
     t.text     "description"
   end
+
+  create_table "categories_translations", :id => false, :force => true do |t|
+    t.integer "category_id"
+    t.integer "translation_id"
+  end
+
+  add_index "categories_translations", ["category_id", "translation_id"], :name => "index_categories_translations_on_category_id_and_translation_id"
+  add_index "categories_translations", ["category_id"], :name => "index_categories_translations_on_category_id"
+  add_index "categories_translations", ["translation_id"], :name => "index_categories_translations_on_translation_id"
 
   create_table "companies", :force => true do |t|
     t.string   "title"
@@ -41,6 +50,8 @@ ActiveRecord::Schema.define(:version => 20100713085615) do
     t.string   "link_title"
   end
 
+  add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
+
   create_table "settings", :force => true do |t|
     t.string   "var"
     t.text     "value"
@@ -56,13 +67,17 @@ ActiveRecord::Schema.define(:version => 20100713085615) do
     t.string   "target_content"
     t.integer  "source_language_id"
     t.integer  "target_language_id"
-    t.integer  "category_id"
     t.integer  "company_id"
     t.string   "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
   end
+
+  add_index "translations", ["company_id"], :name => "index_translations_on_company_id"
+  add_index "translations", ["source_language_id"], :name => "index_translations_on_source_language_id"
+  add_index "translations", ["target_language_id"], :name => "index_translations_on_target_language_id"
+  add_index "translations", ["user_id"], :name => "index_translations_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "login",                                  :null => false
@@ -89,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20100713085615) do
     t.text     "notes"
   end
 
+  add_index "users", ["admin"], :name => "index_users_on_admin"
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["login"], :name => "index_users_on_login"

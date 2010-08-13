@@ -10,9 +10,42 @@
   <%=h @category.description %>
 </p>
 
-<br />
-
 <p>
   <%= link_to "Edit", edit_admin_category_path(@category) %> |
   <%= link_to "Delete", admin_category_path(@category), :confirm => 'Are you sure?', :method => :delete %>
 </p>
+
+<br />
+
+<table id="one-column-emphasis-b">
+  <tr>
+    <th>From</th>
+    <th>To</th>
+    <th></th>
+    <th></th>
+    <th>Domain</th>
+    <th>Company</th>
+    <th>User</th>
+    <th>Notes</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% for translation in @category.translations %>
+    <tr>
+      <td><%= link_to translation.source_content.to_s, admin_translation_path(translation) %></td>
+      <td><%= link_to translation.target_content.to_s, admin_translation_path(translation) %></td>
+      <td><%=h translation.source_language.title %></td>
+      <td><%=h translation.target_language.title %></td>
+      <td>
+        <% translation.categories.each do |category| %>
+          <%= link_to(category.title, admin_category_path(category)) %>
+        <% end %>
+      </td>
+      <td><%= link_to(translation.company_name, admin_company_path(translation.company)) if translation.company %></td>
+      <td><%= link_to(translation.user.login, admin_user_path(translation.user)) if translation.user %></td>
+      <td><%=h translation.notes %></td>
+      <td><%= link_to "Edit", edit_admin_translation_path(translation) %></td>
+      <td><%= link_to "Del", admin_translation_path(translation), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>

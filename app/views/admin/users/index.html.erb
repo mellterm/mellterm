@@ -1,11 +1,12 @@
 <% @title ||= "Users" %>
 
-<table id="hor-minimalist-b">
+<table id="one-column-emphasis-b">
   <caption><%= @title %></caption>
 	<thead>
     <tr>
       <th><%= sort_link_helper "login", "login" %></th>
-      <th>admin</th>
+      <th>Admin</th>
+      <th>Transl</th>
       <th><%= sort_link_helper "created", "created_at" %></th>
       <th><%= sort_link_helper "updated", "updated_at" %></th>
       <th> </th>
@@ -20,6 +21,9 @@
     </td>
     <td>
       <%= user.admin? %>
+    </td>
+    <td>
+      <%= user.translations.count %>
     </td>
     <td class="mouse" onclick=<%="document.location.href='#{admin_user_path(user)}'"%>>
       <%=h user.created_at.to_s(:short) %>

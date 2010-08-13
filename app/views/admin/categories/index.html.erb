@@ -1,9 +1,10 @@
 <% title "Domains" %>
 
-<table id="hor-minimalist-b">
+<table id="one-column-emphasis-b">
   <tr>
     <th>Title</th>
     <th>Description</th>
+    <th>Transl</th>
     <th></th>
     <th></th>
   </tr>
@@ -11,6 +12,9 @@
     <tr>
       <td><%= link_to category.title, admin_category_path(category) %></td>
       <td><%= category.description %></td>
+      <td>
+        <%= category.translations.count %>
+      </td>
       <td><%= link_to "Edit", edit_admin_category_path(category) %></td>
       <td><%= link_to "Del", admin_category_path(category), :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>

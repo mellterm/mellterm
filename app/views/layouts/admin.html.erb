@@ -13,7 +13,27 @@
     <%= stylesheet_link_tag 'admin/table' %>
     <%= stylesheet_link_tag 'admin/pagination' %>
     <%= javascript_include_tag 'browser_detect' %>
+    
+    <% if Rails.env == "production" %>
+      <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
+    <% else %>
+      <%= javascript_include_tag 'jquery-1.4.2.min' %>
+    <% end %>
+
+    <%= javascript_include_tag 'application' %>
     <%= yield(:head) %>
+    
+    <script type="text/javascript">
+      function toggleCheckbox(checkbox_id){
+        var checkbox = document.getElementById(checkbox_id)
+        if (checkbox.checked == 0) {
+          checkbox.checked = true;
+        }
+        else {
+          checkbox.checked = false;
+      	}
+      }
+    </script>
   </head>
   <body>
     
