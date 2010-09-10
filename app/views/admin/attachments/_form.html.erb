@@ -1,0 +1,25 @@
+<p>
+  <%= f.label :title %>
+  <br />
+  <%= f.text_field :title %>
+</p>
+
+<p>
+  <%= f.label :notes %>
+  <br />
+  <%= f.text_field :notes %>
+</p>
+
+<% unless @attachment.new_record? %>
+  <p>Title: <%=h @attachment.title %> </p>
+  <p>Filename: <%=h @attachment.data_file_name %> </p>
+  <p>Size: <%= to_file_size @attachment.data_file_size.to_i %> </p>
+  <p>Type: <%= @attachment.data_content_type %> </p>
+  <p>URL: <%= link_to @attachment.data.url,@attachment.data.url %> </p>
+<% end %>
+
+<p>
+  <%= f.label "File to Upload" %>
+  <br />
+  <%= f.file_field :data %>
+</p>

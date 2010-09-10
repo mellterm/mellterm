@@ -6,8 +6,10 @@
 //<![CDATA[
 	CKEDITOR.replace( 'ckeditor',
 		{
-			skin : 'office2003'
+			skin : 'office2003',
+			entities : false
 		});
+	CKEDITOR.config.entities = false;
 //]]>
 </script>
 
@@ -19,6 +21,11 @@
   <%= f.label :permalink %><br />
   <%= f.text_field :permalink, :size => 60 %>
 </p>
+<p>
+  <%= f.label :header_content %><br />
+  <%= f.text_area :header_content, :rows => 8, :cols => 60 %>
+</p>
+
 <p>
   <%= f.label :body %><br />
   <%= f.text_area :body, :class => "ckeditor" %>

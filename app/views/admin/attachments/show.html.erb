@@ -1,0 +1,11 @@
+<p>Title: <%=h @attachment.title %> </p>
+<p>Filename: <%=h @attachment.data_file_name %> </p>
+<p>Size: <%= to_file_size @attachment.data_file_size.to_i %> </p>
+<p>Type: <%= @attachment.data_content_type %> </p>
+<p>URL: <%= to_file_size @attachment.data_content_type %> </p>
+
+<p>
+  <%= link_to "Edit", edit_admin_attachment_path(@attachment) %>
+  |
+  <%= link_to "Back", admin_attachments_path %>
+</p>

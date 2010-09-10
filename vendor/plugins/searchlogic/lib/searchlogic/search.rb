@@ -60,6 +60,10 @@ module Searchlogic
       mass_conditions.clone.merge(@conditions)
     end
     
+    def compact_conditions
+      conditions.select { |k,v| !v.blank? }
+    end
+    
     # Accepts a hash of conditions.
     def conditions=(values)
       values.each do |condition, value|
@@ -100,6 +104,10 @@ module Searchlogic
     # Returns the column we are currently ordering by
     def ordering_by
       order && order.to_s.gsub(/^(ascend|descend)_by_/, '')
+    end
+    
+    def respond_to?(*args)
+      super || scope?(normalize_scope_name(args.first))
     end
     
     private

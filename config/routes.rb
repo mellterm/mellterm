@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :companies, :has_many => :translations
   map.resources :categories, :has_many => :translations
   map.resources :languages, :has_many => :contents
+  map.resources :attachments
   
   map.resources :users
   map.resource :account, :controller => "users"
@@ -29,6 +30,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/dashboard/:action', :controller => "admin/dashboard"
   # Admin routes
   map.namespace :admin do |admin|
+    admin.resources :attachments
     admin.resources :settings
     admin.resources :users
     admin.resources :pages

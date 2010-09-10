@@ -34,6 +34,11 @@
       	}
       }
     </script>
+    
+    <% if @page && @page.header_content %>
+      <%= @page.header_content %>
+    <% end %>
+    
   </head>
   <body>
     
@@ -70,6 +75,7 @@
               <li><%= link_to "Companies", admin_companies_path, :class => is_current_menu("companies") %></li>
               <li><%= link_to "Languages", admin_languages_path, :class => is_current_menu("languages") %></li>
               <li><%= link_to "Pages", admin_pages_path, :class => is_current_menu("pages") %></li>
+              <li><%= link_to "Files", admin_attachments_path, :class => is_current_menu("attachments") %></li>
               <li><%= link_to "Users", admin_users_path, :class => is_current_menu("users") %></li>
               <li><%= link_to "Settings", admin_settings_path, :class => is_current_menu("settings") %></li>
             </ul>

@@ -1,0 +1,51 @@
+<% @title ||= "Uploaded Files" %>
+
+<table id="one-column-emphasis">
+  <caption>Uploloaded Files</caption>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Filename</th>
+    <th>Size</th>
+    <th>Type</th>
+		<th>Added</th>
+		<th> </th>
+		<th> </th>
+		<th> </th>
+  </tr>
+
+<% for attachment in @attachments %>
+  <tr>
+    
+    <td class="mouse" onclick=<%="document.location.href='#{admin_attachment_path(attachment)}'"%>>
+      <%= link_to attachment.id, admin_attachment_path(attachment) %>
+    </td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_attachment_path(attachment)}'"%>>
+      <%= link_to attachment.title, admin_attachment_path(attachment) %>
+    </td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_attachment_path(attachment)}'"%>>
+      <%= link_to attachment.data_file_name, admin_attachment_path(attachment) %>
+    </td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_attachment_path(attachment)}'"%>>
+      <%= to_file_size attachment.data_file_size %>
+    </td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_attachment_path(attachment)}'"%>>
+      <%= attachment.data_content_type %>
+    </td>
+		<td class="mouse" onclick=<%="document.location.href='#{admin_attachment_path(attachment)}'"%>>
+		  <%=h attachment.created_at.strftime("%d %b, %Y") %>
+	  </td>
+	  <td><%= link_to "Download", attachment.data.url %></td>
+    <td><%= link_to "Edit", edit_admin_attachment_path(attachment) %></td>
+    <td><%= link_to "Del", admin_attachment_path(attachment), :confirm => t('are_you_sure'), :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<div class='flickr_pagination'>
+    <%= will_paginate @attachments %>
+</div>
+<br />
+<%= link_to "NEW", new_admin_attachment_path %>
+<br />

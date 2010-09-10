@@ -9,7 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100802140230) do
+ActiveRecord::Schema.define(:version => 20100910093016) do
+
+  create_table "attachments", :force => true do |t|
+    t.string   "title"
+    t.text     "notes"
+    t.integer  "user_id"
+    t.boolean  "is_private",        :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -46,8 +59,9 @@ ActiveRecord::Schema.define(:version => 20100802140230) do
     t.integer  "language_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "menu_order",  :default => 1
+    t.integer  "menu_order",     :default => 1
     t.string   "link_title"
+    t.text     "header_content"
   end
 
   add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
