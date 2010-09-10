@@ -2,3 +2,4 @@ git
 *.log
 /log
 /tmp
+database.yml
