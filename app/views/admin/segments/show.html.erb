@@ -1,0 +1,41 @@
+<% title "Translation" %>
+
+<div>
+  <span class="small info"><%=h @segment.source_language.title %></span>
+  <p><%=h @segment.source_content %></p>
+</div>
+<div>
+  <span class="small info"><%=h @segment.target_language.title %></span>
+  <p><%=h @segment.target_content %></p>
+</div>
+<br />
+<div>
+  <label>Domains:</label>&nbsp;
+  <%= @segment.category.title if @segment.category %>
+</div>
+<br />
+<div>
+  <label>cru:</label>
+  <%=h @segment.cru %>
+</div>
+<br />
+<div>
+  <label>crd:</label>
+  <%=h @segment.crd %>
+</div>
+<br />
+<div>
+  <label>Notes:</label>
+  <%=h @segment.notes %>
+</div>
+<br />
+<div>
+  <label>Raw Data:</label>
+  <p><%=h @segment.raw_data %></p>
+</div>
+<br />
+
+<div>
+  <%= link_to "Edit", edit_admin_segment_path(@segment) %> |
+  <%= link_to "Destroy", admin_segment_path(@segment), :confirm => 'Are you sure?', :method => :delete %>
+</div>

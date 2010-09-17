@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title><%= h(yield(:title) || Settings[:site_meta_title]) %></title>
+  <%= stylesheet_link_tag '/themes/simple/style.css' %>
+  <script src="/tooltip/lib/jquery.js" type="text/javascript"></script>
+  <script src="/tooltip/lib/jquery.bgiframe.js" type="text/javascript"></script>
+  <script src="/tooltip/lib/jquery.dimensions.js" type="text/javascript"></script>
+  <script src="/tooltip/jquery.tooltip.js" type="text/javascript"></script>
+
+
+  <script type="text/javascript">
+    function toggleCheckbox(checkbox_id){
+      var checkbox = document.getElementById(checkbox_id)
+      if (checkbox.checked == 0) {
+        checkbox.checked = true;
+      }
+      else {
+        checkbox.checked = false;
+    	}
+    }
+  
+    $(function() {
+      $('.tooltip *').tooltip();
+    
+      $('.pretty *').tooltip({ 
+          track: true, 
+          delay: 0, 
+          showURL: false, 
+          showBody: " - ", 
+          extraClass: "pretty", 
+          fixPNG: true, 
+          opacity: 0.90, 
+          top: -50,
+          left: -80 
+      });
+    });    
+  </script>
+  
+  <%= yield(:head) %>
+  
+</head>
+<body>
+	<div id="content">
+		<div class="header">
+			<div class="searchform">	
+
+		    <% if logged_in? %>
+					<div id="search" >
+					  <% form_for @search, :url => {:controller => "translations"}, :html => {:name => "search"} do |f| %>
+              <%= f.text_field :source_content_or_target_content_like_any, :class => "search-text" %>
+              <%= f.submit "Search" %>
+              <br />
+              <% Category.all.each do |t|%>
+                <div class="checkbox_search_item">
+                  <%= check_box_tag "categories[]", 
+                      t.id, params[:categories] && params[:categories].include?(t.id.to_s),
+                      :id => "checkbox_#{t.id}"
+                  %>
+                  <%= link_to t.title, "#", :title => t.description.to_s, 
+                      :onclick => "toggleCheckbox('checkbox_#{t.id}');" 
+                  %>
+                </div>
+              <% end %>
+            <% end %>
+					</div>
+				<% end %>
+
+			</div>
+			<h1><a href="/">Mellterm</a></h1>
+		</div>
+
+		<div class="subheader">
+			<div class="subheader_right">
+			  <% Page.page.each do |t| %>
+			    <%= link_to t.title, t %>
+			  <% end %>
+			  <% if logged_in? %>
+          <%= link_to "Translations", translations_path %>
+          <%= link_to "Account", edit_account_path %>
+          <%= link_to "Logout", logout_path %>
+          <% if current_user.admin %>
+            <%= link_to "Administration", admin_path %>
+          <% end %>
+        <% else %>
+          <%= link_to "Login", login_path %>
+        <% end %>
+			</div>
+		</div>
+  						
+		<div class="right">
+			
+      <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, :class => "flash_#{name}" %>
+      <%- end -%>
+      
+      <div class="post">
+        <%- if show_title? -%>
+          <h2 class="title">
+            <%=h yield(:title) %>
+          </h2>
+        <%- end -%>
+        
+        <div class="yield">
+          <%= yield %>
+        </div>
+        
+      </div>
+				
+			<div class="line"></div>
+			<%= render :partial => "/shared/simple/block_left" %>
+      <%= render :partial => "/shared/simple/block_right" %>
+		</div>
+		
+    <%= render :partial => "/shared/simple/sidebar" %>
+    <%= render :partial => "/shared/simple/footer" %>
+		
+	</div>
+</body>
+</html>

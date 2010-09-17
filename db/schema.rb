@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100910093016) do
+ActiveRecord::Schema.define(:version => 20100917093605) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -62,9 +62,27 @@ ActiveRecord::Schema.define(:version => 20100910093016) do
     t.integer  "menu_order",     :default => 1
     t.string   "link_title"
     t.text     "header_content"
+    t.string   "location",       :default => "page"
+    t.integer  "display_order",  :default => 1
   end
 
   add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
+
+  create_table "segments", :force => true do |t|
+    t.string   "source_content"
+    t.string   "target_content"
+    t.integer  "source_language_id"
+    t.integer  "target_language_id"
+    t.integer  "category_id"
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.string   "cru"
+    t.string   "crd"
+    t.text     "notes"
+    t.text     "raw_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "settings", :force => true do |t|
     t.string   "var"
@@ -86,6 +104,8 @@ ActiveRecord::Schema.define(:version => 20100910093016) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "internal_id"
+    t.string   "source"
   end
 
   add_index "translations", ["company_id"], :name => "index_translations_on_company_id"

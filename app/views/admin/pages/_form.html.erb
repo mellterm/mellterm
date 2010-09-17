@@ -23,13 +23,19 @@
 </p>
 <p>
   <%= f.label :header_content %><br />
-  <%= f.text_area :header_content, :rows => 8, :cols => 60 %>
+  <%= f.text_area :header_content, :rows => 20, :cols => 80 %>
 </p>
 
 <p>
   <%= f.label :body %><br />
   <%= f.text_area :body, :class => "ckeditor" %>
 </p>
+
+<p>
+  <%= f.label :location, "Content Type" %><br />
+  <%= f.select(:location, Page::LOCATIONS.collect {|p| p}, { :include_blank => false }) %>
+</p>
+
 <p>
   <%= f.label :language_id %><br />
   <%= f.select(:language_id, Language.all.collect {|p| [p.title,p.id] }, { :include_blank => false }) %>

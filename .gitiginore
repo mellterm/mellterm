@@ -3,3 +3,4 @@ git
 /log
 /tmp
 database.yml
+.DS_Store

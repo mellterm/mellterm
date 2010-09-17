@@ -21,3 +21,23 @@
   <strong>Notes:</strong>
   <%=h @translation.notes %>
 </p>
+
+<br />
+
+<div>
+  <% @segments.each do |segment| %>
+    <div>
+      <span class="small info"><%=h segment.source_language.title %>:</span>
+      <br />
+      <%= highlight(segment.source_content,@translation.source_content) %>
+    </div>
+    <br />
+    <div>
+      <span class="small info"><%=h segment.target_language.title %>:</span>
+      <br />
+      <%= highlight(segment.target_content,@translation.target_content) %>
+    </div>
+    <br />
+    <hr />
+  <% end %>
+</div>

@@ -1,5 +1,20 @@
+DONE
 - Change WYSIWYG, done 1 hour
 - Add description to Domains and show as tooltip, done 1 hour
 - Change to multiple domains per translation. done 2 hour
 - on the upload add checkbox domains. will be added to the domans on the file. woring on
 - add user_id to translations, done
+
+NEW
+
+2010-09-10
+- update import method
+- add languages to search (radio button)
+- Menu on Top, Content Bottom
+- change search to start with words
+- Add company to search (radio)
+- Search autocomplete with terms
+- Allow users tocreate their own translations 
+- add Value to terms (1-5), default 3. 
+- decapitalize headers
+- 

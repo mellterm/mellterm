@@ -24,7 +24,10 @@
     <th>Domain</th>
     <th>Company</th>
     <th>User</th>
+    <th>Internal ID</th>
+    <th>Source</th>
     <th>Notes</th>
+    <th>Date</th>
     <th></th>
     <th></th>
   </tr>
@@ -41,7 +44,10 @@
       </td>
       <td><%= link_to(translation.company_name, admin_company_path(translation.company)) if translation.company %></td>
       <td><%= link_to(translation.user.login, admin_user_path(translation.user)) if translation.user %></td>
+      <td><%=h translation.internal_id %></td>
+      <td><%=h translation.source %></td>
       <td><%=h translation.notes %></td>
+      <td><%= translation.updated_at.strftime("%Y-%m-%d") %></td>
       <td><%= link_to "Edit", edit_admin_translation_path(translation) %></td>
       <td><%= link_to "Del", admin_translation_path(translation), :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
@@ -91,13 +97,13 @@
 <h2>Format of CSV file for import</h2>
 <p>CSV must have header a definining the language</p>
 <pre>
-  header --> source_language,destination_language,domains(categories),company,notes
-  data ->    source_content,destination_content,"domain1, domain2",company ABC, "some notes"
+  header --> source_language,destination_language,domains(categories),company,Internal-ID,Value(1-5),notes,Source
+  data ->    source_content,destination_content,"domain1, domain2",company ABC,123,"some notes"
   data ->    source_content,destination_content
 </pre>
 <h4>Example:</h4>
 <pre>
-  de_de,en_gb,category,company,notes
+  de_de,en_gb,domain,company,internal_id,notes,source
   Ablage,Personal Clipboard,"tech,office",abc,"this, that and those"
   Allgemein,General,tech,abc,"this, that and those"
   Allg. Hinweise,general hints,Office,"xyz Company, ltd.",

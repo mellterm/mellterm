@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
   before_filter :store_location, :setup_search, :order_by
-  layout 'indicator'
+  layout 'simple'
   
   rescue_from(ActionController::RoutingError, :with => :not_found) if Rails.env == "production"
   rescue_from(ActionController::UnknownAction, :with => :not_found) if Rails.env == "production"

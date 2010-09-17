@@ -6,3 +6,10 @@
   <span class="date"><%= @page.updated_at.strftime("%B %d, %Y") %></span>
   <!-- <span class="posted">Posted by admin </span> -->
 </p>
+
+<% content_for :head do %>
+  <% if @page %>
+    <%= @page.header_content if @page.header_content %>
+    <title><%= @page.title if @page.title %></title>
+  <% end %>
+<% end %>
