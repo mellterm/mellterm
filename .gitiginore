@@ -1,6 +1,6 @@
 git
 *.log
-/log
-/tmp
+log/
+tmp/
 database.yml
 .DS_Store
