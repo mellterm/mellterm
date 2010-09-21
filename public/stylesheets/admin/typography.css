@@ -108,7 +108,7 @@ caption     { background: #eee; }
 -------------------------------------------------------------- */
 
 .small      { font-size: 0.9em; margin-bottom: 1em; line-height: 1em; }
-.info       { font-size: 1.0em; font-style: italic; color: #888;}
+.info       { font-size: 1.0em; font-style: italic; color: #666;}
 .alert      { font-size: 1.2em; font-style: italic; margin-bottom: 0.8em; color: #666;}
 .medium     { font-size: 1.0em; margin-bottom: 1em; line-height: 1em; }
 .large      { font-size: 1.4em; line-height: 2.5em; margin-bottom: 1.25em; }

@@ -1,10 +1,10 @@
-<h3> <%= @title ||= "Editing translation" %> </h3>
+<h3> <%= @title ||= "Editing Segment" %> </h3>
 
-<% form_for @translation, :url => { :action => "update" } do |f| %>
+<% form_for @segment, :url => { :action => "update" } do |f| %>
 
   <%= f.error_messages %>
   
-  <%= render :partial => 'form', :locals => { :f => f, :translation => @translation } %>
+  <%= render :partial => 'form', :locals => { :f => f, :segment => @segment } %>
 
   <%= image_submit_tag "admin/save_button.png", :class => "button" %>
   

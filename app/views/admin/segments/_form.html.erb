@@ -1,45 +1,19 @@
 <p>
-  <%= f.label :source_content, "From" %><br />
   <%= f.select(:source_language_id, Language.all.collect {|p| [p.title,p.id] }, { :include_blank => false }) %>
-  <%= f.text_field :source_content, :size => 80 %> 
+  <br />
+  <%= f.text_area :source_content, :rows=>5, :cols=>60 %> 
 </p>
+<hr />
 <p>
-  <%= f.label :target_content, "To" %><br />
   <%= f.select(:target_language_id, Language.all.collect {|p| [p.title,p.id] }, { :include_blank => false }) %>
-  <%= f.text_field :target_content, :size => 80 %>
+  <br />
+  <%= f.text_area :target_content, :rows =>5, :cols=>60 %>
 </p>
 
 
 <p>
-  <label>Domains</label>
-<% #for category in Category.all 
-%>
-
-    <div class="check_item">
-      <%= #check_box_tag "translation[category_ids][]", 
-          #category.id, 
-          #@translation.categories.include?(category),
-          #:id => "checkbox_#{category.id}"
-      %>
-      <%= #category.title.to_s
-          #link_to category.title, "#", :title => category.title.to_s, 
-          #:onclick => "toggleCheckbox('checkbox_#{category.id}');" 
-      %>
-    </div>
-<% #end 
-%>
-<%= # select_tag "translation[category_ids][]", 
-#     options_from_collection_for_select(Category.all, :id, :title), 
-#     :multiple => true 
-%>
-
-<%= multi_select("translation",
-    "translation[category_ids][]", 
-    Category.all, 
-    @translation.categories, 
-    :id,
-    {:text => [:title], :bracket => [:description]})
-%>
+  <label>Domain</label>
+  <%= f.select :category_id, Category.all.collect {|t| [t.title,t.id]} %>
 </p>
 
 <p>

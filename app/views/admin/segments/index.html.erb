@@ -1,38 +1,12 @@
+
 <% title "Segments" %>
 
-<table id="one-column-emphasis-b">
-  <tr>
-    <th>From</th>
-    <th>To</th>
-    <th>Domain</th>
-    <th>User</th>
-    <th>CRU</th>
-    <th>CRD</th>
-    <th>Imported</th>
-    <th></th>
-    <th></th>
-  </tr>
-  <% for segment in @segments %>
-    <tr>
-      <td>
-        <%= link_to segment.source_content.to_s, admin_segment_path(segment) %>
-        <span class="info small"><%=h segment.source_language.title %></span>
-      </td>
-      <td>
-        <%= link_to segment.target_content.to_s, admin_segment_path(segment) %>
-        <span class="info small"><%=h segment.target_language.title %></span>
-      </td>
-      <td><%= link_to(segment.category.title, admin_category_path(category)) if segment.category %></td>
-      <td><%= link_to(segment.user.login, admin_user_path(segment.user)) if segment.user %></td>
-      <td><%=h segment.cru %></td>
-      <td><%=h segment.crd %></td>
-      <td><%= segment.updated_at.strftime("%Y-%m-%d") %></td>
-      <td><%= link_to "Edit", edit_admin_segment_path(segment) %></td>
-      <td><%= link_to "Del", admin_segment_path(segment), :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="segments">
+  <%= render @segments %>
+</div>
+
 <br />
+
 <p>
   <%= link_to image_tag("admin/new_button.png"), new_admin_segment_path %>
 </p>

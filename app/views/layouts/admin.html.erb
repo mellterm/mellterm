@@ -13,12 +13,13 @@
     <%= stylesheet_link_tag 'admin/table' %>
     <%= stylesheet_link_tag 'admin/pagination' %>
     <%= javascript_include_tag 'browser_detect' %>
-    
     <% if Rails.env == "production" %>
       <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
     <% else %>
       <%= javascript_include_tag 'jquery-1.4.2.min' %>
     <% end %>
+    <%= javascript_include_tag '/jeditable/jquery.jeditable.js', :charset => "utf-8" %>
+    <%= javascript_include_tag '/jeditable/jquery.jeditable.autogrow.js', :charset => "utf-8" %>
 
     <%= javascript_include_tag 'application' %>
     <%= yield(:head) %>

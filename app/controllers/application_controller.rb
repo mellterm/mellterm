@@ -6,13 +6,20 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
-  before_filter :store_location, :setup_search, :order_by
+  before_filter :set_categories_hash, :store_location, :setup_search, :order_by
   layout 'simple'
   
   rescue_from(ActionController::RoutingError, :with => :not_found) if Rails.env == "production"
   rescue_from(ActionController::UnknownAction, :with => :not_found) if Rails.env == "production"
   rescue_from(ActiveRecord::RecordNotFound, :with => :not_found) if Rails.env == "production"
   
+  def set_categories_hash
+    @categories_hash = {}
+    Category.all.each do |t| 
+      @categories_hash[t.id.to_s] = t.title.to_s
+    end
+    
+  end
   
   def order_by
     if session[:order_by]

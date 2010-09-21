@@ -1,0 +1,11 @@
+<h3> <%= @title ||= "New Segment" %> </h3>
+
+<% form_for @segment, :url => { :action => "create" } do |f| %>
+
+  <%= f.error_messages %>
+  
+  <%= render :partial => 'form', :locals => { :f => f, :segment => @segment } %>
+
+  <%= image_submit_tag "admin/save_button.png", :class => "button" %>
+  
+<% end %>

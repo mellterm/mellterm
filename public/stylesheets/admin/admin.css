@@ -153,80 +153,6 @@ h2.header_title {
 }
 
 
-.jobs_box {
-	float: left;
-	background-color: #E6FCCB;
-	border: 1px solid #9ECB64;
-	width: 180px;
-	padding: 2px 0 2px 0;
-	margin: 2px 8px;
-	text-align: center;
-	height: 222px;
-}
-.jobs_box a {
-	text-decoration: none;
-	color: #555;
-}
-.jobs_box .user_avatar_small img {
-	margin: 2px;
-	text-align: center;
-	border: 1px solid #9ECB64;
-} 
-.jobs_box .user_avatar_small img a {
-	text-align: center;
-	outline: none;
-}
-
-.jobs_box .user_name {
-	font-size: 1.2em;
-	color: #555;
-}
-.jobs_box .user_login {
-	font-size: 1.4em;
-	color: #555;
-}
-
-
-.divider_box {
-	float: left;
-	width: 99%;
-	border-bottom: 1px solid #aaa;
-	padding: 0 0 20px 0;
-	margin: 2px;
-}
-.user_box {
-	float: left;
-	background-color: #E3F4FF;
-	border: 1px solid #7EC6F6;
-	width: 120px;
-	height: 140px;
-	padding: 2px 0 2px 0;
-	margin: 2px 8px;
-	text-align: center;
-}
-.user_box a {
-	text-decoration: none;
-	color: #555;
-}
-.user_box .user_avatar_small img {
-	margin: 2px;
-	text-align: center;
-	border: 1px solid #7EC6F6;
-} 
-.user_box .user_avatar_small img a {
-	text-align: center;
-	outline: none;
-}
-
-.user_box .user_name {
-	font-size: 1.2em;
-	color: #555;
-}
-.user_box .user_login {
-	font-size: 1.4em;
-	color: #555;
-}
-
 
 /* Footer */
 #footer {
@@ -356,4 +282,42 @@ input.search {
   font-size:1.3em;
   margin-bottom: 5px;
   
+}
+
+.segment {
+  margin: 0 0 15px 0;
+  padding: 0 0 15px 0;
+
+}
+.segment_prop {
+  color: #666;
+  font-size: 12px;
+}
+.segments a {
+  color: #333;
+  text-decoration:none;
+}
+.segments a:hover {
+  color: #222;
+  text-decoration:underline;
+}
+.info a {
+  font-size:12px;
+}
+.segments .seg_language {
+  color:#486DAA;
+}
+.segment_from, 
+.segment_to {
+  background-color:#FFFFFA;
+  border: 1px solid #ddd;
+  margin: 4px 0;
+  padding: 0 4px;
+}
+.segment_from :hover,
+.segment_to :hover {
+  background-color:#FFFFE0;
+}
+.editable textarea {
+  width: 98%;
 }

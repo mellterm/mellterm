@@ -15,3 +15,9 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+begin; require 'ruby-debug'; 
+Debugger.settings[:autolist] = 1;
+Debugger.settings[:autoeval] = 1;
+Debugger.settings[:reload_source_on_change] = 1;
+rescue LoadError; nil; end
