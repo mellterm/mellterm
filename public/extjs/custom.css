@@ -1,0 +1,38 @@
+/* Custom */
+.topbar {
+  height: 20px;
+  width:100%;
+  background-image: url(/extjs/white-top-bottom.gif);
+  border-color: #99BBE8;
+  color: #15428B;
+  font-family: tahoma, arial, verdana, sans-serif;
+  font-size: 13px;
+  padding-top:4px;
+  padding-left:8px;
+}
+.topbar a {
+  margin-right: 2px;
+  margin-left: 2px;
+}
+
+table.userprofile-div {
+  font-size: 12px;
+}
+table.userprofile-div tbody tr,
+table.userprofile-div tbody tr td {
+  padding: 3px 0;
+}
+
+table.login-div {
+  font-size: 12px;
+}
+
+input.accordion_login {
+  width: 96%;
+  padding: 3px;
+  border: 1px solid #aaa;
+}
+#start-div {
+  float:left;
+  padding: 7px;
+}
