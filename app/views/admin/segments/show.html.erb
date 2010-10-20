@@ -1,11 +1,11 @@
 <% title "Translation" %>
 
 <div>
-  <span class="small info"><%=h @segment.source_language.title %></span>
+  <span class="small info"><%= @segment.source_language.title if @segment.source_language %></span>
   <p><%=h @segment.source_content %></p>
 </div>
 <div>
-  <span class="small info"><%=h @segment.target_language.title %></span>
+  <span class="small info"><%= @segment.target_language.title if @segment.target_language %></span>
   <p><%=h @segment.target_content %></p>
 </div>
 <br />

@@ -103,7 +103,6 @@ a:hover {
 
 #search {
 	float: left;
-	width: 350px;
 	height: auto;
 	padding: 10px 0px 0px 0px;
 }
@@ -111,7 +110,7 @@ a:hover {
 #search form {
 	height: auto;
 	margin: 0;
-	padding: 10px 0 0 50px;
+	padding: 10px 0 0 10px;
 }
 
 #search fieldset {
@@ -121,7 +120,7 @@ a:hover {
 }
 
 .search-text {
-	width: 220px;
+	width: 98%;
 	padding: 4px;
 	border: 1px solid #bbb;
 	background: #FFFFFF;
@@ -444,7 +443,7 @@ a:hover {
 #hor-minimalist-b {
 	background: #fff;
 	margin: 20px 0;
-	width: 592px;
+	width: 100%;
 	border-collapse: collapse;
 	text-align: left;
 	font-size: 14px;
@@ -603,14 +602,17 @@ a:hover {
 
 .checkbox_search_item {
   float: left;
-  margin-right: 10px;
-  min-width: 72px;
+  margin-right: 8px;
+  margin-top: 8px;
+  width: 100%
 }
 
-input.nice_input {
-  padding: 4px;
-  font-size: 1.15em;
-  border: 1px solid #999;
+input.nice_input,
+textarea.nice_input {
+  color: #444;
+  padding: 3px;
+  font-size: 1em;
+  border: 1px solid #aaa;
   margin: 2px;
 }
 

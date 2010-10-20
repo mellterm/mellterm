@@ -1,0 +1,12 @@
+<% form_for @document, :html => { :multipart => true } do |f| %>
+
+  <%= f.error_messages %>
+  
+  <%= render :partial => 'form', :locals => { :f => f, :document => @document } %>
+  
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+

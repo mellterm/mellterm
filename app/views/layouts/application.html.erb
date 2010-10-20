@@ -1,41 +1,249 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-  <head>
-    <title><%= h(yield(:title) || Settings[:site_meta_title]) %></title>
-    <%= stylesheet_link_tag 'application' %>    
-    <%= yield(:head) %>
-  </head>
-  <body>
-    <div id="navigation">
-      <ul>
-        <% if logged_in? %>
-          <li> <%= link_to "Translations", translations_path %> </li>
-          <li> <%= link_to "Pages", pages_path %> </li>
-          <li> <%= link_to "Account", edit_account_path %> </li>
-          <li> <%= link_to "Logout", logout_path %> </li>
-        <% else %>
-          <li> <%= link_to "Login", login_path %> </li>
-        <% end %>
-      </ul>
-    </div>
-    <div id="container">
-      <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, :class => "flash_#{name}" %>
-      <%- end -%>
-      
-      <%- if show_title? -%>
-        <h1><%=h yield(:title) %></h1>
-      <%- end -%>
-      
-      <%= yield %>
-    </div>
-  </body>
+<head>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title><%= @title || Settings[:site_meta_title] %></title>
+  <%= stylesheet_link_tag 'themes/indicator/style.css' %>
+  <%= stylesheet_link_tag 'admin/table.css' %>
+  <%= stylesheet_link_tag 'site.css' %>
   
-  <% if params[:search_] %>
-    <script language=JavaScript>
-      highlightSearchTerms("<%= params[:search][:source_content_or_target_content_like_any] %>", false);
-    </script>
+  <script type="text/javascript">
+    function toggleCheckbox(checkbox_id){
+      var checkbox = document.getElementById(checkbox_id)
+      if (checkbox.checked == 0) {
+        checkbox.checked = true;
+      }
+      else {
+        checkbox.checked = false;
+    	}
+    }
+  
+    $(function() {
+      $('.tooltip *').tooltip();
+    
+      $('.pretty *').tooltip({ 
+          track: true, 
+          delay: 0, 
+          showURL: false, 
+          showBody: " - ", 
+          extraClass: "pretty", 
+          fixPNG: true, 
+          opacity: 0.90, 
+          top: -50,
+          left: -80 
+      });
+    });    
+  </script>
+  
+  <%= yield(:head) %>
+  
+  <% if @page && @page.header_content %>
+    <%= @page.header_content %>
   <% end %>
   
+  
+  <!-- ExtJS STARTS HERE -->
+	<link rel="stylesheet" type="text/css" href="/extjs/ext-all.css" />
+ 	<!-- LIBS -->
+ 	<script type="text/javascript" src="/extjs/ext-base.js"></script>
+ 	<!-- ENDLIBS -->
+  <script type="text/javascript" src="/extjs/ext-all.js"></script>
+  <!--<script language="javascript" src="../grid/PropsGrid.js"></script>-->
+	<style type="text/css">
+	html, body {
+        font:normal 12px verdana;
+        margin:0;
+        padding:0;
+        border:0 none;
+        overflow:hidden;
+        height:100%;
+    }
+	  .x-panel-body p {
+	    margin:5px;
+	  }
+    .x-column-layout-ct .x-panel {
+      margin-bottom:5px;
+    }
+    .x-column-layout-ct .x-panel-dd-spacer {
+      margin-bottom:5px;
+    }
+    .settings {
+      background-image:url(/extjs/folder_wrench.png) !important;
+    }
+    .nav {
+      background-image:url(/extjs/folder_go.png) !important;
+    }
+    </style>
+	<script type="text/javascript">
+
+    Ext.onReady(function(){
+       // NOTE: This is an example showing simple state management. During development,
+       // it is generally best to disable state management as dynamically-generated ids
+       // can change across page loads, leading to unpredictable results.  The developer
+       // should ensure that stable state ids are set for stateful components in real apps.
+       Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+       
+       <% if logged_in? %>
+       var viewport = new Ext.Viewport({
+            layout:'border',
+            items:[{
+                region:'west',
+                id:'west-panel',
+                title:'Menu',
+                split:true,
+                width: 240,
+                minSize: 180,
+                maxSize: 360,
+                collapsible: true,
+                margins:'30 0 5 5',
+                cmargins:'30 5 5 5',
+                layout:'accordion',
+                layoutConfig:{
+                    animate:true
+                },
+                items: [{
+                    contentEl: 'search-div',
+                    title:'Search',
+                    autoScroll:true,
+                    border:false,
+                    singleExpand: false
+                },{
+                    contentEl: 'workspace-div',
+                    title:'Workspace',
+                    border:false,
+                    autoScroll:false,
+                    singleExpand: false
+                },{
+                    contentEl: 'userprofile-div',
+                    title:'Profile',
+                    border:false,
+                    autoScroll:false,
+                    singleExpand: false
+                }]
+            },{
+                region:'center',
+                margins:'30 5 5 0',
+                layout:'column',
+                autoScroll:true,
+                items:[{
+                    columnWidth:0.990,
+                    baseCls:'x-plain',
+                    bodyStyle:'padding:5px 0 5px 5px',
+                    items:[{
+                        title: "<%= @title %>",
+                        contentEl: 'start-div'
+                    }]
+                }]
+            }]
+        });
+        <% else %>
+        var viewport = new Ext.Viewport({
+             layout:'border',
+             items:[{
+                 region:'west',
+                 id:'west-panel',
+                 title:'Menu',
+                 split:true,
+                 width: 200,
+                 minSize: 175,
+                 maxSize: 400,
+                 collapsible: true,
+                 margins:'30 0 5 5',
+                 cmargins:'30 5 5 5',
+                 layout:'accordion',
+                 layoutConfig:{
+                     animate:true
+                 },
+                 items: [{
+                     contentEl: 'login-div',
+                     title:'Login',
+                     border:false,
+                     autoScroll:false,
+                     singleExpand: false
+                 }]
+             },{
+                 region:'center',
+                 margins:'30 5 5 0',
+                 layout:'column',
+                 autoScroll:true,
+                 items:[{
+                     columnWidth:0.990,
+                     baseCls:'x-plain',
+                     bodyStyle:'padding:5px 0 5px 5px',
+                     items:[{
+                         title: 'Main Page',
+                         contentEl: 'start-div'
+                     }]
+                 }]
+             }]
+         });
+        <% end %>
+    });
+	</script>
+	
+	<%= stylesheet_link_tag '/extjs/custom.css' %>
+	
+	<% if Rails.env == "production" %>
+    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
+  <% else %>
+    <%= javascript_include_tag 'jquery-1.4.2.min' %>
+  <% end %>
+  <%= javascript_include_tag '/jeditable/jquery.jeditable.js', :charset => "utf-8" %>
+  <%= javascript_include_tag '/jeditable/jquery.jeditable.autogrow.js', :charset => "utf-8" %>
+  
+</head>
+<body>
+  <script type="text/javascript" src="/extjs/examples.js"></script>
+  
+  <div class="topbar">
+    <% Page.all.each do |page| %>
+	    <%= link_to page.title, permalink_path(page.permalink) %> - 
+	  <% end %>
+    <% if logged_in? %>
+       <%= link_to "Segments", segments_path %> 
+       - <%= link_to "Account", edit_account_path %> 
+       - <%= link_to "Logout", logout_path %> 
+      <% if current_user.admin %>
+        - <%= link_to "Administration", admin_path %> 
+      <% end %>
+    <% else %>
+       <%= link_to "Login", login_path %> 
+    <% end %>
+  </div>
+  
+  
+  <div class="x-hidden">
+    
+    <div id="login-div">
+      <% unless current_user %>
+        <%= render :partial => "/shared/login" %>
+      <% end %>
+    </div>
+    
+    <div id="search-div">
+      <%= render :partial => "/shared/search" if current_user %>
+    </div>
+    
+    <!-- Workspace content -->
+    <div id="workspace-div">
+      <%= render :partial => "/shared/workspace" if current_user %>
+    </div>
+    
+    <!-- User Profile content -->
+    <div id="userprofile-div">
+      <%= render :partial => "/shared/user_profile" if current_user %>
+    </div>
+    
+    <!-- Start page content -->
+    <div id="start-div">
+        <%- flash.each do |name, msg| -%>
+          <%= content_tag :div, msg, :class => "flash_#{name}" %>
+        <%- end -%>
+        <%= yield %>
+    </div>
+    
+  </div>
+  
+</body>
 </html>

@@ -4,6 +4,9 @@ class Segment < ActiveRecord::Base
   belongs_to :target_language, :class_name => "Language"
   belongs_to :user
   belongs_to :category
+  belongs_to :document
+  
+  belongs_to :last_user, :class_name => "User", :foreign_key => "updated_by"
   
   def self.import_tmx(user_id,category_id,file)
     require 'xmlsimple'

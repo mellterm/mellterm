@@ -19,10 +19,15 @@
   <%= will_paginate @segments, :container => false %>
 </div>
 
-
 <br />
 <br />
-<strong><%= link_to "Delete all", {:action => "destroy", :all => true}, :confirm => 'Are you rally sure you want to delete ALL records from database?', :method => :delete %></strong>
+<strong>
+  <%= link_to "Delete all", 
+    {:action => "destroy", :all => true}, 
+    :confirm => 'Are you rally sure you want to delete ALL records from database?', 
+    :method => :delete 
+  %>
+</strong>
 
 <br />
 <br />

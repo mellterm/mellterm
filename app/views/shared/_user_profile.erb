@@ -1,0 +1,32 @@
+<table class="userprofile-div">
+  <tr>
+    <td>Name: </td>
+    <td><%=h current_user.name_title %> <%=h current_user.name %></td>
+  </tr>
+  <tr>
+    <td>Login: </td>
+    <td><%=h current_user.login %></td>
+  </tr>
+  <tr>
+    <td>Email: </td>
+    <td><%=h current_user.email %></td>
+  </tr>
+  <tr>
+    <td>Phone: </td>
+    <td><%=h current_user.phone %></td>
+  </tr>
+  <tr>
+    <td>Address: </td>
+    <td><%=h current_user.address %></td>
+  </tr>
+  <tr>
+    <td>Country: </td>
+    <td><%=h current_user.country_name %></td>
+  </tr>
+  <tr>
+    <td>Language: </td>
+    <td><%=h current_user.language_name %></td>
+  </tr>
+</table>
+<p><%= image_tag current_user.avatar.url(:small) %></p>
+<p><%= link_to "Edit Profile", edit_user_path(current_user) %></p>

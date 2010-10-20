@@ -12,9 +12,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :categories, :has_many => :translations
   map.resources :languages, :has_many => :contents
   map.resources :attachments
-  map.resources :segments
+  map.resources :segments, :belongs_to => :document
+  map.resources :documents, :has_many => :segments
   
-  map.resources :users
+  map.resources :users, :has_many => :documents
   map.resource :account, :controller => "users"
   map.resource :user_session
     

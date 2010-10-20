@@ -8,6 +8,7 @@ class PagesController < ApplicationController
     if params[:id]
       @page = Page.find(params[:id])
     end
+    @title = @page.title
   end
   
 end

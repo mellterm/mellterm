@@ -1,0 +1,12 @@
+<div class="segments">
+  <%= render @segments %>
+</div>
+
+<br />
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%= page_entries_info @segments %>
+  </div>
+  <br />
+  <%= will_paginate @segments, :container => false %>
+</div>

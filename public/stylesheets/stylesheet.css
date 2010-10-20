@@ -1,0 +1,186 @@
+/* Settings for the browser window */
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: small;
+  color: black;
+  background: white;
+}
+
+/* The main application window */
+#main {
+  height: 96%;
+  width: 98%;
+  border: 2px solid black;
+}
+
+/* The application menu on the left */
+#menu {
+  width: 350px;
+  height: 98%;
+}
+
+/* Sections of content within the menu */
+.menuContent {
+  overflow: auto;
+}
+
+/* The content window on the right */
+#content {
+  padding: 10px;
+  height: 95%;
+  overflow: auto;
+}
+
+#content h3 {
+  padding-top: 5px;
+}
+
+/* A section of information in the content window (i.e. Address) */
+.section {
+  margin-left: 30px;
+  width: 525px;
+  border: 1px solid black;
+  padding: 5px;
+  background: #e1ebfb;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
+
+/* A table column in the section */
+.section td {
+  padding-right: 10px;
+}
+
+.addressOption {
+  padding-left: 30px;
+}
+
+#spinner {
+  position: absolute;
+  margin-left: 365px;
+  margin-top: 10px;
+  padding: 5px;
+  background: white;
+  z-index: 10;
+}
+
+/* BEGIN - Styles for addresses */
+.addressContacts th {
+  padding: 10px;
+}
+
+.addressContacts td {
+  text-align: center;
+}
+/* END - Styles for addresses */
+
+/* BEGIN - Styles for group maintenance */
+.selectGroupAddresses {
+  width: 235px;
+  height: 455px;
+}
+
+#maintainGroupTable td {
+  border: none;
+}
+
+#maintainGroupControls {
+  text-align: center;
+  width: 55px;
+}
+
+.groupListAddresses {
+  border: 1px solid black;
+  background: #e1ebfb;
+  width: 235px;
+}
+
+.groupListAddresses ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+.groupListAddresses li {
+  cursor: -moz-grab;
+}
+/* END - styles for group maintenance */
+
+/* The notice to the user, when we send them a message */
+#notice {
+  border: 2px solid red;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+}
+
+/* START:error styles */
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+/* END:error styles */
+
+/* START:link styles */
+a, a:visited {
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#menu a {
+  color: black;
+  text-decoration: none;
+}
+
+#menu a:hover {
+  text-decoration: underline;
+}
+/* END:link styles */
+
+#multipleAddressConfirmation {
+  width: 400px;
+  height: 250px;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}

@@ -1,0 +1,46 @@
+.segment {
+  margin: 0 0 15px 0;
+  padding: 0 0 15px 0;
+
+}
+.segment_prop {
+  color: #666;
+  font-size: 12px;
+}
+.segments a {
+  color: #333;
+  text-decoration:none;
+}
+.segments a:hover {
+  color: #222;
+  text-decoration:underline;
+}
+.info a {
+  font-size:12px;
+}
+.segments .seg_language {
+  color:#486DAA;
+}
+.segment_from, 
+.segment_to {
+  background-color:#FFFFEA;
+  border: 1px solid #ddd;
+  margin: 4px 0;
+  padding: 0 4px;
+  min-height: 32px;
+}
+.segment_from :hover,
+.segment_to :hover {
+  background-color:#FFFFE0;
+}
+.editable textarea {
+  width: 98%;
+}
+.workspace_ul li a {
+  text-decoration: underline;
+}
+.workspace_ul li {
+  margin-left: 10px;
+  list-style-type: disc;
+	list-style-position: inside;
+}

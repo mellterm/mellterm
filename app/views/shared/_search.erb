@@ -1,0 +1,23 @@
+<!-- Search content -->
+<div id="search" >
+  <% form_for @search, :url => {:controller => "segments"}, :html => {:name => "search"} do |f| %>
+  <table>
+    <tr>
+      <td><%= f.text_field :source_content_or_target_content_like_any, :class => "search-text" %></td>
+      <td><%= f.submit "Search" %></td>
+    </tr>
+  </table>
+    <br />
+    <% Category.all.each do |t|%>
+      <div class="checkbox_search_item">
+        <%= check_box_tag "categories[]", 
+            t.id, params[:categories] && params[:categories].include?(t.id.to_s),
+            :id => "checkbox_#{t.id}"
+        %>
+        <%= link_to t.title, "#", :title => t.description.to_s, 
+            :onclick => "toggleCheckbox('checkbox_#{t.id}');" 
+        %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

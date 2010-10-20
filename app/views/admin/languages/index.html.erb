@@ -2,7 +2,8 @@
 
 <table id="hor-minimalist-b">
   <tr>
-    <th>Title</th>
+    <th>Short</th>
+    <th>Full</th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,6 +11,7 @@
   <% for language in @languages %>
     <tr>
       <td><%=h language.title %></td>
+      <td><%=h language.name %></td>
       <td><%= link_to "Show", admin_language_path(language) %></td>
       <td><%= link_to "Edit", edit_admin_language_path(language) %></td>
       <td><%= link_to "Destroy", admin_language_path(language), :confirm => 'Are you sure?', :method => :delete %></td>

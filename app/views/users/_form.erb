@@ -1,18 +1,77 @@
-<table>
+<table class="userprofile-div">
+  <tr>
+    <td><%= form.label :name_title, "Title" %></td>
+    <td><%= form.select :name_title, options_for_select(["mr.", "mrs.", "miss."],current_user.name_title), {:include_blank => true} %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :name %></td>
+    <td><%= form.text_field :name, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :phone %></td>
+    <td><%= form.text_field :phone, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :address %></td>
+    <td><%= form.text_field :address, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :skype %></td>
+    <td><%= form.text_field :skype, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :country_name, "Country" %></td>
+    <td><%= form.country_select :country_name, "Select Country" %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :language, "Native Language" %></td>
+    <td><%= form.select :language_id, Language.all.map {|t| [t.name,t.id]} %></td>
+  </tr>
+  <tr>
+    <td><%= form.label :notes, "Personal BIO" %></td>
+    <td><%= form.text_area :notes, :rows => 8, :cols => 24, :class=>"nice_input" %></td>
+  </tr>
+  <% if current_user.avatar %>
+    <tr>
+      <td><%= form.label :avatar, "Change Photo" %></td>
+      <td><%= form.file_field :avatar %></td>
+    </tr>
+    <tr>
+      <td>Current Photo</td>
+      <td><%= image_tag(current_user.avatar.url(:mini), :alt => 'Photo', :title => 'Current photo') %></td>
+    </tr>
+    <tr>
+      <td><%= form.label(:delete_avatar, 'Delete photo') %></td>
+      <td><%= form.check_box(:delete_avatar) %></td>
+    </tr>
+
+  <% else %>
+    <tr>
+      <td><%= form.label :avatar, "Add Profile Photo" %></td>
+      <td><%= form.file_field :avatar %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<hr>
+<br />
+
+<table class="userprofile-div">
   <tr>
     <td><%= form.label :login %></td>
-    <td><%= form.text_field :login, :size => 24, :class=>"nice_input" %></td>
+    <td><%= form.text_field :login, :class=>"nice_input" %></td>
   </tr>
   <tr>
     <td><%= form.label :password, form.object.new_record? ? nil : "Change password" %></td>
-    <td><%= form.password_field :password, :size => 24, :class=>"nice_input" %></td>
+    <td><%= form.password_field :password, :class=>"nice_input" %></td>
   </tr>
   <tr>
     <td><%= form.label :password_confirmation %></td>
-    <td><%= form.password_field :password_confirmation, :size => 24, :class=>"nice_input" %></td>
+    <td><%= form.password_field :password_confirmation, :class=>"nice_input" %></td>
   </tr>
   <tr>
     <td><%= form.label :email %></td>
-    <td><%= form.text_field :email, :size => 24, :type => "email", :class=>"nice_input" %></td>
+    <td><%= form.text_field :email, :type => "email", :class=>"nice_input" %></td>
   </tr>
 </table>

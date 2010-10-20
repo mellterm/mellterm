@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100917093605) do
+ActiveRecord::Schema.define(:version => 20101020094020) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -46,10 +46,56 @@ ActiveRecord::Schema.define(:version => 20100917093605) do
     t.datetime "updated_at"
   end
 
+  create_table "documents", :force => true do |t|
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "date_updated_at"
+    t.string   "xliff_xmlns"
+    t.string   "xliff_version"
+    t.string   "xliff_original"
+    t.string   "xliff_source_language"
+    t.string   "xliff_datatype"
+    t.string   "xliff_tool"
+    t.string   "xliff_tool_id"
+    t.string   "xliff_date"
+    t.string   "xliff_xml_space"
+    t.string   "xliff_ts"
+    t.string   "xliff_category"
+    t.string   "xliff_target_language"
+    t.string   "xliff_product_name"
+    t.string   "xliff_product_version"
+    t.string   "xliff_build_num"
+    t.string   "file_encoding"
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.integer  "category_id"
+    t.integer  "company_id"
+    t.integer  "language_id"
+    t.boolean  "public",                :default => false
+    t.boolean  "assigned",              :default => false
+    t.boolean  "completed",             :default => false
+    t.datetime "expires_at"
+    t.text     "description"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "documents", ["assigned"], :name => "index_documents_on_assigned"
+  add_index "documents", ["category_id"], :name => "index_documents_on_category_id"
+  add_index "documents", ["company_id"], :name => "index_documents_on_company_id"
+  add_index "documents", ["completed"], :name => "index_documents_on_completed"
+  add_index "documents", ["language_id"], :name => "index_documents_on_language_id"
+  add_index "documents", ["public"], :name => "index_documents_on_public"
+  add_index "documents", ["team_id"], :name => "index_documents_on_team_id"
+  add_index "documents", ["user_id"], :name => "index_documents_on_user_id"
+
   create_table "languages", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   create_table "pages", :force => true do |t|
@@ -82,6 +128,8 @@ ActiveRecord::Schema.define(:version => 20100917093605) do
     t.text     "raw_data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "document_id"
+    t.integer  "updated_by"
   end
 
   create_table "settings", :force => true do |t|
@@ -113,6 +161,12 @@ ActiveRecord::Schema.define(:version => 20100917093605) do
   add_index "translations", ["target_language_id"], :name => "index_translations_on_target_language_id"
   add_index "translations", ["user_id"], :name => "index_translations_on_user_id"
 
+  create_table "user_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "login",                                  :null => false
     t.string   "email",                                  :null => false
@@ -136,12 +190,23 @@ ActiveRecord::Schema.define(:version => 20100917093605) do
     t.string   "address"
     t.string   "time_zone"
     t.text     "notes"
+    t.string   "name_title"
+    t.integer  "language_id"
+    t.integer  "user_type_id"
+    t.string   "country_name"
+    t.string   "skype"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["admin"], :name => "index_users_on_admin"
   add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["language_id"], :name => "index_users_on_language_id"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+  add_index "users", ["user_type_id"], :name => "index_users_on_user_type_id"
 
 end

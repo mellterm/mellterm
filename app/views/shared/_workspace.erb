@@ -1,0 +1,6 @@
+My Documents: 
+<ul class="workspace_ul">
+  <% current_user.documents.each do |t| %>
+    <li> <%= link_to t.data_file_name, t %></li>
+  <% end %>
+</ul>

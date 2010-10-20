@@ -6,12 +6,21 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
-  before_filter :set_categories_hash, :store_location, :setup_search, :order_by
-  layout 'simple'
+  before_filter :set_categories_hash, :store_location, :setup_search, :order_by, :set_title, :set_user_session
+  layout 'application'
   
   rescue_from(ActionController::RoutingError, :with => :not_found) if Rails.env == "production"
   rescue_from(ActionController::UnknownAction, :with => :not_found) if Rails.env == "production"
   rescue_from(ActiveRecord::RecordNotFound, :with => :not_found) if Rails.env == "production"
+  
+  def set_user_session
+    @user_session = UserSession.new unless current_user
+    @title = "Login" if (controller_name == "user_session" && action_name == "new")
+  end
+  
+  def set_title
+    @title = "Home" if @title.nil?
+  end
   
   def set_categories_hash
     @categories_hash = {}

@@ -52,14 +52,22 @@ $(function() {
 <div class="segment" id="<%= dom_id(segment)%>">
   <div class="segment_from">
     <p>
-      <span class="editable_source_<%= segment.id %>" id="<%= segment.id %>"><%= segment.source_content.to_s %></span>
-      <span class="seg_language small info"><%=h segment.source_language.title %> </span>
+      <span class="editable_source_<%= segment.id %>" id="<%= segment.id %>">
+        <%=h segment.source_content.to_s if segment.source_content %>
+      </span>
+      <span class="seg_language small info">
+        <%=h segment.source_language.title if segment.source_language %>
+      </span>
     </p>
   </div>
   <div class="segment_to">
     <p>
-      <span class="editable_target_<%= segment.id %>" id="<%= segment.id %>"><%= segment.target_content.to_s %></span>
-      <span class="seg_language small info"><%=h segment.target_language.title %></span>
+      <span class="editable_target_<%= segment.id %>" id="<%= segment.id %>">
+        <%=h segment.target_content.to_s if segment.target_content %>
+      </span>
+      <span class="seg_language small info">
+        <%=h segment.target_language.title if segment.target_language %>
+      </span>
     </p>
   </div>
   <div class="segment_prop">
