@@ -4,8 +4,8 @@
     <td> <%= f.file_field :data %> </td>
   </tr>
   <tr>
-    <td> <%= f.label :description, "Description"%> </td>
-    <td> <%= f.text_field :description, :class=> "nice_input", :size => 40 %> </td>
+    <td> <%= f.label :description, "Document Title" %> </td>
+    <td> <%= f.text_field :description, :class=> "nice_input", :size => 42 %> </td>
   </tr>
   <tr>
     <td> <%= f.label :category, "Domain Category" %> </td>
@@ -23,40 +23,40 @@
   <% unless @document.new_record? %>
     <tr>
       <td> <%= f.label :data_file_name, "File Name" %> </td>
-      <td> <%= f.text_field :data_file_name, :class=> "nice_input", :size => 40, :size => 40, :disabled => 'disabled' %> </td>
+      <td> <%= f.text_field :data_file_name, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
     <tr>
       <td> <%= f.label :data_content_type, "File Type" %> </td>
-      <td> <%= f.text_field :data_content_type, :class=> "nice_input", :size => 40, :disabled => 'disabled' %> </td>
+      <td> <%= f.text_field :data_content_type, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
     <tr>
       <td> <%= f.label :data_file_size, "File Size" %> </td>
-      <td> <%= f.text_field :data_file_size, :class=> "nice_input", :size => 30, :disabled => 'disabled', :value => to_file_size(@document.data_file_size) %> </td>
+      <td> <%= f.text_field :data_file_size, :class=> "nice_input", :size => 42, :disabled => 'disabled', :value => to_file_size(@document.data_file_size) %> </td>
     </tr>
     <tr>
       <td> <%= f.label :file_encoding, "File Encoding" %> </td>
-      <td> <%= f.text_field :file_encoding, :class=> "nice_input", :size => 40, :disabled => 'disabled' %> </td>
+      <td> <%= f.text_field :file_encoding, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
 
     <tr>
       <td> <%= f.label :xliff_xmlns %> </td>
-      <td> <%= f.text_field :xliff_xmlns, :class=> "nice_input", :size => 40, :disabled => 'disabled' %> </td>
+      <td> <%= f.text_field :xliff_xmlns, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
     <tr>
       <td> <%= f.label :xliff_version %> </td>
-      <td> <%= f.text_field :xliff_version, :class=> "nice_input", :size => 40, :disabled => 'disabled' %> </td>
+      <td> <%= f.text_field :xliff_version, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
     <tr>
       <td> <%= f.label :xliff_original %> </td>
-      <td> <%= f.text_field :xliff_original, :class=> "nice_input", :size => 40, :disabled => 'disabled' %> </td>
+      <td> <%= f.text_field :xliff_original, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
     <tr>
       <td> <%= f.label :xliff_source_language %> </td>
-      <td> <%= f.text_field :xliff_source_language, :class=> "nice_input", :size => 40, :disabled => 'disabled' %> </td>
+      <td> <%= f.text_field :xliff_source_language, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
     <tr>
       <td> <%= f.label :xliff_datatype %> </td>
-      <td> <%= f.text_field :xliff_datatype, :class=> "nice_input", :size => 40, :disabled => 'disabled' %> </td>
+      <td> <%= f.text_field :xliff_datatype, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
   <% end %>
 </table>

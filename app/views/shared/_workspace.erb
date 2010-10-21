@@ -1,6 +1,16 @@
-My Documents: 
+<p>My Documents: </p>
 <ul class="workspace_ul">
   <% current_user.documents.each do |t| %>
     <li> <%= link_to t.data_file_name, t %></li>
   <% end %>
 </ul>
+<br />
+<p><%= link_to "Upload Xliff Document", new_document_path %></p>
+<p>
+  <%= link_to(image_tag("admin/new_button.png"), 
+    new_document_path, 
+    :alt => "Upload Xliff Document", 
+    :title => "Upload Xliff Document", 
+    :class => "button") 
+  %>
+</p>

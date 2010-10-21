@@ -24,6 +24,10 @@
     <td><%= form.country_select :country_name, "Select Country" %></td>
   </tr>
   <tr>
+    <td><%= form.label :user_type_id, "Type of User" %></td>
+    <td><%= form.select :user_type_id, UserType.all.map{|t| [t.name,t.id]}, {:include_blank => true} %></td>
+  </tr>
+  <tr>
     <td><%= form.label :language, "Native Language" %></td>
     <td><%= form.select :language_id, Language.all.map {|t| [t.name,t.id]} %></td>
   </tr>
@@ -40,11 +44,6 @@
       <td>Current Photo</td>
       <td><%= image_tag(current_user.avatar.url(:mini), :alt => 'Photo', :title => 'Current photo') %></td>
     </tr>
-    <tr>
-      <td><%= form.label(:delete_avatar, 'Delete photo') %></td>
-      <td><%= form.check_box(:delete_avatar) %></td>
-    </tr>
-
   <% else %>
     <tr>
       <td><%= form.label :avatar, "Add Profile Photo" %></td>

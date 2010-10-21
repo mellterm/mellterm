@@ -20,25 +20,8 @@ class User < ActiveRecord::Base
   before_destroy :keep_admin
   
   has_attached_file :avatar, :styles => { :large => "240x240>", :medium => "160x160>", :small => "120x120>", :mini => "80x80>"}
-  
-  before_validation :clear_avatar
-  
-  
-  
-  def delete_avatar=(value)
-    @delete_avatar = !value.to_i.zero?
-  end
-  
-  def delete_avatar
-    !!@delete_avatar
-  end
-  alias_method :delete_avatar?, :delete_avatar
-
-  # remove the image
-  def clear_avatar
-    self.avatar = nil if delete_avatar? && !avatar.dirty?
-  end
-  
+    
+  # language
   def language_name
     self.language.name if self.language
   end

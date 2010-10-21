@@ -42,6 +42,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :translations
     admin.resources :categories, :has_many => :translations
     admin.resources :segments, :members => :import
+    admin.resources :user_types
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

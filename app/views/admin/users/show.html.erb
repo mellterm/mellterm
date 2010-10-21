@@ -7,14 +7,17 @@
   		<%= show_field("Login", @user.login) %>
   		<%= show_field("Name", @user.name) %>
       <%= show_field("Email",@user.email) %>
+      <%= show_field("Skype", @user.skype) %>
       <%= show_field("Phone", @user.phone) %>
       <%= show_field("Address", @user.address) %>
-      <%= show_field("Created_at", @user.created_at.to_s(:long)) %>
-      <%= show_field("Updated_at", @user.updated_at.to_s(:long)) %>
+      <%= show_field("Country", @user.country_name) %>
+  		<%= show_field("Language", @user.language.name) if @user.language %>
     </fieldset>
 
     <fieldset>
   		<legend>History</legend>
+  		<%= show_field("Created_at", @user.created_at.to_s(:long)) %>
+      <%= show_field("Updated_at", @user.updated_at.to_s(:long)) %>
   		<%= show_field("Logins", @user.login_count) %>
       <%= show_field("Failed Logins",@user.failed_login_count) %>
       <%= show_field("Last Request", @user.last_request_at.to_s(:long)) %>
@@ -23,6 +26,14 @@
       <%= show_field("Current Login", @user.current_login_at.to_s(:long)) %>
       <%= show_field("Current IP", @user.current_login_ip) %>
     </fieldset>
+    
+    <fieldset>
+  		<legend>Other</legend>
+
+      <%= show_field("Admin", @user.admin?) %>
+      <%= show_field("Type", @user.user_type.name) if @user.user_type %>
+    </fieldset>
+		
     
   <br clear="both"/>
   <%= link_to image_tag("admin/edit_button.png"), edit_admin_user_path(@user) %>

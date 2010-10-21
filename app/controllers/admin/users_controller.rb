@@ -44,7 +44,6 @@ class Admin::UsersController < Admin::BaseController
   # PUT /admin/users/1.xml
   def update
     @user = User.find(params[:id])
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         #@user.update_roles(params[:user][:role_ids])

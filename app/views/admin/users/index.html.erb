@@ -6,7 +6,10 @@
     <tr>
       <th><%= sort_link_helper "login", "login" %></th>
       <th>Admin</th>
-      <th>Transl</th>
+      <th>Type</th>
+      <th>Lang</th>
+      <th>Documents</th>
+      <th>Segments</th>
       <th><%= sort_link_helper "created", "created_at" %></th>
       <th><%= sort_link_helper "updated", "updated_at" %></th>
       <th> </th>
@@ -20,10 +23,19 @@
       <%= link_to(user.login, admin_user_path(user)) %>
     </td>
     <td>
-      <%= user.admin? %>
+      <%= boolean_to_word_yes user.admin? %>
     </td>
     <td>
-      <%= user.translations.count %>
+      <%= user.user_type.name if user.user_type %>
+    </td>
+    <td>
+      <%= user.language.title if user.language %>
+    </td>
+    <td>
+      <%= user.documents.count %>
+    </td>
+    <td>
+      <%= user.segments.count %>
     </td>
     <td class="mouse" onclick=<%="document.location.href='#{admin_user_path(user)}'"%>>
       <%=h user.created_at.to_s(:short) %>

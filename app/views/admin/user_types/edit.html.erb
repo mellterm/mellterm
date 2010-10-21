@@ -1,0 +1,13 @@
+<h3> <%= @title ||= "Editing #{@user_type.name}" %> </h3>
+
+<% form_for @user_type, :url => { :action => "update" }, :html => { :multipart => true } do |f| %>
+
+  <%= f.error_messages %>
+  <p>
+  	<%= f.label :name %> <br />
+  	<%= f.text_field :name %>
+  </p>
+
+  <%= image_submit_tag "admin/save_button.png", :class => "button" %>
+
+<% end %>

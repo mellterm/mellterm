@@ -1,0 +1,28 @@
+<table id="one-column-emphasis-b">
+  <caption><%= @title = "User Types List" %></caption>
+	<thead>
+    <tr>
+      <th>Type</th>
+      <th>User Count</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+
+<% for user_type in @user_types %>
+  <tr>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_user_type_path(user_type)}'"%>>
+      <%= link_to(user_type.name, admin_user_type_path(user_type)) %>
+    </td>
+    <td>
+      <%= user_type.users.count %>
+    </td>
+    <td><%= link_to "Edit", edit_admin_user_type_path(user_type) %></td>
+    <td><%= link_to "Del",  admin_user_type_path(user_type), :confirm => "Are you Sure", :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to image_tag("admin/new_button.png"), new_admin_user_type_path %>

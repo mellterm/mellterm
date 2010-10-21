@@ -1,3 +1,4 @@
+
 <% form_for @segment, :url => { :action => "update" } do |f| %>
 
   <%= f.error_messages %>
@@ -5,5 +6,6 @@
   <%= render :partial => 'form', :locals => { :f => f, :segment => @segment } %>
 
   <%= image_submit_tag "admin/save_button.png", :class => "button" %>
+  <%= link_to(image_tag("admin/back_button.png"), @segment.document, :class => "button") %>
   
 <% end %>

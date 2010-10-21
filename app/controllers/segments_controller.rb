@@ -60,7 +60,9 @@ class SegmentsController < ApplicationController
   def edit
     @segment = current_user.segments.find(params[:id])
     @segment.updated_by = current_user.id
-    @title = "Editing Segment"
+    if @segment.document
+      @title = "Editing Segment from #{@segment.document.data_file_name}"
+    end
   end
   
   def update_ajax

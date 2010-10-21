@@ -1,7 +1,7 @@
 <p>
   <%= f.select(:source_language_id, Language.all.collect {|p| [p.title,p.id] }, { :include_blank => false }) %>
   <br />
-  <%= f.text_area :source_content, :rows=>4, :cols=>66, :class=>"nice_input" %> 
+  <%= f.text_area :source_content, :rows=>4, :cols=>66, :class=>"nice_input", :disabled => "disabled" %> 
 </p>
 <hr />
 <p>
@@ -16,5 +16,4 @@
 <p>
   <%= f.label :notes, "Extra Notes" %><br />
   <%= f.text_field :notes, :size => 48, :class=>"nice_input" %>
-  <p class="info">This will be tooltip on translations</p>
 </p>

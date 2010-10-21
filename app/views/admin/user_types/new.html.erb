@@ -1,0 +1,16 @@
+<h3><%= @title = "Create a new user type" %></h3>
+
+<% form_for(@user_type, :url => admin_user_types_path, :html => { :multipart => true }) do |f| %>
+
+  <%= f.error_messages %>
+  
+  <p>
+  	<%= f.label :name %> <br />
+  	<%= f.text_field :name %>
+  </p>
+
+  <%= image_submit_tag "admin/save_button.png", :class => "button" %>
+
+<% end %>
+
+
