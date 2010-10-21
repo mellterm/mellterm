@@ -1,27 +1,25 @@
 <script type="text/javascript" charset="utf-8"> 
 
 $(function() {
-  
-  $(".editable_source_<%= segment.id %>").editable("/segments/update_ajax/<%=segment.id%>", { 
-      indicator   : "<img src='/images/indicator.gif'>",
-      type        : 'textarea',
-      submitdata  : { _method: "put", authenticity_token: <%= form_authenticity_token.to_json %> },
-      select      : true,
-      cols        : 100,
-      rows        : "<%= segment.source_content.size/80 %>",
-      submit      : 'Save',
-      cancel      : 'Cancel',
-      cssclass    : "editable",
-      name        : 'segment[source_content]',
-      tooltip     : 'Click here to edit... ',
-      placeholder : 'Click here to edit... '
-  }); 
-  
+  // $(".editable_source_<%= segment.id %>").editable("/segments/update_ajax/<%=segment.id%>", { 
+  //     indicator   : "<img src='/images/indicator.gif'>",
+  //     type        : 'textarea',
+  //     submitdata  : { _method: "put", authenticity_token: <%= form_authenticity_token.to_json %> },
+  //     select      : true,
+  //     cols        : 100,
+  //     rows        : "<%= segment.source_content.size/80 %>",
+  //     submit      : 'Save',
+  //     cancel      : 'Cancel',
+  //     cssclass    : "editable",
+  //     name        : 'segment[source_content]',
+  //     tooltip     : 'Click here to edit... ',
+  //     placeholder : 'Click here to edit... '
+  // }); 
   $(".editable_target_<%= segment.id %>").editable("/segments/update_ajax/<%=segment.id%>", { 
       indicator   : "<img src='/images/indicator.gif'>",
       type        : 'textarea',
       submitdata  : { _method: "put", authenticity_token: <%= form_authenticity_token.to_json %> },
-      rows        : "<%= segment.source_content.size/80 %>",
+      rows        : "<%= segment.source_content.size/50 %>",
       cols        : 100,
       select      : true,
       submit      : 'Save',
@@ -52,33 +50,24 @@ $(function() {
 <div class="segment" id="<%= dom_id(segment)%>">
   <div class="segment_from">
     <p>
-      <span class="editable_source_<%= segment.id %>" id="<%= segment.id %>">
-        <%=h segment.source_content.to_s if segment.source_content %>
-      </span>
-      <span class="seg_language small info">
-        <%=h segment.source_language.title if segment.source_language %>
-      </span>
+      <span class="editable_source_<%= segment.id %>" id="<%= segment.id %>"><%=h segment.source_content.to_s if segment.source_content %></span>
+      <span class="seg_language small info"><%=h segment.source_language.title if segment.source_language %></span>
     </p>
   </div>
   <div class="segment_to">
     <p>
-      <span class="editable_target_<%= segment.id %>" id="<%= segment.id %>">
-        <%=h segment.target_content.to_s if segment.target_content %>
-      </span>
-      <span class="seg_language small info">
-        <%=h segment.target_language.title if segment.target_language %>
-      </span>
+    <span class="editable_target_<%= segment.id %>" id="<%= segment.id %>"><%=h segment.target_content.to_s if segment.target_content %></span>
+    <span class="seg_language small info"><%=h segment.target_language.title if segment.target_language %></span>
     </p>
   </div>
   <div class="segment_prop">
     <a>
-    <span class="editable_select_<%= segment.id %>" id="<%= segment.id %>" style="display: inline">
-      <%=h segment.category.title if segment.category %>
-    </span></a> -
+    <span class="editable_select_<%= segment.id %>" id="<%= segment.id %>" style="display: inline"><%=h segment.category.title if segment.category %></span>
+    </a> -
     <%= segment.user.login if segment.user %> -
-    <%= segment.last_user.login if segment.last_user %> -
-    <%= segment.updated_at.strftime("%H:%M:%S, %d %b %Y") %> -
-    <%= link_to "Edit", edit_segment_path(segment) %> -
+    <%= segment.last_user.login if segment.last_user %> - 
+    <%= segment.updated_at.strftime("%H:%M:%S, %d %b %Y") %> - 
+    <%= link_to "Edit", edit_segment_path(segment) %> - 
     <%= link_to "Del", segment_path(segment), :confirm => 'Are you sure?', :method => :delete %>
   </div>
 </div>

@@ -7,17 +7,17 @@ class SegmentsController < ApplicationController
     # @search = Translation.search(params[:search])
     conditions = nil
     if params[:categories] && !params[:categories].empty?
-      # cat_ids = params[:categories].join(" OR category_id = ")
-      # conditions = ["category_id = #{cat_ids}"]
-      ids = []
-      params[:categories].each {|t| ids << t.to_i}
-      @search = Segment.categories_id_equals(ids).search(params[:search])
+      cat_ids = params[:categories].join(" OR category_id = ")
+      conditions = ["category_id = #{cat_ids}"]
+      # ids = []
+      # params[:categories].each {|t| ids << t.to_i}
+      # @search = Segment.categories_id_equals(ids).search(params[:search])
     else
-      @search = Segment.search(params[:search])
+      @segment_search = Segment.search(params[:search])
     end
-    @segments = @search.paginate(
-      :select => "distinct `segments`.*",
-      # :conditions => conditions, 
+    @segments = @segment_search.paginate(
+      # :select => "distinct `segments`.*",
+      :conditions => conditions, 
       :page => params[:page], 
       :per_page => 40,
       :include => [:source_language, :target_language, :category, :user]

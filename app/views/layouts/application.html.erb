@@ -182,16 +182,11 @@
     });
 	</script>
 	
-	<%= stylesheet_link_tag '/extjs/custom.css' %>
-	
-	<% if Rails.env == "production" %>
-    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
-  <% else %>
-    <%= javascript_include_tag 'jquery-1.4.2.min' %>
-  <% end %>
+	<%= stylesheet_link_tag   '/extjs/custom.css' %>
+  <%= javascript_include_tag 'jquery-1.4.2.min' %>
   <%= javascript_include_tag '/jeditable/jquery.jeditable.js', :charset => "utf-8" %>
   <%= javascript_include_tag '/jeditable/jquery.jeditable.autogrow.js', :charset => "utf-8" %>
-  
+
 </head>
 <body>
   <script type="text/javascript" src="/extjs/examples.js"></script>

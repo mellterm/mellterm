@@ -29,12 +29,13 @@
   padding: 0 4px;
   min-height: 32px;
 }
-.segment_from :hover,
-.segment_to :hover {
-  background-color:#FFFFE0;
+.segment_from {
+  background-color:#FFFFF8;
 }
+
 .editable textarea {
   width: 98%;
+  padding: 0;
 }
 .workspace_ul li a {
   text-decoration: underline;
@@ -43,4 +44,9 @@
   margin-left: 10px;
   list-style-type: disc;
 	list-style-position: inside;
+}
+
+.editable textarea {
+  padding: 2px;
+  width: 98%;
 }

@@ -6,12 +6,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
-  before_filter :set_categories_hash, :store_location, :setup_search, :order_by, :set_title, :set_user_session
+  before_filter :get_settings, :set_categories_hash, :store_location, :setup_search, :order_by, :set_title, :set_user_session
   layout 'application'
   
   rescue_from(ActionController::RoutingError, :with => :not_found) if Rails.env == "production"
   rescue_from(ActionController::UnknownAction, :with => :not_found) if Rails.env == "production"
   rescue_from(ActiveRecord::RecordNotFound, :with => :not_found) if Rails.env == "production"
+  
+  def get_settings
+    @editable_source = false
+  end
   
   def set_user_session
     @user_session = UserSession.new unless current_user
@@ -44,10 +48,14 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
   
-  # this search will be for global
+  # this search for global template
   # DO NOT REMOVE From here.
   def setup_search
-    @search = Translation.search(params[:search])
+    if current_user
+      @segment_search = current_user.segments.search(params[:search])
+    else
+      @segment_search = nil
+    end
   end
   
   # Check for iphone/ipod devices, Nokia, Android
