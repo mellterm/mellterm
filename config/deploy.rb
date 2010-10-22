@@ -5,7 +5,7 @@ set :domain, "mellterm.frederico-araujo.com"
 set :scm, :git
 set :deploy_via, :remote_cache
 set :rails_env, "production"
-set :user, "fred"
+set :user, "root"
 set :use_sudo,  false
 #set :git_enable_submodules, 1
 set :deploy_to, "/var/www/apps/#{application}"
