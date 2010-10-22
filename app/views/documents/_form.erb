@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <td> <%= f.label :data, "XLIFF File"%> </td>
+    <td> <%= f.label :data, "Browse File"%> </td>
     <td> <%= f.file_field :data %> </td>
   </tr>
   <tr>
@@ -8,8 +8,12 @@
     <td> <%= f.text_field :description, :class=> "nice_input", :size => 42 %> </td>
   </tr>
   <tr>
-    <td> <%= f.label :category, "Domain Category" %> </td>
-    <td> <%= f.select :category_id, Category.all.collect {|t| [t.title,t.id]} %> </td>
+    <td> <%= f.label :language_id, "Document Language" %> </td>
+    <td> <%= f.select :language_id, Language.all.collect {|t| [t.title,t.id]}, :include_blank => true %> </td>
+  </tr>
+  <tr>
+    <td> <%= f.label :category_id, "Document Domain" %> </td>
+    <td> <%= f.select :category_id, Category.all.collect {|t| [t.title,t.id]}, :include_blank => true %> </td>
   </tr>
   <tr>
     <td> <%= f.label :description, "Public Visible" %> </td>
@@ -39,23 +43,23 @@
     </tr>
 
     <tr>
-      <td> <%= f.label :xliff_xmlns %> </td>
+      <td> <%= f.label :xliff_xmlns, "Type" %> </td>
       <td> <%= f.text_field :xliff_xmlns, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
     <tr>
-      <td> <%= f.label :xliff_version %> </td>
+      <td> <%= f.label :xliff_version, "Format Version" %> </td>
       <td> <%= f.text_field :xliff_version, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
     <tr>
-      <td> <%= f.label :xliff_original %> </td>
+      <td> <%= f.label :xliff_original, "Original File" %> </td>
       <td> <%= f.text_field :xliff_original, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
     <tr>
-      <td> <%= f.label :xliff_source_language %> </td>
+      <td> <%= f.label :xliff_source_language, "Source Language" %> </td>
       <td> <%= f.text_field :xliff_source_language, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
     <tr>
-      <td> <%= f.label :xliff_datatype %> </td>
+      <td> <%= f.label :xliff_datatype, "Datatype" %> </td>
       <td> <%= f.text_field :xliff_datatype, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
   <% end %>

@@ -20,6 +20,12 @@ ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 ssh_options[:paranoid] = false
 
+
+# RVM 
+$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
+require "rvm/capistrano"                  # Load RVM's capistrano plugin.
+set :rvm_ruby_string, 'ruby-1.8.7'        # Or whatever env you want it to run in.
+
 # If you are using Passenger mod_rails uncomment this:
 # if you're still using the script/reapear helper you will need
 # these http://github.com/rails/irs_process_scripts
@@ -57,7 +63,8 @@ end
 #   end
 # end
 
-set :unicorn_binary, "/usr/local/bin/unicorn_rails"
+# using full path on unicorn_binary will not allow to use RVM
+set :unicorn_binary, "unicorn_rails"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{shared_path}/pids/unicorn.pid"
 set :unicorn_sock, "#{shared_path}/pids/unicorn.sock"
@@ -81,7 +88,6 @@ namespace :deploy do
   end
 end
 
-
 namespace(:customs) do
   task :config, :roles => :app do
     run "ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
@@ -93,7 +99,6 @@ namespace(:customs) do
     run "ln -nfs  #{shared_path}/system #{release_path}/public/system"
   end
 end
-
 
 after "deploy:symlink", "customs:config"
 after "deploy:symlink", "customs:symlink"

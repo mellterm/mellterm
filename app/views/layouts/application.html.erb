@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title><%= @title || Settings[:site_meta_title] %></title>
   <%= stylesheet_link_tag 'themes/indicator/style.css' %>
-  <%= stylesheet_link_tag 'admin/table.css' %>
+  <%= stylesheet_link_tag 'table.css' %>
   <%= stylesheet_link_tag 'site.css' %>
   
   <script type="text/javascript">
@@ -102,19 +102,38 @@
                 layoutConfig:{
                     animate:true
                 },
-                items: [{
+                items: [
+                <% if @document && @document.data && !@document.segments.empty? %>
+                {
+                    contentEl: 'terms-div',
+                    title:"Candidate Terms",
+                    autoScroll:true,
+                    border:false,
+                    singleExpand: false
+                },
+                {
+                    contentEl: 'document-div',
+                    title:"Document Properties",
+                    autoScroll:true,
+                    border:false,
+                    singleExpand: false
+                },
+                <% end %>
+                {
                     contentEl: 'search-div',
                     title:'Search',
                     autoScroll:true,
                     border:false,
                     singleExpand: false
-                },{
+                },
+                {
                     contentEl: 'workspace-div',
                     title:'Workspace',
                     border:false,
                     autoScroll:false,
                     singleExpand: false
-                },{
+                },
+                {
                     contentEl: 'userprofile-div',
                     title:'Profile',
                     border:false,
@@ -215,6 +234,15 @@
         <%= render :partial => "/shared/login" %>
       <% end %>
     </div>
+    
+    <% if current_user && @document && @document.data %>
+      <div id="terms-div">
+        <%= render :partial => "/shared/terms" %>
+      </div>
+      <div id="document-div">
+        <%= render :partial => "/shared/document" %>
+      </div>
+    <% end %>
     
     <div id="search-div">
       <%= render :partial => "/shared/search" if current_user %>

@@ -53,7 +53,9 @@ class ApplicationController < ActionController::Base
   def setup_search
     if current_user
       @segment_search = current_user.segments.search(params[:search])
+      @terms_search = current_user.translations.search(params[:search])
     else
+      @terms_search = nil
       @segment_search = nil
     end
   end

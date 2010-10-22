@@ -1,6 +1,6 @@
 <!-- Search content -->
 <div id="search" >
-  <% form_for @segment_search, :url => {:controller => "segments"}, :html => {:name => "search"} do |f| %>
+  <% form_for @terms_search, :url => {:controller => "translations"}, :html => {:name => "search"} do |f| %>
   <table>
     <tr>
       <td><%= f.text_field :source_content_or_target_content_like_any, :class => "search-text" %></td>

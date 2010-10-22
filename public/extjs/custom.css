@@ -36,3 +36,8 @@ input.accordion_login {
   float:left;
   padding: 7px;
 }
+
+table.sidebar {
+  font-size: 12px;
+  margin: 4px;
+}
