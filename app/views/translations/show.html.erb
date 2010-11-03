@@ -1,15 +1,17 @@
-<% title "#{@translation.source_content} (#{@translation.source_language.title})" %>
-<br />
-<h3>
-  <%=h @translation.target_content %> (<%= @translation.target_language.title %>)
-</h3>
-
+<% @title = "#{@translation.source_content} (#{@translation.source_language.title})" %>
 <br />
 <p>
+  <b>
+  <%=h @translation.source_content %> (<%= @translation.source_language.title %>)
+  &nbsp; - &nbsp;
+  <%=h @translation.target_content %> (<%= @translation.target_language.title %>)
+  </b>
+</p>
+
+<p>
   <strong>Domains:</strong>
-  &nbsp;
   <% @translation.categories.each do |category| %>
-      <%= category.title %> &nbsp;
+    <%= category.title %>,
   <% end %>
 </p>
 <p>
@@ -17,27 +19,28 @@
   <%=h @translation.company_name %>
 </p>
 
+<% unless @translation.notes.empty? %>
 <p>
   <strong>Notes:</strong>
   <%=h @translation.notes %>
 </p>
-
+<% end %>
 <br />
 
 <div>
   <% @segments.each do |segment| %>
-    <div>
-      <span class="small info"><%=h segment.source_language.title %>:</span>
-      <br />
-      <%= highlight(segment.source_content,@translation.source_content) %>
-    </div>
-    <br />
-    <div>
-      <span class="small info"><%=h segment.target_language.title %>:</span>
-      <br />
-      <%= highlight(segment.target_content,@translation.target_content) %>
-    </div>
-    <br />
     <hr />
+    <p>
+      <% if segment.source_language %>
+        <span class="small info"><%=h segment.source_language.title %>:</span><br />
+      <% end %>
+      <%= highlight(segment.source_content,@translation.source_content) %>
+    </p>
+    <p>
+      <% if segment.target_language %>
+        <span class="small info"><%=h segment.target_language.title %>:</span><br />
+      <% end %>
+      <%= highlight(segment.target_content,@translation.target_content) %>
+    </p>
   <% end %>
 </div>

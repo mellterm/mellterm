@@ -22,9 +22,9 @@ ssh_options[:paranoid] = false
 
 
 # RVM 
-$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
-require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, 'ruby-1.8.7'        # Or whatever env you want it to run in.
+# $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
+# require "rvm/capistrano"                  # Load RVM's capistrano plugin.
+# set :rvm_ruby_string, 'ruby-1.8.7'        # Or whatever env you want it to run in.
 
 # If you are using Passenger mod_rails uncomment this:
 # if you're still using the script/reapear helper you will need

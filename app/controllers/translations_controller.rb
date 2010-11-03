@@ -24,8 +24,7 @@ class TranslationsController < ApplicationController
   
   def show
     @translation = Translation.find(params[:id])
-    @seg_search = Segment.source_content_like(@translation.source_content)
-    @segments = @seg_search.all
+    @segments = @translation.matching_segments
   end
     
 end
