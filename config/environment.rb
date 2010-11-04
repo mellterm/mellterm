@@ -22,6 +22,11 @@ Rails::Initializer.run do |config|
   # config.gem "searchlogic"
   # config.gem "authlogic"
   config.gem "will_paginate"
+  config.gem "fastercsv"
+  config.gem "xml-simple", :lib => "xmlsimple"
+  config.gem "hpricot"
+  config.gem "bcrypt-ruby", :lib => "bcrypt"
+  
   # config.gem "jintastic"
 
   # Only load the plugins named here, in the order given (default is alphabetical).

@@ -1,11 +1,12 @@
 set :application, "mellterm"
-set :repository,  "git@github.com:fred/mellterm.git"
+# set :repository,  "git@github.com:fred/mellterm.git"
+set :repository,  "git://github.com/fred/mellterm.git"
 set :branch, "master"
 set :domain, "mellterm.frederico-araujo.com"
 set :scm, :git
 set :deploy_via, :remote_cache
 set :rails_env, "production"
-set :user, "root"
+set :user, "fred"
 set :use_sudo,  false
 #set :git_enable_submodules, 1
 set :deploy_to, "/var/www/apps/#{application}"
@@ -22,9 +23,10 @@ ssh_options[:paranoid] = false
 
 
 # RVM 
-# $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
-# require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-# set :rvm_ruby_string, 'ruby-1.8.7'        # Or whatever env you want it to run in.
+$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
+require "rvm/capistrano"                  # Load RVM's capistrano plugin.
+set :rvm_ruby_string, 'ruby-1.8.7'        # Or whatever env you want it to run in.
+set :rvm_type, :user
 
 # If you are using Passenger mod_rails uncomment this:
 # if you're still using the script/reapear helper you will need
