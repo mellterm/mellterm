@@ -16,7 +16,9 @@ class Document < ActiveRecord::Base
     data = XmlSimple.xml_in(File.read(self.data.path),{ 'ForceContent' => true })
     
     # check if the file is really an xliff file
-    if (data && data["file"] && data["version"] && data["xmlns"] && data["xmlns"].match("xliff:document"))
+    if (data && data["xmlns:sdl"] && data["xmlns:sdl"].match("SdlXliff"))
+      return false
+    elsif (data && data["file"] && data["version"] && data["xmlns"] && data["xmlns"].match("xliff:document"))
       import_xlf(data)
     elsif (data && data["header"] && data["version"] && data["body"] && data["body"].size > 0 && data["body"].first["tu"] )
       import_tmx(data)

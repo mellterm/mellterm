@@ -19,10 +19,12 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     @segments = @document.segments.paginate(
       :page => params[:page], 
-      :order => order_by, 
+      :order => "segments.id ASC",
       :include => [:source_language,:target_language, :user, :category],
       :per_page => 100
     )
+    
+    @first_id = @document.segments.first.id if !@segments.empty?
     
     @title ="#{@document.data_file_name} (#{@document.xliff_source_language})"
     respond_to do |format|

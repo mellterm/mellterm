@@ -32,6 +32,16 @@
 .segment_from {
   background-color:#FFFFF8;
 }
+.segment_from_id {
+  /*  
+  display: inline;
+  clear:none;
+  float: left; 
+  */
+  display: inline;
+  clear:none;
+  font-weight: bold;
+}
 
 .editable textarea {
   width: 98%;

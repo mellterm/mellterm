@@ -20,6 +20,7 @@ class SegmentsController < ApplicationController
       :conditions => conditions, 
       :page => params[:page], 
       :per_page => 40,
+      :order => "segments.id ASC",
       :include => [:source_language, :target_language, :category, :user]
     )
   end
