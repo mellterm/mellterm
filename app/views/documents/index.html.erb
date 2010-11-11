@@ -5,6 +5,9 @@
     <th>Size</th>
     <th>Language</th>
     <th>Segments</th>
+    <th>Encoding</th>
+    <th></th>
+    <th></th>
   </tr>
 
 <% @documents.each do |document| %>
@@ -14,8 +17,9 @@
     <td><%= to_file_size(document.data_file_size) %></td>
     <td><%= document.xliff_source_language %></td>
     <td><%= document.segments.count %></td>
+    <td><%= document.file_encoding %></td>
     <td><%= link_to 'Edit', edit_document_path(document) %></td>
-    <td><%= link_to 'Delete', document, :confirm => 'Are you sure you want to delete this Document?', :method => :delete %></td>
+    <td><%= link_to 'Del', document, :confirm => 'Are you sure you want to delete this Document?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

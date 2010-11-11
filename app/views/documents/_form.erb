@@ -41,26 +41,41 @@
       <td> <%= f.label :file_encoding, "File Encoding" %> </td>
       <td> <%= f.text_field :file_encoding, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
-
+    
+    <% if @document.xliff_xmlns %>
     <tr>
-      <td> <%= f.label :xliff_xmlns, "Type" %> </td>
-      <td> <%= f.text_field :xliff_xmlns, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
+      <td> <%= f.label :xliff_xmlns, "Document Type" %> </td>
+      <td> <%= f.text_field :xliff_xmlns, :class=> "nice_input", :size => 42, :disabled => 'disabled' %>  </td>
     </tr>
+    <% end %>
+    
+    <% if @document.xliff_version %>
     <tr>
       <td> <%= f.label :xliff_version, "Format Version" %> </td>
       <td> <%= f.text_field :xliff_version, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
+    <% end %>
+    
+    <% if @document.xliff_original %>
     <tr>
       <td> <%= f.label :xliff_original, "Original File" %> </td>
       <td> <%= f.text_field :xliff_original, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
+    <% end %>
+    
+    <% if @document.xliff_source_language %>
     <tr>
       <td> <%= f.label :xliff_source_language, "Source Language" %> </td>
       <td> <%= f.text_field :xliff_source_language, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
+    <% end %>
+    
+    <% if @document.xliff_datatype %>
     <tr>
       <td> <%= f.label :xliff_datatype, "Datatype" %> </td>
       <td> <%= f.text_field :xliff_datatype, :class=> "nice_input", :size => 42, :disabled => 'disabled' %> </td>
     </tr>
+    <% end %>
+    
   <% end %>
 </table>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101020094020) do
+ActiveRecord::Schema.define(:version => 20101111055957) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -114,6 +114,10 @@ ActiveRecord::Schema.define(:version => 20101020094020) do
 
   add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
 
+  create_table "segment_statuses", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "segments", :force => true do |t|
     t.string   "source_content"
     t.string   "target_content"
@@ -130,7 +134,21 @@ ActiveRecord::Schema.define(:version => 20101020094020) do
     t.datetime "updated_at"
     t.integer  "document_id"
     t.integer  "updated_by"
+    t.integer  "reviewer_id"
+    t.integer  "translator_id"
+    t.string   "status_id"
   end
+
+  add_index "segments", ["category_id"], :name => "index_segments_on_category_id"
+  add_index "segments", ["company_id"], :name => "index_segments_on_company_id"
+  add_index "segments", ["document_id"], :name => "index_segments_on_document_id"
+  add_index "segments", ["reviewer_id"], :name => "index_segments_on_reviewer_id"
+  add_index "segments", ["source_language_id"], :name => "index_segments_on_source_language_id"
+  add_index "segments", ["status_id"], :name => "index_segments_on_status_id"
+  add_index "segments", ["target_language_id"], :name => "index_segments_on_target_language_id"
+  add_index "segments", ["translator_id"], :name => "index_segments_on_translator_id"
+  add_index "segments", ["updated_by"], :name => "index_segments_on_updated_by"
+  add_index "segments", ["user_id"], :name => "index_segments_on_user_id"
 
   create_table "settings", :force => true do |t|
     t.string   "var"
@@ -154,11 +172,14 @@ ActiveRecord::Schema.define(:version => 20101020094020) do
     t.integer  "user_id"
     t.string   "internal_id"
     t.string   "source"
+    t.string   "type"
   end
 
   add_index "translations", ["company_id"], :name => "index_translations_on_company_id"
+  add_index "translations", ["id", "type"], :name => "index_translations_on_id_and_type"
   add_index "translations", ["source_language_id"], :name => "index_translations_on_source_language_id"
   add_index "translations", ["target_language_id"], :name => "index_translations_on_target_language_id"
+  add_index "translations", ["type"], :name => "index_translations_on_type"
   add_index "translations", ["user_id"], :name => "index_translations_on_user_id"
 
   create_table "user_types", :force => true do |t|

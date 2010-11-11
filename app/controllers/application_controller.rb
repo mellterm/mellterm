@@ -13,6 +13,14 @@ class ApplicationController < ActionController::Base
   rescue_from(ActionController::UnknownAction, :with => :not_found) if Rails.env == "production"
   rescue_from(ActiveRecord::RecordNotFound, :with => :not_found) if Rails.env == "production"
   
+  def on_windows?
+    if RUBY_PLATFORM =~ /(:?mswin|win32|mingw|bccwin)/
+      return true
+    else
+      return false
+    end
+  end
+  
   def get_settings
     @editable_source = false
   end

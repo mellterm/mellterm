@@ -59,6 +59,9 @@ class DocumentsController < ApplicationController
     @document = Document.new(params[:document])
     @document.user_id = current_user.id
 
+    if on_windows?
+      flash[:error] = "File Processing not compatible with Windows"
+    end
     respond_to do |format|
       if @document.save
         format.html { redirect_to(edit_document_path(@document), :notice => 'Document was successfully created.') }

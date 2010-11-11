@@ -1,0 +1,2 @@
+class Entity < Translation
+end
