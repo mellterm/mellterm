@@ -7,6 +7,67 @@
   <p>
     <%= f.submit 'Create' %>
   </p>
+  
+  <div class="information">
+    <h3>Allowed File Types</h3>
+    <br />
+    <ul class="bullet">
+      <li><strong>TMX:</strong> Tmx files tested on version 1.4</li>
+      <li><strong>XLF:</strong> Xlf format files</li>
+      <li><strong>XLIFF:</strong> Xliff format files</li>
+      <li><strong>XML:</strong> Xml containing either TMX, XLF or XLIFF</li>
+      <li><strong>TXT:</strong> Txt containing either TMX, XLF or XLIFF</li>
+      <li><strong>CSV:</strong> Csv file to import terms, query, entity or abbreviation</li>
+      <li><strong>ZIP:</strong> Zip containing one or more of above allowed files</li>
+    </ul>
+    
+    <p> For zip, i.e. a zip file 'archive.zip' could contain: part1.tmx, part2.tmx, terms.csv</p>
+    <p> Maximum Upload Size is 50MB. </p>
+    <p> For large files, it's highly recommended to compress with ZIP before uploading, i.e. files larger than 5MB</p>
+  </div>
+  
+  
+  <div class="information">
+    <h3>The CSV file must be in following format:</h3>
+    <br />
+    <p>1. File have a header definining the language</p>
+    <pre>
+      header --> source_language,destination_language,type,domain,company,notes,Source
+      data -->   source_content,destination_content,type of term,domain,company ABC,"some notes"
+      data -->   source_content,destination_content
+    </pre>
+    
+    <p> Type allowed:     
+    
+    <h4>Example:</h4>
+    <pre>
+      SOURCE LANG, DEST LANG, TYPE, DOMAIN, COMPANY, APPROVED, DOCID/DOCNAME, POS, SOURCE, NOTES, AUTHORITY
+      example: 
+      de_de,en_gb,domain,company,approved, Document_id or internal_id, pos, source, notes, source, authority
+      Ablage,Personal Clipboard,"term","tech", Company abc,y,"Some Notes"
+      Allgemein,General,,tech,abc,"this, that and those"
+      Allg. Hinweise,general hints,,Office,"xyz Company, ltd.",
+      Aufgaben,Tasks,,tech,abc,,
+      Ablauf,process,,,Client,y,,,,,,
+      Auftrag,Appointment
+    </pre>
+    <p>Notes: If comma is in part of field, it must be embraced by Double Quotes ("") as in the example above. </p>
+    
+    <pre>
+    SOURCE LANG: Source Language
+    DEST LANG: Destination Language,
+    TYPE: type of tranlation can be: term(default), query, entity, abbreviation 
+    DOMAIN: domain string
+    COMPANY: company string
+    APPROVED: y/yes or blank
+    DOCID/DOCNAME: 
+    POS: part of speech, default=noun also phrase, adjective, adverb, plural
+    SOURCE: source url, text
+    NOTES: notes text
+    AUTHORITY: integer
+    </pre>
+    
+  </div>
+  
 <% end %>
-
 

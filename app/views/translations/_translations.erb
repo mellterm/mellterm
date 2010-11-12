@@ -1,0 +1,42 @@
+<% title "Translations" %>
+
+<table id="hor-minimalist-b" class="pretty">
+  <tr>
+    <th>From</th>
+    <th>To</th>
+    <th></th>
+    <th></th>
+    <th>Domain</th>
+  </tr>
+  <% for translation in @translations %>
+    <tr>
+      <td>
+        <%= link_to translation.source_content,
+          translation,
+          :title => translation.notes.to_s
+        %>
+      </td>
+      <td>
+        <%= link_to translation.target_content, 
+            translation,
+            :title => translation.notes.to_s
+        %>
+      </td>
+      <td><%=h translation.source_language.title %></td>
+      <td><%=h translation.target_language.title %></td>
+      <td>
+        <% translation.categories.each do |category| %>
+          <%= category.title %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%= page_entries_info @translations %>
+  </div>
+  <br />
+  <%= will_paginate @translations, :container => false %>
+</div>

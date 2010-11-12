@@ -1,5 +1,9 @@
 <div class="segments">
-  <%= render @segments %>
+  <% if @document.is_csv? %>
+    <%= render :partial => "/translations/translations", :locals => {:translations => @translations} %>
+  <% else %>
+    <%= render @segments %>
+  <% end %>
 </div>
 
 <br />

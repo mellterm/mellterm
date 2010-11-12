@@ -240,7 +240,7 @@
         <%= render :partial => "/shared/terms" %>
       </div>
       <div id="document-div">
-        <%= render :partial => "/shared/document" %>
+        <%= render :partial => "/shared/document", :locals => { :document => @document }  %>
       </div>
     <% end %>
     

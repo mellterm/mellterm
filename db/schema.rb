@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101111055957) do
+ActiveRecord::Schema.define(:version => 20101112125917) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -173,6 +173,12 @@ ActiveRecord::Schema.define(:version => 20101111055957) do
     t.string   "internal_id"
     t.string   "source"
     t.string   "type"
+    t.boolean  "approved",           :default => false
+    t.boolean  "is_public",          :default => true
+    t.string   "pos"
+    t.integer  "authority"
+    t.string   "doc_name"
+    t.integer  "document_id"
   end
 
   add_index "translations", ["company_id"], :name => "index_translations_on_company_id"

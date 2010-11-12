@@ -2,11 +2,16 @@ class Document < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
   has_many :segments, :dependent => :destroy
+  has_many :translations, :dependent => :destroy
   
   has_attached_file :data
   validates_attachment_presence :data
   
   after_save :convert_to_utf8, :set_mime, :process_file
+  
+  def is_csv?
+    self.data_file_name.match("(\.csv)$")
+  end
   
   def on_windows?
     if RUBY_PLATFORM =~ /(:?mswin|win32|mingw|bccwin)/
@@ -100,7 +105,7 @@ class Document < ActiveRecord::Base
     mime_encoding = self.mime_encoding
     mime_type = self.mime_type
     # Only allow UTF-8 
-    if mime_encoding.match("(UTF-8|US-ASCII|BINARY)") or mime_type.match("zip")
+    if mime_encoding.match("(UTF-8|US-ASCII|BINARY|UNKNOWN)") or mime_type.match("zip")
       logger.info "[file] File already good format or can't convert: #{mime_encoding}"
       true
     else
@@ -218,12 +223,12 @@ class Document < ActiveRecord::Base
       lang_id = nil
     end
     
-    
     tu.each do |t|
       from      = t["tuv"][0]["seg"][0]["content"].to_s
       to        = t["tuv"][1]["seg"][0]["content"].to_s
-      # puts "#{from_lang} -> #{from}"
-      # puts "#{to_lang} -> #{to}"
+      logger.debug "[tmx] #{from_lang} -> #{from}"
+      logger.debug "[tmx] #{to_lang} -> #{to}"
+      logger.debug "======"
       
       if Segment.create(
         :source_content => from,
@@ -258,32 +263,16 @@ class Document < ActiveRecord::Base
     require 'tempfile'
     file = self.data.path
     mime_encoding = self.mime_encoding
-  
-    arr_of_arrs = FasterCSV.read(file.path)
-    # de_de, en_gb,category,company, notes
+    user_id = self.user_id
+    
+    # Read the CSV file in memory.
+    arr_of_arrs = FasterCSV.read(file)
+    # DE_DE EN_GB TYPE DOMAIN COMPANY APPROVED DOCID/DOCNAME POS SOURCE NOTES AUTHORITY
+    # de_de,en_gb,type,domain,company,approved, Document_id, pos, source, notes, authority
     @source_language = Language.find_or_create_by_title(arr_of_arrs[0][0].to_s)
     @target_language = Language.find_or_create_by_title(arr_of_arrs[0][1].to_s)
     arr_of_arrs.delete_at(0)
     @total = 0
-  
-    # TODO: Get company and category from the form.
-    # if not present on the csv file, then 
-    # "csv_file"=>{"company"=>"FRED2", "domain"=>"FRED1"}
-    if params[:csv_file][:company_id]
-      @bypass_company_id = params[:csv_file][:company_id]
-    else
-      @bypass_company_id = nil
-    end
-    
-    if params[:csv_file][:category_ids]
-      @bypass_category_ids = params[:csv_file][:category_ids]
-    else
-      @bypass_category_ids = nil
-    end
-    
-    @bypass_user_id = nil
-    @company_count_start = Company.count
-    @category_count_start = Category.count
   
     arr_of_arrs.each do |row|
       @source_content = row[0].to_s
@@ -292,64 +281,71 @@ class Document < ActiveRecord::Base
       @source_content = @source_content.toutf8 unless @source_content.is_utf8?
       @target_content = @target_content.toutf8 unless @target_content.is_utf8?
     
-      # will look for the categories on the CSV file.
-      # if they are there, ignore the one from the form. 
-      categories = row[2].to_s.split(",")
-      unless categories.empty?
-        @csv_categories = []
-        categories.each do |t|
-          cat = Category.find_or_create_by_title(t)
-          @csv_categories << cat.id if cat
-        end
+      term_type = row[2].to_s
+
+      # Domain. find or create new one
+      row3 = row[3].to_s
+      if row3.empty?
+        category_id = self.category_id
       else
-        @csv_categories = @bypass_category_ids
+        category_id = Category.find_or_create_by_title(row3).id
       end
-    
-      # will look for the company on the CSV file
-      # if not found on the database, then create it.
-      company = row[3].to_s
-      if company.empty?
-        @company_id = @bypass_company_id
+      
+      # Company. find or create new one
+      row4 = row[4].to_s
+      if row4.empty?
+        company_id = nil
       else
-        @company = Company.find_or_create_by_title(company)
-        @company_id = @company.id if @company
+        company_id = Company.find_or_create_by_title(row4).id
       end
-    
-      user_id = nil
-      if @bypass_user_id
-        user_id = @bypass_user_id
+      
+      # Approved 
+      if row[5].to_s.match(/(y|yes)/)
+        approved = true
       else
-        user_id = current_user.id if current_user
+        approved = false
       end
-    
-      # @category_id = Category.find_or_create_by_title(row[2].to_s).id unless row[2].to_s.blank?
-      # @company_id = Company.find_or_create_by_title(row[3].to_s) unless row[3].to_s.blank?
-    
-      @notes = row[4].to_s
+      
+      is_public = self.public
+
+      # DocID/DocName
+      doc_name = row[6].to_s
+      # POS
+      pos = row[7].to_s
+      # Source
+      source = row[8].to_s      
+      # Notes
+      notes = row[9].to_s
+      # Authority
+      authority = row[10].to_s
+      
       if (@tr = Translation.create(
           :source_content => @source_content,
           :target_content => @target_content,
           :source_language_id => @source_language.id,
           :target_language_id => @target_language.id,
-          :company_id => @company_id,
-          :notes => @notes,
-          :user_id => user_id)
+          :user_id => user_id,
+          :company_id => company_id,
+          :approved => approved,
+          :is_public => is_public,
+          :doc_name => doc_name,
+          :pos => pos,
+          :source => source,
+          :notes => notes,
+          :authority => authority
+          )
         )
         @total+=1
-        @tr.category_ids = @csv_categories
+        @tr.category_ids = [category_id] if category_id
+        self.translations << @tr
       end
     end
-    @company_count = Company.count-@category_count_start
-    @category_count = Category.count-@category_count_start
-  
-    flash[:success] = "#{@total} entries were successfully imported."
-    flash[:success] << "<br />#{@category_count} new domains were created." if (@category_count>0)
-    flash[:success] << "<br />#{@company_count} new companies were created." if (@company_count>0)
-    file.close!
+    logger.info("[file] CSV File #{file} processed #{@total} entries")
   end
   
   
-    
+  
+  # Private methods.
   protected
   
     # Check File Encoding from File System. Linux/BSD only

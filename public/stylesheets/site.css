@@ -60,3 +60,17 @@
   padding: 2px;
   width: 98%;
 }
+
+.information {
+  margin-top: 20px;
+  border: 1px dashed #999;
+  float: left;
+  padding: 15px;
+  clear: both;
+}
+ul li {margin: 5px 10px;}
+.bullet li {list-style-type: disc;}
+
+strong {
+  font-weight:bold;
+}
