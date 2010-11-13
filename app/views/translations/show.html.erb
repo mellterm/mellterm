@@ -44,3 +44,6 @@
     </p>
   <% end %>
 </div>
+
+<%= link_to "edit", edit_translation_path(@translation) %> - 
+<%= link_to "delete", translation_path(@translation), :confirm => 'Are you sure?', :method => :delete %>

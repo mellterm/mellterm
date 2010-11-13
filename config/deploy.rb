@@ -1,6 +1,6 @@
 set :application, "mellterm"
-# set :repository,  "git@github.com:fred/mellterm.git"
-set :repository,  "git://github.com/fred/mellterm.git"
+set :repository,  "git@github.com:fred/mellterm.git"
+# set :repository,  "git://github.com/fred/mellterm.git"
 set :branch, "master"
 set :domain, "mellterm.frederico-araujo.com"
 set :scm, :git

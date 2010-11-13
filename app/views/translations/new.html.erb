@@ -1,0 +1,12 @@
+<h3> <%= @title ||= "New Translation" %> </h3>
+
+<% form_for(@translation, :url => admin_translations_path, :html => { :multipart => true }) do |f| %>
+
+  <%= f.error_messages %>
+  
+  <%= render :partial => 'form', :locals => { :f => f, :translation => @translation } %>
+
+  <%= image_submit_tag "admin/save_button.png", :class => "button" %>
+  
+<% end %>
+

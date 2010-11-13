@@ -7,6 +7,7 @@
     <th></th>
     <th></th>
     <th>Domain</th>
+    <th>Edit</th>
   </tr>
   <% for translation in @translations %>
     <tr>
@@ -29,6 +30,7 @@
           <%= category.title %>
         <% end %>
       </td>
+      <td><%= link_to "edit", edit_translation_path(translation) %></td>
     </tr>
   <% end %>
 </table>
