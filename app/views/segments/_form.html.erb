@@ -9,6 +9,12 @@
   <br />
   <%= f.text_area :target_content, :rows =>4, :cols=>66, :class=>"nice_input" %>
 </p>
+
+<p>
+  <label>Status</label>
+  <%= f.select :status_id, Segment::STATUSES.collect {|t| t} %>
+</p>
+
 <p>
   <label>Domain Category</label>
   <%= f.select :category_id, Category.all.collect {|t| [t.title,t.id]} %>

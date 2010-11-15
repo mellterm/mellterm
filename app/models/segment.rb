@@ -1,5 +1,8 @@
 class Segment < ActiveRecord::Base
   
+  STATUSES = ["new", "reviewed", "translated", "query"]
+  # PRIORITIES = ["Low", "Normal", "Important", "Urgent"]
+  
   belongs_to :source_language, :class_name => "Language"
   belongs_to :target_language, :class_name => "Language"
   belongs_to :user
@@ -7,6 +10,17 @@ class Segment < ActiveRecord::Base
   belongs_to :document
   
   belongs_to :last_user, :class_name => "User", :foreign_key => "updated_by"
+  belongs_to :reviewer, :class_name => "User", :foreign_key => "reviewer_id"
+  belongs_to :translator, :class_name => "User", :foreign_key => "translator_id"
+  
+  # only check if empty and use the default "new"
+  def status
+    if self.status_id && !self.status_id.empty?
+      self.status_id
+    else
+      "new"
+    end
+  end
   
   def self.import_tmx(user_id,category_id,file)
     require 'xmlsimple'

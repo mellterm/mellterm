@@ -39,7 +39,10 @@ class ApplicationController < ActionController::Base
     Category.all.each do |t| 
       @categories_hash[t.id.to_s] = t.title.to_s
     end
-    
+    @statuses_hash = {}
+    Segment::STATUSES.each do |t|
+      @statuses_hash[t]=t
+    end
   end
   
   def order_by

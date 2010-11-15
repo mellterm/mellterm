@@ -6,6 +6,11 @@ class Translation < ActiveRecord::Base
   belongs_to :company
   belongs_to :user
   
+  validates_format_of :pos, 
+    :with => /(adj|adv|phr|pl|noun)/ , 
+    :allow_blank => true, 
+    :allow_nil => true
+  
   validates_presence_of :source_content, :target_content
   
   def category_name

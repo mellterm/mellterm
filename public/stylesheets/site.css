@@ -74,3 +74,9 @@ ul li {margin: 5px 10px;}
 strong {
   font-weight:bold;
 }
+.select_edit button,
+.select_edit select,
+.select_edit input, {
+  display: inline ;
+  clear: none ;
+}

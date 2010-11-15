@@ -1,4 +1,5 @@
-class Document < ActiveRecord::Base
+class Document < ActiveRecord::Base  
+  
   belongs_to :user
   belongs_to :category
   has_many :segments, :dependent => :destroy
@@ -8,6 +9,11 @@ class Document < ActiveRecord::Base
   validates_attachment_presence :data
   
   after_save :convert_to_utf8, :set_mime, :process_file
+  
+  # This method will export to XLF
+  def export_to_xlf
+    
+  end
   
   def is_csv?
     self.data_file_name.match("(\.csv)$")
@@ -299,8 +305,9 @@ class Document < ActiveRecord::Base
         company_id = Company.find_or_create_by_title(row4).id
       end
       
-      # Approved 
-      if row[5].to_s.match(/(y|yes)/)
+      # Approved, if it has a "y" in there then approve.
+      # and if company is specified also approve.
+      if row[5].to_s.match(/(y|yes)/) or company_id
         approved = true
       else
         approved = false
@@ -310,12 +317,19 @@ class Document < ActiveRecord::Base
 
       # DocID/DocName
       doc_name = row[6].to_s
+      
       # POS
-      pos = row[7].to_s
+      pos = row[7].to_s.downcase
+      if pos.empty?
+        pos = "noun"
+      end
+      
       # Source
-      source = row[8].to_s      
+      source = row[8].to_s
+         
       # Notes
       notes = row[9].to_s
+      
       # Authority
       authority = row[10].to_s
       
@@ -340,6 +354,7 @@ class Document < ActiveRecord::Base
         self.translations << @tr
       end
     end
+    
     logger.info("[file] CSV File #{file} processed #{@total} entries")
   end
   
@@ -417,5 +432,5 @@ class Document < ActiveRecord::Base
       # always return true to skip and ignore errors for now.
       return file
     end
-  
+      
 end

@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(:version => 20101112125917) do
     t.integer  "translator_id"
     t.string   "status_id"
   end
-
+  
   add_index "segments", ["category_id"], :name => "index_segments_on_category_id"
   add_index "segments", ["company_id"], :name => "index_segments_on_company_id"
   add_index "segments", ["document_id"], :name => "index_segments_on_document_id"
