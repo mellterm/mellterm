@@ -51,7 +51,7 @@ class TranslationsController < ApplicationController
   def update
     params[:translation][:category_ids] ||= []
     @translation = current_user.translations.find(params[:id])
-    if @translation.update_attributes(params[:translation])
+    if @translation.update_attributes(params[:translation].merge(:updated_by => current_user))
       flash[:success] = "Successfully updated translation."
       redirect_to admin_translations_url
     else

@@ -28,24 +28,3 @@
     :method => :delete 
   %>
 </strong>
-
-<br />
-<br />
-<br />
-<hr />
-<br />
-<h2>Import a Translation Memory File</h2>
-<p>First remove headers</p>
-
-<% form_for :memory_file, :url => {:action=>"import"}, :html => { :multipart => true } do |f| %>
-  <p>
-    <label>Select Domain for uploaded entries: </label> <br />
-    <%= f.select(:category_id, Category.all.collect {|p| [p.title,p.id] }, { :include_blank => true }) %>
-  </p>
-  <p>
-    Select a CSV File to import
-    <br />
-    <%= f.file_field :file %>
-    <%= submit_tag 'Upload' %>
-  </p>
-<% end %>

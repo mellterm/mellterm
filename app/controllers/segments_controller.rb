@@ -69,7 +69,7 @@ class SegmentsController < ApplicationController
   def update_ajax
     @segment = current_user.segments.find(params[:id])
     @segment.updated_by = current_user.id
-    @segment.update_attributes(params[:segment])
+    @segment.update_attributes(params[:segment].merge(:updated_by => current_user))
     respond_to do |format|
       format.js
     end
@@ -79,7 +79,7 @@ class SegmentsController < ApplicationController
     @segment = current_user.segments.find(params[:id])
     @segment.updated_by = current_user.id
     respond_to do |format|
-      if @segment.update_attributes(params[:segment])
+      if @segment.update_attributes(params[:segment].merge(:updated_by => current_user)) 
         flash[:success] = "Successfully updated record."
         format.html { 
           if @segment.document
@@ -113,33 +113,33 @@ class SegmentsController < ApplicationController
   
   
   def import
-    if params[:memory_file][:file]
-      require 'hpricot'
-      require 'tempfile'
-      file = params[:memory_file][:file]
-      #file = File.read("/tmp/utf8_SCHOLL_MARKETING.xml")
-      
-      user_id = nil
-      user_id = current_user.id if current_user
-      
-      if params[:memory_file][:category_id]
-        category_id = params[:memory_file][:category_id].to_i
-      else
-        category_id = nil
-      end
-      
-      # Do the import job
-      result = Segment.import_tmx(user_id,category_id,file)
-      @total = result[:total]
-      @rejected = result[:rejected]
-      flash[:success] = "#{@total} entries were successfully imported."
-      flash[:success] << "<br />#{@rejected} were not import." if (@rejected>0)
-      flash[:notice] = result[:msg]
-      file.close
-    else
-      flash[:error] = "No File given"
-    end
-    redirect_to :action => "index"
+    # if params[:memory_file][:file]
+    #   require 'hpricot'
+    #   require 'tempfile'
+    #   file = params[:memory_file][:file]
+    #   #file = File.read("/tmp/utf8_SCHOLL_MARKETING.xml")
+    #   
+    #   user_id = nil
+    #   user_id = current_user.id if current_user
+    #   
+    #   if params[:memory_file][:category_id]
+    #     category_id = params[:memory_file][:category_id].to_i
+    #   else
+    #     category_id = nil
+    #   end
+    #   
+    #   # Do the import job
+    #   result = Segment.import_tmx(user_id,category_id,file)
+    #   @total = result[:total]
+    #   @rejected = result[:rejected]
+    #   flash[:success] = "#{@total} entries were successfully imported."
+    #   flash[:success] << "<br />#{@rejected} were not import." if (@rejected>0)
+    #   flash[:notice] = result[:msg]
+    #   file.close
+    # else
+    #   flash[:error] = "No File given"
+    # end
+    # redirect_to :action => "index"
   end
   
 end

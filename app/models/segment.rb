@@ -1,4 +1,6 @@
 class Segment < ActiveRecord::Base
+    
+  versioned
   
   STATUSES = ["new", "reviewed", "translated", "query"]
   # PRIORITIES = ["Low", "Normal", "Important", "Urgent"]

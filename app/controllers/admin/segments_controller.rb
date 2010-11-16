@@ -74,33 +74,33 @@ class Admin::SegmentsController < Admin::BaseController
   
   
   def import
-    if params[:memory_file][:file]
-      require 'hpricot'
-      require 'tempfile'
-      file = params[:memory_file][:file]
-      #file = File.read("/tmp/utf8_SCHOLL_MARKETING.xml")
-      
-      user_id = nil
-      user_id = current_user.id if current_user
-      
-      if params[:memory_file][:category_id]
-        category_id = params[:memory_file][:category_id].to_i
-      else
-        category_id = nil
-      end
-      
-      # Do the import job
-      result = Segment.import_tmx(user_id,category_id,file)
-      @total = result[:total]
-      @rejected = result[:rejected]
-      flash[:success] = "#{@total} entries were successfully imported."
-      flash[:success] << "<br />#{@rejected} were not import." if (@rejected>0)
-      flash[:notice] = result[:msg]
-      file.close
-    else
-      flash[:error] = "No File given"
-    end
-    redirect_to :action => "index"
+    # if params[:memory_file][:file]
+    #   require 'hpricot'
+    #   require 'tempfile'
+    #   file = params[:memory_file][:file]
+    #   #file = File.read("/tmp/utf8_SCHOLL_MARKETING.xml")
+    #   
+    #   user_id = nil
+    #   user_id = current_user.id if current_user
+    #   
+    #   if params[:memory_file][:category_id]
+    #     category_id = params[:memory_file][:category_id].to_i
+    #   else
+    #     category_id = nil
+    #   end
+    #   
+    #   # Do the import job
+    #   result = Segment.import_tmx(user_id,category_id,file)
+    #   @total = result[:total]
+    #   @rejected = result[:rejected]
+    #   flash[:success] = "#{@total} entries were successfully imported."
+    #   flash[:success] << "<br />#{@rejected} were not import." if (@rejected>0)
+    #   flash[:notice] = result[:msg]
+    #   file.close
+    # else
+    #   flash[:error] = "No File given"
+    # end
+    # redirect_to :action => "index"
   end
   
 end

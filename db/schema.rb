@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101112125917) do
+ActiveRecord::Schema.define(:version => 20101116061109) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(:version => 20101112125917) do
     t.integer  "translator_id"
     t.string   "status_id"
   end
-  
+
   add_index "segments", ["category_id"], :name => "index_segments_on_category_id"
   add_index "segments", ["company_id"], :name => "index_segments_on_company_id"
   add_index "segments", ["document_id"], :name => "index_segments_on_document_id"
@@ -235,5 +235,25 @@ ActiveRecord::Schema.define(:version => 20101112125917) do
   add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
   add_index "users", ["user_type_id"], :name => "index_users_on_user_type_id"
+
+  create_table "versions", :force => true do |t|
+    t.integer  "versioned_id"
+    t.string   "versioned_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "user_name"
+    t.text     "changes"
+    t.integer  "number"
+    t.string   "tag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "versions", ["created_at"], :name => "index_versions_on_created_at"
+  add_index "versions", ["number"], :name => "index_versions_on_number"
+  add_index "versions", ["tag"], :name => "index_versions_on_tag"
+  add_index "versions", ["user_id", "user_type"], :name => "index_versions_on_user_id_and_user_type"
+  add_index "versions", ["user_name"], :name => "index_versions_on_user_name"
+  add_index "versions", ["versioned_id", "versioned_type"], :name => "index_versions_on_versioned_id_and_versioned_type"
 
 end

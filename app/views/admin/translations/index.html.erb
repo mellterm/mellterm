@@ -66,53 +66,5 @@
   <%= will_paginate @translations, :container => false %>
 </div>
 
-<br />
-<br />
-<br />
-<h2>CSV Import</h2>
-<% form_for :csv_file, :url => {:action=>"import"}, :html => { :multipart => true } do |f| %>
-  <p>
-    <label>Select Categories for uploaded entries: </label> <br />
-    <%= select_tag "csv_file[category_ids][]", 
-        options_from_collection_for_select(Category.all, :id, :title), 
-        :multiple => true
-    %>
-  </p>
-  <p>
-    <label>Select Company for uploaded entries: </label> <br />
-    <%= f.select(:company_id, Company.all.collect {|p| [p.title,p.id] }, { :include_blank => true }) %>
-  </p>
-  <p>
-    Select a CSV File to import
-    <br />
-    <%= f.file_field :file %>
-    <%= submit_tag 'Upload' %>
-  </p>
-<% end %>
 
-<br />
-<br />
-<br />
-
-<h2>Format of CSV file for import</h2>
-<p>CSV must have header a definining the language</p>
-<pre>
-  header --> source_language,destination_language,domains(categories),company,Internal-ID,Value(1-5),notes,Source
-  data ->    source_content,destination_content,"domain1, domain2",company ABC,123,"some notes"
-  data ->    source_content,destination_content
-</pre>
-<h4>Example:</h4>
-<pre>
-  de_de,en_gb,domain,company,internal_id,notes,source
-  Ablage,Personal Clipboard,"tech,office",abc,"this, that and those"
-  Allgemein,General,tech,abc,"this, that and those"
-  Allg. Hinweise,general hints,Office,"xyz Company, ltd.",
-  Aufgaben,Tasks,tech,abc,,
-  Auftrag,Appointment
-</pre>
-Notes: If comma is in part of field, it must be embraced by Double Quotes ("") as in the example above. 
-
-<br />
-<br />
-<br />
 <strong><%= link_to "Delete all", {:action => "destroy", :all => true}, :confirm => 'Are you rally sure you want to delete ALL records from database?', :method => :delete %></strong>
