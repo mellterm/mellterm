@@ -1,0 +1,15 @@
+<h1>Listing attachments</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% @attachments.each do |attachment| %>
+  <tr>
+    <td><%= link_to attachment.data_file_name, attachment %></td>
+    <td><%= link_to attachment.created_at.to_s(:long), attachment %></td>
+    <td><%= link_to 'Del', attachment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+

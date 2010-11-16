@@ -1,4 +1,5 @@
 <table class="sidebar">
+  <h3> Document Properties </h3>
   <tr>
     <td>File:</td>
     <td><%= @document.data_file_name %></td>
@@ -36,6 +37,19 @@
     <td><%= @document.notes %></td>
   </tr>
 </table>
+
+<% if @document.attachments.empty? %>
+  <p>No Exports of this document </p>
+<% else %>
+  <div class="document_attachments">
+    <h3> Exports </h3>
+    <ul>
+    <% @document.attachments.each do |t| %>
+      <li><%= link_to t.data_file_name, t %>(<%= t.created_at.strftime("%H:%M, %d %b %Y") %>)</li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <p>
   <b><%= link_to 'Delete Document', document, :confirm => 'Are you sure you want to delete this Document?', :method => :delete %></b>

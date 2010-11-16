@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :attachments
+
   
   map.permalink '/page/:permalink/:language', 
     :controller => 'pages', :action => 'show', 

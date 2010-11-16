@@ -66,12 +66,14 @@ class Document < ActiveRecord::Base
     
     # Here iterates on all segments and save the file.
     self.segments.each do |seg|
-      seg_source_language, seg_target_language = nil,nil
-      seg_source_content, seg_target_content = nil,nil
+      seg_source_language, seg_target_language = nil, nil
+      seg_source_content, seg_target_content = nil, nil
       seg_source_language = seg.source_language.name if seg.source_language
       seg_target_language = seg.target_language.name if seg.target_language
       seg_source_content = seg.source_content
       seg_target_content = seg.target_content
+      
+      
       if seg_source_language && seg_target_language && seg_source_content && seg_target_content
         tmp_file.write("<tuv xml:lang=\"#{seg_source_language}\">")
         tmp_file.write("<seg>#{seg_source_content}</seg>")
