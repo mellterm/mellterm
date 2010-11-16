@@ -4,15 +4,96 @@ class Document < ActiveRecord::Base
   belongs_to :category
   has_many :segments, :dependent => :destroy
   has_many :translations, :dependent => :destroy
+  has_many :attachments, :dependent => :destroy, :foreign_key => 'parent_id'
   
   has_attached_file :data
   validates_attachment_presence :data
   
   after_save :convert_to_utf8, :set_mime, :process_file
   
+  # Last usage date - Specifies when the last time the content of a <tu> or <tuv> element
+  #  was used in the original translation memory environment.
+  def lastusagedate
+    last_segment = self.segments.last
+    if last_segment
+      last_segment.updated_at.iso8601.gsub(/(\-|\:|\+)/,"")
+    else
+      nil
+    end
+  end
+  
+  # This methods builds up the TU-header for the TMX file.
+  def tu_header
+    tu = Hash.new
+    tu[:creationdate] = self.created_at.iso8601.gsub(/(\-|\:|\+)/,"")
+    tu[:creationid] = self.user.name if self.user 
+    tu[:changedate] = self.updated_at.iso8601.gsub(/(\-|\:|\+)/,"")
+    tu[:changeid] = self.user.name if self.user 
+    tu[:lastusagedate] = lastusagedate
+    return tu
+  end
+  
+  
+  # This methods builds up the XML-Header for the TMX file.
+  def tmx_header
+    header = Hash.new
+    
+    header[:segtype] = "sentence"
+    # This should be the user that translated the document, or exported it.
+    header[:changeid] = self.user.name if self.user
+    
+    # This is the user that uploaded the document
+    header[:creationid] = self.user.name if self.user
+    header[:creationtool] = "Mellterm"
+    header[:creationtoolversion] = "Mellterm-Web-v0.5"
+    header[:creation_date] = Time.now.iso8601.gsub(/(\-|\:|\+)/,"")
+    header[:srclang] = self.xliff_source_language
+    header[:datatype] = "plaintext"
+    return header
+  end
+  
   # This method will export to XLF
   def export_to_xlf
+    require 'tempfile'
+    header_template = File.join(RAILS_ROOT, "lib", "tmx_header.erb")
+    @header = self.tmx_header
+    @tu = self.tu_header
+    new_template = ERB.new(File.read(header_template))
     
+    # Create a temp file and dump the XML into it
+    tmp_file = File.new(File.join(Dir.tmpdir,"doc_#{Time.now.to_i}.xml"), "w+")
+    tmp_file.write(new_template.result)
+    
+    # Here iterates on all segments and save the file.
+    self.segments.each do |seg|
+      seg_source_language, seg_target_language = nil,nil
+      seg_source_content, seg_target_content = nil,nil
+      seg_source_language = seg.source_language.name if seg.source_language
+      seg_target_language = seg.target_language.name if seg.target_language
+      seg_source_content = seg.source_content
+      seg_target_content = seg.target_content
+      if seg_source_language && seg_target_language && seg_source_content && seg_target_content
+        tmp_file.write("<tuv xml:lang=\"#{seg_source_language}\">")
+        tmp_file.write("<seg>#{seg_source_content}</seg>")
+        tmp_file.write("</tuv>")
+        tmp_file.write("<tuv xml:lang=\"#{seg_target_language}\">")
+        tmp_file.write("<seg>#{seg_target_content}</seg>")
+        tmp_file.write("</tuv>")
+      end
+    end
+    
+    tmp_file.write("</tu>")
+    tmp_file.write("</body>")
+    tmp_file.write("</tmx>")
+    
+    # Create a new attachment and save it
+    new_attachment = Attachment.new(:user_id => self.user_id, :parent_id => self.id)
+    new_attachment.data = tmp_file
+    if new_attachment.valid?
+      new_attachment.save
+    end
+    tmp_file.close
+    true
   end
   
   def is_csv?

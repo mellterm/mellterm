@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :segments
   belongs_to :language
   belongs_to :user_type
-  
+  validates_presence_of :name
   acts_as_authentic
   
   # acts_as_authentic do |c|
