@@ -2,7 +2,7 @@ class AttachmentsController < ApplicationController
   # GET /attachments
   # GET /attachments.xml
   def index
-    @attachments = Attachment.all
+    @attachments = current_user.attachments
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class AttachmentsController < ApplicationController
   # GET /attachments/1
   # GET /attachments/1.xml
   def show
-    @attachment = Attachment.find(params[:id])
+    @attachment = current_user.attachments.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +25,7 @@ class AttachmentsController < ApplicationController
   # GET /attachments/new.xml
   def new
     @attachment = Attachment.new
+    @attachment.user_id = current_user.id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +42,7 @@ class AttachmentsController < ApplicationController
   # POST /attachments.xml
   def create
     @attachment = Attachment.new(params[:attachment])
-
+    @attachment.user_id = current_user.id
     respond_to do |format|
       if @attachment.save
         format.html { redirect_to(@attachment, :notice => 'Attachment was successfully created.') }
@@ -57,7 +58,7 @@ class AttachmentsController < ApplicationController
   # PUT /attachments/1.xml
   def update
     @attachment = Attachment.find(params[:id])
-
+    @attachment.user_id = current_user.id
     respond_to do |format|
       if @attachment.update_attributes(params[:attachment])
         format.html { redirect_to(@attachment, :notice => 'Attachment was successfully updated.') }

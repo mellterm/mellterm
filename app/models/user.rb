@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :feed_sites
   has_many :own_categories, :class_name => "Category", :foreign_key => "owner_id"
   has_many :translations
+  has_many :attachments
   has_many :documents
   has_many :segments
   belongs_to :language
