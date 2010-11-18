@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :document_statuses
+
   map.resources :attachments
 
   
@@ -45,6 +47,8 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :categories, :has_many => :translations
     admin.resources :segments, :members => :import
     admin.resources :user_types
+    admin.resources :document_statuses
+    admin.resources :documents
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

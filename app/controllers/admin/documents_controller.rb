@@ -1,10 +1,13 @@
-class DocumentsController < ApplicationController
-  before_filter :require_user
+class Admin::DocumentsController < Admin::BaseController
+  before_filter :require_admin
   
   # GET /documents
   # GET /documents.xml
   def index
-    @documents = current_user.documents
+    @documents = Document.paginate(:page => params[:page], 
+      :order => "documents.id ASC",
+      :per_page => 100
+    )
     @title = "My Documents"
 
     respond_to do |format|
@@ -107,14 +110,4 @@ class DocumentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  def export_document
-    @document = Document.find(params[:id])
-    if @document.export_to_xlf
-      redirect_to(@document, :notice => 'Document was successfully Exported, Download the export on the side panel.') }
-    else
-      redirect_to(@document, :notice => 'Document has failed') }
-    end
-  end
-  
 end

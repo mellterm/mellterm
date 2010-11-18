@@ -1,0 +1,82 @@
+<h3> Document Properties </h3>
+<table id="box-table-a">
+  <tr>
+    <td>File:</td>
+    <td><%= @document.data_file_name %></td>
+  </tr>
+  <tr>
+    <td>Description:</td>
+    <td><%= @document.description %></td>
+  </tr>
+  <tr>
+    <td>Mime Type:</td>
+    <td><%= @document.data_content_type %> </td>
+  </tr>
+  <tr>
+    <td>User:</td>
+    <td><%= @document.user.login if @document.user %> </td>
+  </tr>
+  <tr>
+    <td>Mime Type:</td>
+    <td><%= @document.data_content_type %> </td>
+  </tr>
+  <tr>
+    <td>Size:</td>
+    <td><%= to_file_size @document.data_file_size %></td>
+  </tr>
+  <tr>
+    <td>XML Type:</td>
+    <td><%= @document.xliff_xmlns %> </td>
+  </tr>
+  <tr>
+    <td>Original:</td>
+    <td><%= @document.xliff_original %></td>
+  </tr>
+  <tr>
+    <td>Encoding:</td>
+    <td><%= @document.file_encoding %></td>
+  </tr>
+  <tr>
+    <td>Source Language:</td>
+    <td><%= @document.xliff_source_language %></td>
+  </tr>
+  <tr>
+    <td>Datatype:</td>
+    <td><%= @document.xliff_datatype %></td>
+  </tr>
+  <tr>
+    <td>Instruc.</td>
+    <td><%= @document.notes %></td>
+  </tr>
+</table>
+
+<% if @document.attachments.empty? %>
+  <p>No Exports of this document </p>
+<% else %>
+  <div class="document_attachments">
+    <h3> Exports </h3>
+    <ul>
+    <% @document.attachments.each do |t| %>
+      <li><%= link_to t.data_file_name, t %>(<%= t.created_at.strftime("%H:%M, %d %b %Y") %>)</li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<div class="segments">
+  <% if @document.is_csv? %>
+    <%= render :partial => "/translations/translations", :locals => {:translations => @translations} %>
+  <% else %>
+    <%= render @segments %>
+  <% end %>
+</div>
+
+<br />
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%= page_entries_info @segments %>
+  </div>
+  <br />
+  <%= will_paginate @segments, :container => false %>
+</div>

@@ -1,0 +1,52 @@
+<% @title ||= "Documents" %>
+
+<table id="one-column-emphasis-b">
+  <caption><%= @title %></caption>
+	<thead>
+    <tr>
+      <th>Desc</th>
+      <th>Filename</th>
+      <th>Type</th>
+      <th>Size</th>
+      <th>SL</th>
+      <th>User</th>
+      <th>Segments</th>
+      <th>Exports</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+
+<% for document in @documents %>
+  <tr>
+    <td><%=h document.description %></td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_document_path(document)}'"%>>
+      <%= link_to(document.data_file_name, admin_document_path(document)) %>
+    </td>
+    <td><%= document.data_content_type %></td>
+    <td><%= to_file_size(document.data_file_size) %></td>
+    <td><%= document.xliff_source_language %></td>
+    <td><%= document.user.name if document.user %></td>
+    <td><%= document.segments.count %></td>
+    <td><%= document.attachments.count %></td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_document_path(document)}'"%>>
+      <%=h document.created_at.to_s(:short) %>
+    </td>
+    <td class="mouse" onclick=<%="document.location.href='#{admin_document_path(document)}'"%>>
+      <%=h document.updated_at.to_s(:short) %>
+    </td>
+    <td><%= link_to "Edit", edit_admin_document_path(document) %></td>
+    <td><%= link_to "Del", admin_document_path(document), :confirm => "Are you Sure", :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<div class='flickr_pagination'>
+    <%= will_paginate @documents %>
+</div>
+
+<br />
+<%= link_to image_tag("admin/new_button.png"), new_document_path %>

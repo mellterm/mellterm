@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101116133312) do
+ActiveRecord::Schema.define(:version => 20101118055252) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20101116133312) do
 
   create_table "companies", :force => true do |t|
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "document_statuses", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

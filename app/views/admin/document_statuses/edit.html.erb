@@ -1,0 +1,21 @@
+<h1>Editing Document Status</h1>
+
+<% form_for @document_status, :url => { :action => "update" } do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :size => 36 %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :rows => 8, :cols => 32 %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<p>
+<%= link_to 'Back', admin_document_statuses_path %>
+</p>

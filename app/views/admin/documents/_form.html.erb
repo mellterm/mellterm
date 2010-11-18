@@ -1,0 +1,80 @@
+<table class="userprofile-div">
+  <tr>
+    <td><%= f.label :name_title, "Title" %></td>
+    <td><%= f.select :name_title, options_for_select([" ", "mr.", "mrs.", "miss."], @user.name_title) %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :name %></td>
+    <td><%= f.text_field :name, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :phone %></td>
+    <td><%= f.text_field :phone, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :address %></td>
+    <td><%= f.text_field :address, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :skype %></td>
+    <td><%= f.text_field :skype, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :country_name, "Country" %></td>
+    <td><%= f.country_select :country_name, "Select Country" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :language, "Native Language" %></td>
+    <td><%= f.select :language_id, Language.all.map {|t| [t.name,t.id]} %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :notes, "Personal BIO" %></td>
+    <td><%= f.text_area :notes, :rows => 8, :cols => 24, :class=>"nice_input" %></td>
+  </tr>
+  <% if current_user.avatar %>
+    <tr>
+      <td><%= f.label :avatar, "Change Photo" %></td>
+      <td><%= f.file_field :avatar %></td>
+    </tr>
+    <tr>
+      <td>Current Photo</td>
+      <td><%= image_tag(current_user.avatar.url(:mini), :alt => 'Photo', :title => 'Current photo') %></td>
+    </tr>
+  <% else %>
+    <tr>
+      <td><%= f.label :avatar, "Add Profile Photo" %></td>
+      <td><%= f.file_field :avatar %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<hr>
+<br />
+
+<table class="userprofile-div">
+  <tr>
+    <td><%= f.label :login %></td>
+    <td><%= f.text_field :login, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :password, f.object.new_record? ? nil : "Change password" %></td>
+    <td><%= f.password_field :password, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :password_confirmation %></td>
+    <td><%= f.password_field :password_confirmation, :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :email %></td>
+    <td><%= f.text_field :email, :type => "email", :class=>"nice_input" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :user_type_id, "Type of User" %></td>
+    <td><%= f.select :user_type_id, UserType.all.map{|t| [t.name,t.id]}, {:include_blank => true} %></td>
+  </tr>
+  <tr>
+    <td><%= f.check_box :admin %></td>
+    <td><%= f.label :admin %></td>
+  </tr>
+</table>
