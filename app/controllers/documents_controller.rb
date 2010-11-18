@@ -111,9 +111,9 @@ class DocumentsController < ApplicationController
   def export_document
     @document = Document.find(params[:id])
     if @document.export_to_xlf
-      redirect_to(@document, :notice => 'Document was successfully Exported, Download the export on the side panel.') }
+      redirect_to(@document, :notice => 'Document was successfully Exported, Download the export on the side panel.')
     else
-      redirect_to(@document, :notice => 'Document has failed') }
+      redirect_to(@document, :notice => 'Document has failed')
     end
   end
   
