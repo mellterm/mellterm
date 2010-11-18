@@ -20,7 +20,7 @@ working_directory "/var/www/apps/mellterm/current" # available in 0.94.0+
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
 listen "/var/www/apps/mellterm/shared/pids/unicorn.sock", :backlog => 64
-# listen 8080, :tcp_nopush => true
+# listen 3000, :tcp_nopush => true
 
 # nuke workers after 180 seconds instead of 60 seconds (the default)
 # Need more time to process the feeds, at least 2-3 minutes
