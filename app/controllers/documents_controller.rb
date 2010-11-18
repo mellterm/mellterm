@@ -3,6 +3,7 @@ class DocumentsController < ApplicationController
   
   # GET /documents
   # GET /documents.xml
+  # TODO: need insure security in the index
   def index
     @documents = current_user.documents
     @title = "My Documents"
