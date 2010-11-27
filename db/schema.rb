@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101118055252) do
+ActiveRecord::Schema.define(:version => 20101127122428) do
 
   create_table "attachments", :force => true do |t|
     t.string   "title"
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20101118055252) do
     t.integer  "reviewer_id"
     t.integer  "translator_id"
     t.string   "status_id"
+    t.boolean  "approved",           :default => false
   end
 
   add_index "segments", ["category_id"], :name => "index_segments_on_category_id"

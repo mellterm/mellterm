@@ -18,7 +18,10 @@ $(function() {
   $(".editable_target_<%= segment.id %>").editable("/segments/update_ajax/<%=segment.id%>", { 
       indicator   : "<img src='/images/indicator.gif'>",
       type        : 'textarea',
-      submitdata  : { _method: "put", authenticity_token: <%= form_authenticity_token.to_json %> },
+      submitdata  : { 
+        _method: "put", 
+        authenticity_token: <%= form_authenticity_token.to_json %> 
+      },
       rows        : "<%= segment.source_content.size/50 if segment.source_content %>",
       cols        : 100,
       select      : true,
@@ -34,7 +37,10 @@ $(function() {
   $(".editable_select_<%= segment.id %>").editable("/segments/update_ajax/<%=segment.id%>", { 
     indicator   : "<img src='/images/indicator.gif'>",
     type        : 'select',
-    submitdata  : { _method: "put", authenticity_token: <%= form_authenticity_token.to_json %> },
+    submitdata  : { 
+      _method: "put", 
+      authenticity_token: <%= form_authenticity_token.to_json %> 
+    },
     select      : true,
     submit      : 'Save',
     cancel      : 'Cancel',
@@ -71,12 +77,13 @@ $(function() {
   </div>
   
   <div class="segment_prop">
-    <div class="segment_from_id"><%= segment.id.to_i - (@first_id.to_i-1) %></div> - 
+    <div class="segment_from_id">
+      <%= segment.document.data_file_name if segment.document %> : <%= segment.id.to_i - (@first_id.to_i-1) %>
+    </div> - 
     <span style="display: inline"><%=h segment.category.title if segment.category %></span>
-    <%= segment.user.login if segment.user %> 
-    <%= segment.last_user.login if segment.last_user %> 
-    <%= segment.reviewer.login if segment.reviewer %> &nbsp; - &nbsp;
-    Updated: <%= segment.updated_at.strftime("%H:%M, %d %b %Y") %> &nbsp; - &nbsp;
+    Owner : <%= segment.user.login if segment.user %> -
+    Updated By : <%= segment.last_user.login if segment.last_user %> at <%= segment.updated_at.strftime("%H:%M, %d %b %Y") %> 
+    <%= segment.reviewer.login if segment.reviewer %> -
     Status: 
     <span class="select_edit editable_select_<%= segment.id %>" id="<%= segment.id %>" style="display:inline"><%=h segment.status %></span> &nbsp; - &nbsp;
     <%= link_to "Edit", edit_segment_path(segment) %> - 

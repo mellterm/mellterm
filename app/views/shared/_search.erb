@@ -7,7 +7,11 @@
       <td><%= f.submit "Search" %></td>
     </tr>
   </table>
-    <p>User: <%= f.select :user_id_equals, User.all.collect {|t| [t.login,t.id]}, :include_blank => true %></p>
+    <p>Document: <%= f.select :document_id_equals, current_user.documents.collect {|t| [t.data_file_name,t.id]}, :include_blank => true %></p>
+    <br />
+    <p>From: <%= f.select :source_language_id_equals, Language.all.collect {|t| [t.title,t.id]}, :include_blank => true %></p>
+    <p>To: <%= f.select :target_language_id_equals, Language.all.collect {|t| [t.title,t.id]}, :include_blank => true %></p>
+    <p> <%= f.check_box :approved_equals %> Approved Only</p>
     <br />
     <% Category.all.each do |t|%>
       <div class="checkbox_search_item">

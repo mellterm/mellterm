@@ -33,10 +33,13 @@
   <% end %>
 </table>
 
-<div class="digg_pagination">
-  <div clas="page_info">
-    <%= page_entries_info @translations %>
-  </div>
+<br />
+<% if params[:search] && @segments && !@segments.empty? %>
   <br />
-  <%= will_paginate @translations, :container => false %>
-</div>
+  <h3> 
+    Segments matching "<%= params[:search][:source_content_or_target_content_like_any] %>" </h3>
+  <br />
+  <div class="segments">
+    <%= render @segments %>
+  </div>
+<% end %>

@@ -2,24 +2,43 @@ class TranslationsController < ApplicationController
   before_filter :require_user
   
   def index
-    # @search = Translation.search(params[:search])
+
     conditions = ["translations.user_id = ?", current_user.id]
     if params[:categories] && !params[:categories].empty?
       # cat_ids = params[:categories].join(" OR category_id = ")
       # conditions = ["category_id = #{cat_ids}"]
       ids = []
       params[:categories].each {|t| ids << t.to_i}
-      @search = current_user.translations.categories_id_equals(ids).search(params[:search])
+      @terms_search = current_user.translations.categories_id_equals(ids).search(params[:search])
     else
-      @search = current_user.translations.search(params[:search])
+      @terms_search = current_user.translations.search(params[:search])
     end
-    @translations = @search.paginate(
+    @translations = @terms_search.paginate(
       :select => "distinct `translations`.*",
       # :conditions => conditions, 
       :page => params[:page], 
-      :per_page => 40,
+      :per_page => 25,
       :include => [:source_language, :target_language, :company, :categories, :user]
     )
+
+    if params[:categories] && !params[:categories].empty?
+      cat_ids = params[:categories].join(" OR category_id = ")
+      conditions = ["category_id = #{cat_ids}"]
+      # ids = []
+      # params[:categories].each {|t| ids << t.to_i}
+      # @search = Segment.categories_id_equals(ids).search(params[:search])
+    else
+      @segment_search = current_user.segments.search(params[:search])
+    end
+    @segments = @segment_search.paginate(
+      # :select => "distinct `segments`.*",
+      # :conditions => conditions, 
+      :page => params[:page], 
+      :per_page => 25,
+      :order => "segments.id ASC",
+      :include => [:source_language, :target_language, :category, :user]
+    )
+    
   end
   
   def show
@@ -38,7 +57,7 @@ class TranslationsController < ApplicationController
     @translation.user_id = current_user.id
     if @translation.save
       flash[:success] = "Successfully created translation."
-      redirect_to admin_translations_url
+      redirect_to @translation
     else
       render :action => 'new'
     end
@@ -53,7 +72,7 @@ class TranslationsController < ApplicationController
     @translation = current_user.translations.find(params[:id])
     if @translation.update_attributes(params[:translation].merge(:updated_by => current_user))
       flash[:success] = "Successfully updated translation."
-      redirect_to admin_translations_url
+      redirect_to @translation
     else
       render :action => 'edit'
     end
@@ -68,7 +87,7 @@ class TranslationsController < ApplicationController
       @translation.destroy
       flash[:success] = "Successfully deleted translation."
     end
-    redirect_to admin_translations_url
+    redirect_to translations_path
   end
   
     

@@ -68,18 +68,21 @@ class SegmentsController < ApplicationController
   
   def update_ajax
     @segment = current_user.segments.find(params[:id])
-    @segment.updated_by = current_user.id
-    @segment.update_attributes(params[:segment].merge(:updated_by => current_user))
-    respond_to do |format|
-      format.js
+    if @segment.update_attributes(params[:segment])
+      @segment.last_user = current_user
+      @segment.save
+      respond_to do |format|
+        format.js
+      end
     end
   end
   
   def update
     @segment = current_user.segments.find(params[:id])
-    @segment.updated_by = current_user.id
     respond_to do |format|
-      if @segment.update_attributes(params[:segment].merge(:updated_by => current_user)) 
+      if @segment.update_attributes(params[:segment])
+        @segment.last_user = current_user
+        @segment.save
         flash[:success] = "Successfully updated record."
         format.html { 
           if @segment.document

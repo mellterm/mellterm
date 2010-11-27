@@ -29,9 +29,11 @@ class Translation < ActiveRecord::Base
   
   def matching_segments(limit=10)
     Segment.
-      source_language_title_like(self.source_language.title).
+      source_language_id_equals(self.source_language_id).
+      target_language_id_equals(self.target_language_id).
       source_content_like(self.source_content)
   end
+  
   
   def matching_segments_and_domains(limit=10)
   end

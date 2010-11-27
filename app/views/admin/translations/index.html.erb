@@ -35,8 +35,8 @@
     <tr>
       <td><%= link_to translation.source_content.to_s, admin_translation_path(translation) %></td>
       <td><%= link_to translation.target_content.to_s, admin_translation_path(translation) %></td>
-      <td><%=h translation.source_language.title %></td>
-      <td><%=h translation.target_language.title %></td>
+      <td><%=h translation.source_language.title if translation.source_language %></td>
+      <td><%=h translation.target_language.title if translation.target_language %></td>
       <td>
         <% translation.categories.each do |category| %>
           <%= link_to(category.title, admin_category_path(category)) %>
