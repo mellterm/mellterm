@@ -5,15 +5,15 @@ class SegmentsController < ApplicationController
   def index
     @title ="All of My Segments"
     # @search = Translation.search(params[:search])
-    conditions = nil
+    conditions = ["segments.user_id = ?", current_user.id]
     if params[:categories] && !params[:categories].empty?
       cat_ids = params[:categories].join(" OR category_id = ")
-      conditions = ["category_id = #{cat_ids}"]
+      conditions = ["category_id = #{cat_ids} AND user_id = #{current_user.id}"]
       # ids = []
       # params[:categories].each {|t| ids << t.to_i}
       # @search = Segment.categories_id_equals(ids).search(params[:search])
     else
-      @segment_search = Segment.search(params[:search])
+      @segment_search = current_user.segments.search(params[:search])
     end
     @segments = @segment_search.paginate(
       # :select => "distinct `segments`.*",

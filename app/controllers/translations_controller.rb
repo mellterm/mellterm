@@ -3,15 +3,15 @@ class TranslationsController < ApplicationController
   
   def index
     # @search = Translation.search(params[:search])
-    conditions = nil
+    conditions = ["translations.user_id = ?", current_user.id]
     if params[:categories] && !params[:categories].empty?
       # cat_ids = params[:categories].join(" OR category_id = ")
       # conditions = ["category_id = #{cat_ids}"]
       ids = []
       params[:categories].each {|t| ids << t.to_i}
-      @search = Translation.categories_id_equals(ids).search(params[:search])
+      @search = current_user.translations.categories_id_equals(ids).search(params[:search])
     else
-      @search = Translation.search(params[:search])
+      @search = current_user.translations.search(params[:search])
     end
     @translations = @search.paginate(
       :select => "distinct `translations`.*",
