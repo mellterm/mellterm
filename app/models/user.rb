@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   end
   
   has_and_belongs_to_many :categories
+  # Giang Nguyen
+  has_and_belongs_to_many :projects
+  has_and_belongs_to_many :tasks
+  # -Giang Nguyen
   has_many :feed_sites
   has_many :own_categories, :class_name => "Category", :foreign_key => "owner_id"
   has_many :translations
