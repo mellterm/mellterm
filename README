@@ -12,15 +12,24 @@ Mellterm is a CPU intensive application because it has to parse large file, zip,
 
 === Used Gems
 
-*  searchlogic *
-*  authlogic *
-*  will_paginate *
-*  fastercsv *
-*  xml-simple, :lib => xmlsimple *
-*  bcrypt-ruby, :lib => bcrypt *
-*  vestal_versions *
-*  papaerclip *
+* rspec *
+* rspec-rails * 
+* rspec-rails-ext *
+* rspec-unit *
+* rspec_generator *
+* searchlogic *
+* authlogic *
+* will_paginate *
+* fastercsv *
+* xml-simple, :lib => xmlsimple *
+* bcrypt-ruby, :lib => bcrypt *
+* vestal_versions *
+* papaerclip *
 * factory_girl *
 * rails-settings *
 * country_select *
 
+
+== So, before running 'rake gems:install' install rspec to make sure rake db:migrate works
+
+  gem install rspec rspec-rails rspec-rails-ext rspec-unit rspec_generator 

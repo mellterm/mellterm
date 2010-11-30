@@ -16,3 +16,6 @@ if user
   user.admin = true
   user.save
 end
+
+
+Page.create(:title => "home", :permalink => "home", :body => "This is home Page. Require Page to be there")
