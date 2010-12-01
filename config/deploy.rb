@@ -3,13 +3,16 @@ set :repository,  "git@github.com:fred/mellterm.git"
 # set :repository,  "git://github.com/fred/mellterm.git"
 set :branch, "master"
 
-# EC2 Micro instance
-# ec2-46-51-175-146.eu-west-1.compute.amazonaws.com
-set :domain, "46.51.175.146"
+if ENV["EC2_LARGE"]
+  # EC2 LargeCPU instance
+  # ec2-46-51-174-150.eu-west-1.compute.amazonaws.com
+  set :domain, "46.51.174.150"
+else
+  # EC2 Micro instance
+  # ec2-46-51-175-146.eu-west-1.compute.amazonaws.com
+  set :domain, "46.51.175.146"
+end
 
-# EC2 LargeCPU instance
-# ec2-46-51-174-150.eu-west-1.compute.amazonaws.com
-# set :domain, "46.51.174.150"
 
 set :scm, :git
 set :deploy_via, :remote_cache
