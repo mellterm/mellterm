@@ -120,7 +120,10 @@ ActiveRecord::Schema.define(:version => 20101129190948) do
     t.integer  "display_order",  :default => 1
   end
 
+  add_index "pages", ["language_id"], :name => "index_pages_on_language_id"
+  add_index "pages", ["menu_order"], :name => "index_pages_on_menu_order"
   add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
+  add_index "pages", ["title"], :name => "index_pages_on_title"
 
   create_table "projects", :force => true do |t|
     t.integer  "company_id"

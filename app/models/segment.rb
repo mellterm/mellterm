@@ -14,6 +14,9 @@ class Segment < ActiveRecord::Base
   belongs_to :last_user, :class_name => "User", :foreign_key => "updated_by"
   belongs_to :reviewer, :class_name => "User", :foreign_key => "reviewer_id"
   belongs_to :translator, :class_name => "User", :foreign_key => "translator_id"
+
+  # Giang Nguyen
+  belongs_to :task
   
   # only check if empty and use the default "new"
   def status
