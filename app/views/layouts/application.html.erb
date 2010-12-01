@@ -4,79 +4,18 @@
   <meta name="description" content="" />
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title><%= @title || Settings[:site_meta_title] %></title>
+  
+  <!-- Application Default Stylesheets and Javascripts -->
   <%= stylesheet_link_tag 'themes/indicator/style.css' %>
   <%= stylesheet_link_tag 'table.css' %>
   <%= stylesheet_link_tag 'site.css' %>
+  <%= javascript_include_tag "application" %>
   
+  <!-- ExtJS -->
+  <%= stylesheet_link_tag "/extjs/ext-all.css" %>
+  <%= javascript_include_tag "/extjs/ext-base.js" %>
+  <%= javascript_include_tag "/extjs/ext-all.js" %>
   <script type="text/javascript">
-    function toggleCheckbox(checkbox_id){
-      var checkbox = document.getElementById(checkbox_id)
-      if (checkbox.checked == 0) {
-        checkbox.checked = true;
-      }
-      else {
-        checkbox.checked = false;
-    	}
-    }
-  
-    $(function() {
-      $('.tooltip *').tooltip();
-    
-      $('.pretty *').tooltip({ 
-          track: true, 
-          delay: 0, 
-          showURL: false, 
-          showBody: " - ", 
-          extraClass: "pretty", 
-          fixPNG: true, 
-          opacity: 0.90, 
-          top: -50,
-          left: -80 
-      });
-    });    
-  </script>
-  
-  <%= yield(:head) %>
-  
-  <% if @page && @page.header_content %>
-    <%= @page.header_content %>
-  <% end %>
-  
-  
-  <!-- ExtJS STARTS HERE -->
-	<link rel="stylesheet" type="text/css" href="/extjs/ext-all.css" />
- 	<!-- LIBS -->
- 	<script type="text/javascript" src="/extjs/ext-base.js"></script>
- 	<!-- ENDLIBS -->
-  <script type="text/javascript" src="/extjs/ext-all.js"></script>
-  <!--<script language="javascript" src="../grid/PropsGrid.js"></script>-->
-	<style type="text/css">
-	html, body {
-        font:normal 12px verdana;
-        margin:0;
-        padding:0;
-        border:0 none;
-        overflow:hidden;
-        height:100%;
-    }
-	  .x-panel-body p {
-	    margin:5px;
-	  }
-    .x-column-layout-ct .x-panel {
-      margin-bottom:5px;
-    }
-    .x-column-layout-ct .x-panel-dd-spacer {
-      margin-bottom:5px;
-    }
-    .settings {
-      background-image:url(/extjs/folder_wrench.png) !important;
-    }
-    .nav {
-      background-image:url(/extjs/folder_go.png) !important;
-    }
-    </style>
-	<script type="text/javascript">
-
     Ext.onReady(function(){
        // NOTE: This is an example showing simple state management. During development,
        // it is generally best to disable state management as dynamically-generated ids
@@ -199,12 +138,20 @@
          });
         <% end %>
     });
-	</script>
-	
-	<%= stylesheet_link_tag   '/extjs/custom.css' %>
-  <%= javascript_include_tag 'jquery-1.4.2.min' %>
+  </script>
+  <%= stylesheet_link_tag   '/extjs/custom.css' %>
+
+  <!-- jQuery -->
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" if Rails.env == "production" %>
+  <%= javascript_include_tag 'jquery-1.4.2.min' if Rails.env == "development"  %>
   <%= javascript_include_tag '/jeditable/jquery.jeditable.js', :charset => "utf-8" %>
   <%= javascript_include_tag '/jeditable/jquery.jeditable.autogrow.js', :charset => "utf-8" %>
+  
+  <%= yield(:head) %>
+  
+  <% if @page && @page.header_content %>
+    <%= @page.header_content %>
+  <% end %>
 
 </head>
 <body>

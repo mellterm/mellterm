@@ -1,4 +1,29 @@
 /* Custom */
+
+html, body {
+      font:normal 12px verdana;
+      margin:0;
+      padding:0;
+      border:0 none;
+      overflow:hidden;
+      height:100%;
+  }
+  .x-panel-body p {
+    margin:5px;
+  }
+  .x-column-layout-ct .x-panel {
+    margin-bottom:5px;
+  }
+  .x-column-layout-ct .x-panel-dd-spacer {
+    margin-bottom:5px;
+  }
+  .settings {
+    background-image:url("/extjs/folder_wrench.png") !important;
+  }
+  .nav {
+    background-image:url("/extjs/folder_go.png") !important;
+}
+
 .topbar {
   height: 20px;
   width:100%;
