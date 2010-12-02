@@ -2,8 +2,16 @@ en_us:
   menu: "Menu"
   edit: "Edit"
   edit_profile: "Edit Profile"
+  source_term: "Source Term"
+  target_term: "Target Term"
+  from: "from"
+  to: "to"
 
 de_de:
   menu: "Menü"
   edit: "Bearbeiten"
   edit: "Profile bearbeiten"
+  source_term: "Source Term"
+  target_term: "Target Term"
+  from: "from"
+  to: "to"

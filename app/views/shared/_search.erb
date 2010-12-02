@@ -1,28 +1,93 @@
 <!-- Search content -->
 <div id="search" >
-  <% form_for @terms_search, :url => {:controller => "translations"}, :html => {:name => "search"} do |f| %>
+<% form_for @terms_search, :url => {:controller => "translations"}, :html => {:name => "search"} do |f| %>
+
   <table>
+    
     <tr>
-      <td><%= f.text_field :source_content_or_target_content_like_any, :class => "search-text" %></td>
-      <td><%= f.submit "Search" %></td>
+      <td><%= t('source_term')%> </td>
+      <td></td>
     </tr>
+    
+    <tr>
+      <td><%= f.text_field :source_content_like_any, :class => "search-text", :placeholder => t('source_term') %></td>
+      <td><%= f.select :source_language_id_equals, Language.all.collect {|t| [t.title,t.id]}, :include_blank => true %></td>
+    </tr>
+    
+    <tr>
+      <td><%= t('target_term')%> </td>
+      <td></td>
+    </tr>
+    
+    <tr>
+      <td><%= f.text_field :target_content_like_any, :class => "search-text", :placeholder => t('target_term') %></td>
+      <td><%= f.select :target_language_id_equals, Language.all.collect {|t| [t.title,t.id]}, :include_blank => true %></td>
+    </tr>
+    
   </table>
-    <p>Document: <%= f.select :document_id_equals, current_user.documents.collect {|t| [t.data_file_name,t.id]}, :include_blank => true %></p>
-    <br />
-    <p>From: <%= f.select :source_language_id_equals, Language.all.collect {|t| [t.title,t.id]}, :include_blank => true %></p>
-    <p>To: <%= f.select :target_language_id_equals, Language.all.collect {|t| [t.title,t.id]}, :include_blank => true %></p>
-    <p> <%= f.check_box :approved_equals %> Approved Only</p>
-    <br />
+  
+  <br />
+  <h5>
+    <div id="show_domains" class="jquery_link">Domains</div>
+  </h5>
+  <div id="search_domains" style="<%= 'display:none;' unless (params[:search] && params[:categories] && !params[:categories].empty?) %>">
     <% Category.all.each do |t|%>
       <div class="checkbox_search_item">
         <%= check_box_tag "categories[]", 
             t.id, params[:categories] && params[:categories].include?(t.id.to_s),
             :id => "checkbox_#{t.id}"
         %>
-        <%= link_to t.title, "#", :title => t.description.to_s, 
-            :onclick => "toggleCheckbox('checkbox_#{t.id}');" 
-        %>
+        <%= link_to t.title, "#", :title => t.description.to_s, :onclick => "toggleCheckbox('checkbox_#{t.id}');"%>
       </div>
     <% end %>
-  <% end %>
+    <br clear="both"/>
+  </div>
+  <script>
+    $("#show_domains").click(function () {
+      $("#search_domains").toggle("slow");
+    });
+  </script>
+  
+  
+  <br />
+  <h5>
+    <div id="show_documents" class="jquery_link">Document</div>
+  </h5>
+  <div id="search_document" style="<%= 'display:none;' unless (params[:search] && params[:search][:document_id_equals] && !params[:search][:document_id_equals].empty?) %>">
+    <%= f.select :document_id_equals, current_user.documents.collect {|t| [t.data_file_name,t.id]}, :include_blank => true %>
+    <br clear="both"/>
+  </div>
+  <script>
+    $("#show_documents").click(function () {
+      $("#search_document").toggle("slow");
+    });
+  </script>
+  
+  
+  
+  <br />
+  <h5>
+    <div id="show_others" class="jquery_link">Other Criteria</div>
+  </h5>
+  <% test1 = (params[:search] && params[:search][:user_id_equals] && !params[:search][:user_id_equals].empty?) %>
+  <% test2 = (params[:search] && params[:search][:approved_equals] && params[:search][:approved_equals].to_s=="1") %>
+  <div id="search_others" style="<%= 'display:none;' unless (test1 or test2) %>">
+    <p>
+      Select a User
+      <%= f.select :user_id_equals, User.all.collect {|t| [t.login,t.id]}, :include_blank => true %>
+    </p>
+    <br clear="both"/>
+    <p><%= f.check_box :approved_equals %> Approved Only</p>
+  </div>
+  <script>
+    $("#show_others").click(function () {
+      $("#search_others").toggle("slow");
+    });
+  </script>
+  
+  <br />
+  
+  <p><%= f.submit "Search" %></p>
+    
+<% end %>
 </div>

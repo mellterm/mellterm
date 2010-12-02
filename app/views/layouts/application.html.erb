@@ -9,7 +9,6 @@
   <%= stylesheet_link_tag 'themes/indicator/style.css' %>
   <%= stylesheet_link_tag 'table.css' %>
   <%= stylesheet_link_tag 'site.css' %>
-  <%= javascript_include_tag "application" %>
   
   <!-- ExtJS -->
   <%= stylesheet_link_tag "/extjs/ext-all.css" %>
@@ -29,7 +28,7 @@
             items:[{
                 region:'west',
                 id:'west-panel',
-                title:'Menu',
+                title: "<%= t('menu') %>",
                 split:true,
                 width: 240,
                 minSize: 180,
@@ -146,6 +145,9 @@
   <%= javascript_include_tag 'jquery-1.4.2.min' if Rails.env == "development"  %>
   <%= javascript_include_tag '/jeditable/jquery.jeditable.js', :charset => "utf-8" %>
   <%= javascript_include_tag '/jeditable/jquery.jeditable.autogrow.js', :charset => "utf-8" %>
+  
+  <!-- After All JS Libs are loaded, load application.js -->
+  <%= javascript_include_tag "application" %>
   
   <%= yield(:head) %>
   

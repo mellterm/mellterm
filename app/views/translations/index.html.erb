@@ -36,8 +36,7 @@
 <br />
 <% if params[:search] && @segments && !@segments.empty? %>
   <br />
-  <h3> 
-    Segments matching "<%= params[:search][:source_content_or_target_content_like_any] %>" </h3>
+  <!-- <h3> Segments matching "<%= params[:search][:source_content_or_target_content_like_any] %>" </h3> -->
   <br />
   <div class="segments">
     <%= render @segments %>
