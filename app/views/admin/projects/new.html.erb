@@ -1,11 +1,13 @@
-<h1>New project</h1>
+<h3> <%= "New Project" %> </h3>
 
-<% form_for(@project) do |f| %>
+<% form_for(@project, :url => admin_projects_path) do |f| %>
+
   <%= f.error_messages %>
+  
+  <%= render :partial => 'form', :locals => { :f => f, :project => @project } %>
 
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+  <%= image_submit_tag "admin/save_button.png", :class => "button" -%>
+  
 <% end %>
 
-<%= link_to 'Back', projects_path %>
+<%= link_to image_tag("admin/back_button.png", :class => "button"), admin_projects_path -%>

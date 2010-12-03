@@ -1,4 +1,4 @@
-<% title "Projectsdfsdfs" %>
+<% title "Projects" %>
 
 <h1>Listing projects</h1>
 
@@ -6,9 +6,9 @@
   <tr>
     <th>Project ID</th>
     <th>Company ID</th>
-    <th>Approved</th>
-    <th>Start date</th>
-    <th>Due date</th>
+    <th>Status</th>
+    <th>Start</th>
+    <th>Due</th>
     <th>Instruction</th>
     <th>Rate</th>
     <th></th>
@@ -18,11 +18,11 @@
   <%- for project in @projects -%>
     <tr>
       <td><%= link_to project.id, admin_project_path(project) -%></td>
-      <td><%= link_to project.company_id, admin_project_path(project) -%></td>
-      <td><%= project.approved -%></td>
+      <td><%= link_to project.company_id, admin_company_path(project.company) -%></td>
+      <td><%= project.pt_status.name -%></td>
       <td><%= project.start_date -%></td>
       <td><%= project.due_date -%></td>
-      <td><%= project.instruction[0...15] -%></td>
+      <td><%= project.instruction[0...15] + " .." -%></td>
       <td><%= project.rate -%></td>
 
       <td><%= link_to 'Edit', edit_admin_project_path(project) %></td>

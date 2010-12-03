@@ -8,7 +8,7 @@
   </tr>
 
   <tr>
-    <td>Project owner: <%= link_to "Owner 1", "#" -%></td>
+    <td>Project owner: <%= link_to @project.company.title, admin_company_path(@project.company) -%></td>
   </tr>
   </tr>
 
@@ -23,14 +23,16 @@
   
   <tr>
     <td colspan="2">
-      <%= text_area_tag "instruction", @project.instruction, {:cols => 60, :rows => 4} -%>
+      <div style="border:1px dashed #aaa; padding: 3px 10px">
+        <%= @project.instruction -%>
+      </div>
     </td>
   </tr>
 
   <tr>
     <td colspan="2">
       button available when all tasks marked as completed<br />
-      <%= check_box_tag "completed", 1, false, :disabled => true -%>
+      <%= check_box_tag "completed", 1, false, :disabled => true -%> Complete Project
     </td>
   </tr>
 
@@ -58,9 +60,11 @@ Tasks:<br/><br/>
     <th>Assigned to</th>
     <th>Completed</th>
   </tr>
+
+  <%- for task in @tasks -%>
     <tr>
       <td>
-        <%= link_to "task 1", "#" -%>
+        <%= link_to "Task Name", "#" -%>
       </td>
       <td>
         de_de
@@ -75,6 +79,7 @@ Tasks:<br/><br/>
         <%= check_box_tag "completed", 0, false -%>
       </td>
     </tr>
+  <%- end -%>
 </table>
 
 <br/>

@@ -15,13 +15,14 @@ class Admin::ProjectsController < Admin::BaseController
   # GET /admin_projects/1.xml
   def show
     @project = Project.find(params[:id])
-    @task = [];
+    @tasks = @project.tasks
   end
 
   # GET /admin_projects/new
   # GET /admin_projects/new.xml
   def new
     @project = Project.new
+    @project.company_id = current_user.id
   end
 
   # GET /admin_projects/1/edit
@@ -36,7 +37,7 @@ class Admin::ProjectsController < Admin::BaseController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to(@project, :notice => 'Admin::Project was successfully created.') }
+        format.html { redirect_to(admin_project_path(@project), :notice => 'Project was successfully created.') }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
         format.html { render :action => "new" }
@@ -52,7 +53,7 @@ class Admin::ProjectsController < Admin::BaseController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to(@project, :notice => 'Admin::Project was successfully updated.') }
+        format.html { redirect_to(admin_project_path(@project), :notice => 'Project was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
