@@ -1,4 +1,4 @@
-class PtStatuses < ActiveRecord::Migration
+class CreatePtStatuses < ActiveRecord::Migration
   def self.up
     create_table :pt_statuses do |t|
       t.string :name

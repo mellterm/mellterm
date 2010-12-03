@@ -1,0 +1,50 @@
+<% title "Projectsdfsdfs" %>
+
+<h1>Listing projects</h1>
+
+<table id="one-column-emphasis-b">
+  <tr>
+    <th>Project ID</th>
+    <th>Company ID</th>
+    <th>Approved</th>
+    <th>Start date</th>
+    <th>Due date</th>
+    <th>Instruction</th>
+    <th>Rate</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%- for project in @projects -%>
+    <tr>
+      <td><%= link_to project.id, admin_project_path(project) -%></td>
+      <td><%= link_to project.company_id, admin_project_path(project) -%></td>
+      <td><%= project.approved -%></td>
+      <td><%= project.start_date -%></td>
+      <td><%= project.due_date -%></td>
+      <td><%= project.instruction[0...15] -%></td>
+      <td><%= project.rate -%></td>
+
+      <td><%= link_to 'Edit', edit_admin_project_path(project) %></td>
+      <td><%= link_to 'Del', admin_project_path(project), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <%- end -%>
+</table>
+
+<br />
+
+<p>
+  <%= link_to image_tag("admin/new_button.png"), new_admin_project_path %>
+</p>
+
+<br />
+
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%= page_entries_info @projects %>
+  </div>
+  <br />
+  <%= will_paginate @projects, :container => false %>
+</div>
+
+<strong><%= link_to "Delete all", {:action => "destroy", :all => true}, :confirm => 'Are you rally sure you want to delete ALL records from database?', :method => :delete %></strong>

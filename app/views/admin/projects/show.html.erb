@@ -1,0 +1,82 @@
+<table cellpadding="5" cellspacing="0" border="0" width="50%">
+  <tr>
+    <td>Project name: Project 1</td>
+    <td rowspan="2" valign="top">
+      Project domains:<br/>
+      domain1, domain 2, domain3  
+    </td>
+  </tr>
+
+  <tr>
+    <td>Project owner: <%= link_to "Owner 1", "#" -%></td>
+  </tr>
+  </tr>
+
+  <tr>
+    <td>Start Date: <%= @project.start_date -%></td>
+    <td>Due Date: <%= @project.due_date -%></td>
+  </tr>
+
+  <tr>
+    <td colspan="2">Project language: </td>
+  </tr>
+  
+  <tr>
+    <td colspan="2">
+      <%= text_area_tag "instruction", @project.instruction, {:cols => 60, :rows => 4} -%>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      button available when all tasks marked as completed<br />
+      <%= check_box_tag "completed", 1, false, :disabled => true -%>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <%= link_to "edit project", edit_admin_project_path(@project) -%>&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= link_to "delete project", admin_project_path(@project), :confirm => "Are you sure?", :method => 'delete' -%>
+    </td>
+  </tr>
+
+  <tr>
+  </tr>
+</table>
+<br/>
+
+<hr/>
+
+Tasks:<br/><br/>
+
+<table cellpadding="5" cellspacing="0" border="1">
+  <tr>
+    <th>Task</th>
+    <th>Source_lang</th>
+    <th>Tar_lang</th>
+    <th>Assigned to</th>
+    <th>Completed</th>
+  </tr>
+    <tr>
+      <td>
+        <%= link_to "task 1", "#" -%>
+      </td>
+      <td>
+        de_de
+      </td>
+      <td>
+        en_gb
+      </td>
+      <td>
+        <%= link_to "Team Name", "#" -%>
+      </td>
+      <td>
+        <%= check_box_tag "completed", 0, false -%>
+      </td>
+    </tr>
+</table>
+
+<br/>
+
+Click on a task name to display task file links in side bar.

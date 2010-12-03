@@ -72,6 +72,7 @@
             <ul><%= link_to(image_tag("admin/home_icon.png", :class => "home_icon"), admin_path ) %>
               <li><%= link_to "Home", admin_path, :class => is_current_menu("dashboard") %></li>
               <li><%= link_to "Documents", admin_documents_path, :class => is_current_menu("documents") %></li>
+              <li><%= link_to "Projects", admin_projects_path, :class => is_current_menu("projects") -%></li>
               <li><%= link_to "Terms", admin_translations_path, :class => is_current_menu("translations") %></li>
               <li><%= link_to "Segments", admin_segments_path, :class => is_current_menu("segments") %></li>
               <li><%= link_to "Domains", admin_categories_path, :class => is_current_menu("categories") %></li>

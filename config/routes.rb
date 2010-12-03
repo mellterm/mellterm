@@ -49,6 +49,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :user_types
     admin.resources :document_statuses
     admin.resources :documents
+    admin.resources :projects
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
