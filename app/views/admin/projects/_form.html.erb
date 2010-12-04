@@ -1,10 +1,15 @@
 <p>
-  <%= f.label :start_date, "Start Date: " -%><br />
+  <%= f.label :title, "Project Name: " -%><br />
+  <%= f.text_field :title, :size => 50 -%>
+</p>
+
+<p>
+  <%= f.label :start_date, "Start Date (yyyy-mm-dd): " -%><br />
   <%= f.text_field :start_date, :size => 50 -%>
 </p>
 
 <p>
-  <%= f.label :due_date, "Due Date: " -%><br />
+  <%= f.label :due_date, "Due Date (yyyy-mm-dd) : " -%><br />
   <%= f.text_field :due_date, :size => 50 -%>
 </p>
 

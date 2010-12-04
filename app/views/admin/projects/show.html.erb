@@ -1,14 +1,14 @@
 <table cellpadding="5" cellspacing="0" border="0" width="50%">
   <tr>
-    <td>Project name: Project 1</td>
+    <td>Project name: <%= @project.title -%></td>
     <td rowspan="2" valign="top">
       Project domains:<br/>
-      domain1, domain 2, domain3  
+      <%= @project_domains.join(' ') -%>
     </td>
   </tr>
 
   <tr>
-    <td>Project owner: <%= link_to @project.company.title, admin_company_path(@project.company) -%></td>
+    <td>Project owner: <%= link_to @project.owner.name, admin_user_path(@project.owner) -%></td>
   </tr>
   </tr>
 
@@ -33,6 +33,13 @@
     <td colspan="2">
       button available when all tasks marked as completed<br />
       <%= check_box_tag "completed", 1, false, :disabled => true -%> Complete Project
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      button available when project marked as completed<br />
+      <%= check_box_tag "approved", 1, false, :disabled => true -%> Approve Project
     </td>
   </tr>
 
@@ -64,13 +71,13 @@ Tasks:<br/><br/>
   <%- for task in @tasks -%>
     <tr>
       <td>
-        <%= link_to "Task Name", "#" -%>
+        <%= link_to task.title, "#" -%>
       </td>
       <td>
-        de_de
+        <%= task.segment.source_language.title -%>
       </td>
       <td>
-        en_gb
+        <%= task.segment.target_language.title -%>
       </td>
       <td>
         <%= link_to "Team Name", "#" -%>

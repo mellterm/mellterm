@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :is_company?
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
   before_filter :get_settings, :set_categories_hash, :store_location, :setup_search, :order_by, :set_title, :set_user_session
@@ -154,6 +154,10 @@ class ApplicationController < ActionController::Base
     logger.debug "* session[:language] is '#{session[:language]}'"
   end
 
+  def is_company?
+    return true if current_user.user_type_id == 3
+    return false
+  end
 
 
   private

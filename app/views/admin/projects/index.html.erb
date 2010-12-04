@@ -4,8 +4,8 @@
 
 <table id="one-column-emphasis-b">
   <tr>
-    <th>Project ID</th>
-    <th>Company ID</th>
+    <th>Project name</th>
+    <th>Owner</th>
     <th>Status</th>
     <th>Start</th>
     <th>Due</th>
@@ -17,8 +17,8 @@
 
   <%- for project in @projects -%>
     <tr>
-      <td><%= link_to project.id, admin_project_path(project) -%></td>
-      <td><%= link_to project.company_id, admin_company_path(project.company) -%></td>
+      <td><%= link_to project.title, admin_project_path(project) -%></td>
+      <td><%= link_to project.owner.name, admin_user_path(project.owner) -%></td>
       <td><%= project.pt_status.name -%></td>
       <td><%= project.start_date -%></td>
       <td><%= project.due_date -%></td>
@@ -33,9 +33,11 @@
 
 <br />
 
-<p>
-  <%= link_to image_tag("admin/new_button.png"), new_admin_project_path %>
-</p>
+<%- if is_company? -%>
+  <p>
+    <%= link_to image_tag("admin/new_button.png"), new_admin_project_path %>
+  </p>
+<%- end -%>
 
 <br />
 

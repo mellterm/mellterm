@@ -16,13 +16,21 @@ class Admin::ProjectsController < Admin::BaseController
   def show
     @project = Project.find(params[:id])
     @tasks = @project.tasks
+    @project_domains = []
+
+    @tasks.each do |t|
+      begin
+        @project_domains << t.segment.category.title 
+      rescue Exception => e
+        logger.info "error => #{e}"
+      end
+    end
   end
 
   # GET /admin_projects/new
   # GET /admin_projects/new.xml
   def new
     @project = Project.new
-    @project.company_id = current_user.id
   end
 
   # GET /admin_projects/1/edit
@@ -33,7 +41,9 @@ class Admin::ProjectsController < Admin::BaseController
   # POST /admin_projects
   # POST /admin_projects.xml
   def create
-    @project = Project.new(params[:project])
+    @project = Project.new(params[:project].merge(:owner_id => current_user.id,
+                                                  :pt_status_id => 1,
+                                                  :approved => 0))
 
     respond_to do |format|
       if @project.save

@@ -1,8 +1,8 @@
-# Giang Nguyen
 class CreateProjects < ActiveRecord::Migration
   def self.up
     create_table :projects do |t|
-      t.integer  :company_id
+      t.string   :title
+      t.integer  :owner_id
       t.integer  :pt_status_id
       t.boolean  :approved, :default => false
       t.date     :start_date

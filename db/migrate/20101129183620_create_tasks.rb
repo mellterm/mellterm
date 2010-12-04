@@ -1,6 +1,7 @@
 class CreateTasks < ActiveRecord::Migration
   def self.up
     create_table :tasks do |t|
+      t.string  :title
       t.integer :project_id
       t.integer :pt_status_id
       t.boolean :approved, :default => false
