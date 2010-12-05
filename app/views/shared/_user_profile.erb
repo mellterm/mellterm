@@ -34,3 +34,7 @@
 </table>
 <p><%= image_tag current_user.avatar.url(:small) %></p>
 <p><%= link_to "Edit Profile", edit_user_path(current_user) %></p>
+
+<br />
+<%= link_to "English", {:language => "en_us"}, :class => "bold" %> |
+<%= link_to "German", {:language => "de_de"}, :class => "bold" %>

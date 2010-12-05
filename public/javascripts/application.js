@@ -9,20 +9,20 @@ function toggleCheckbox(checkbox_id){
   else {
     checkbox.checked = false;
 	}
-}
+};
 
-$(function() {
-  $('.tooltip *').tooltip();
-
-  $('.pretty *').tooltip({ 
-      track: true, 
-      delay: 0, 
-      showURL: false, 
-      showBody: " - ", 
-      extraClass: "pretty", 
-      fixPNG: true, 
-      opacity: 0.90, 
-      top: -50,
-      left: -80 
-  });
-});
+// $(document).ready(function () {
+//   $('.tooltip *').tooltip();
+// 
+//   $('.pretty *').tooltip({ 
+//       track: true, 
+//       delay: 0, 
+//       showURL: false, 
+//       showBody: " - ", 
+//       extraClass: "pretty", 
+//       fixPNG: true, 
+//       opacity: 0.90, 
+//       top: -50,
+//       left: -80 
+//   });
+// });

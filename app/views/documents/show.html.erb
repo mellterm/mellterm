@@ -14,3 +14,11 @@
   <br />
   <%= will_paginate @segments, :container => false %>
 </div>
+
+
+<script type="text/javascript">
+  // Load the Documents tab when clicking on a document
+  Ext.onReady(function() {
+    Ext.getCmp('west-panel').items.itemAt(1).expand();
+  });
+</script>

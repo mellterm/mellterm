@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
   before_filter :get_settings, :set_categories_hash, :store_location, :setup_search, :order_by, :set_title, :set_user_session
+  before_filter :get_locale
   layout 'application'
   
   rescue_from(ActionController::RoutingError, :with => :not_found) if Rails.env == "production"
@@ -106,29 +107,19 @@ class ApplicationController < ActionController::Base
   ##################
   # LOCALE METHODS #
   ##################
-
+  
   def default_language
-    "en"
+    "pt-BR"
   end
   
-  # retrieve the language from the session store, 
-  # otherwise set to default of pt-BR
-  def get_locale_from_session
-    if (session && session[:language])
-      lang = session[:language]
-    else
-      lang = default_language
-    end
-    lang
-  end
-
-  # overwrite session language if params[:language] is given and fixate it
-  # params[:session] only accepts 'en' or 'th' (English or Thai)
-  # otherwise get from user profile
   def get_locale
-    if (params[:language] && params[:language].to_s.match(/en|gb|de/))
-      logger.debug "* Lang from headers : #{extract_locale_from_accept_language_header}"
-      logger.debug "* session[:language] was: '#{session[:language]}'"
+    logger.debug "*** Language from Browser Locale : #{extract_locale_from_accept_language_header}"
+    if !params[:language] && !session[:language]
+      session[:language] = extract_locale_from_accept_language_header
+      logger.debug "*** Using Language from Browser Locale: #{extract_locale_from_accept_language_header}"
+    elsif (params[:language] && params[:language].to_s.match(/en_us|de_de/))
+      logger.debug "*** session[:language] was: '#{session[:language]}'"
+      logger.debug "*** new session[:language] = params[:language] : '#{params[:language]}'"
       session[:language] = params[:language]
     elsif RAILS_ENV == "test"
       session[:language] = "en"
@@ -137,21 +128,33 @@ class ApplicationController < ActionController::Base
     end
     set_locale
   end
-
+  
+  # retrieve the language from the session store, 
+  # otherwise set to default of pt-BR
+  def get_locale_from_session
+    if (session && session[:language])
+      logger.debug "*** Language from Session '#{session[:language]}'"
+      lang = session[:language]
+    else
+      lang = default_language
+    end
+    lang
+  end
+  
+  
   def set_locale
     if session[:language]
       set_locale_to(session[:language])
     else
       lang = extract_locale_from_accept_language_header
-      set_locale_to(default_language)
+      set_locale_to(lang)
     end
   end
-
+  
   def set_locale_to(lang)
-    logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
     I18n.locale = lang
-    logger.debug "* Locale set to '#{I18n.locale}'"
-    logger.debug "* session[:language] is '#{session[:language]}'"
+    logger.debug "*** Locale set to '#{I18n.locale}'"
+    logger.debug "*** session[:language] is '#{session[:language]}'"
   end
 
   def is_company?
@@ -211,4 +214,11 @@ class ApplicationController < ActionController::Base
       session[:return_to] = nil
     end
 
+    def extract_locale_from_accept_language_header
+      if request.env['HTTP_ACCEPT_LANGUAGE'] && !request.env['HTTP_ACCEPT_LANGUAGE'].empty?
+        lang = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+        lang = nil if lang.empty?
+      end
+      return lang
+    end
 end

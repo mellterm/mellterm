@@ -14,7 +14,7 @@ body {
 	color: #4D4D4D;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5 {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
@@ -31,6 +31,12 @@ h2 {
 
 h3 {
 	font-size: 1.6em;
+}
+h4 {
+	font-size: 1.3em;
+}
+h5 {
+	font-size: 1.2em;
 }
 
 p, ul, ol {

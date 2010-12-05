@@ -6,3 +6,11 @@
   <%= f.error_messages %>
   <br clear="both"/>
 <% end %>
+
+<script type="text/javascript">
+  // Load the profile tab when clicking on user Edit profile
+  Ext.onReady(function() {
+    Ext.getCmp('west-panel').items.itemAt(2).expand();
+  });
+</script>
+
